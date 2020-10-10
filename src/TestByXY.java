@@ -5,6 +5,7 @@ public class TestByXY {
 		// TODO Auto-generated method stub
 		
 		System.out.println("test by xy! ZYJ");
+		System.out.println("test by XZY ");
 
 	}
 
