@@ -6,7 +6,7 @@ public class Course {
     private String courseName;
     private int school; //1 eee 2 scse 3 nbs
     private int courseType;
-    private int AU;
+    private int au;
     private boolean isDeleted; // not null
 
 

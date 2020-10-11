@@ -1,0 +1,1 @@
+courseId, courseCode, courseName, school, courseType, au, isDeleted
