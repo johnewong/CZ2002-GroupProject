@@ -4,8 +4,11 @@ Install source tree from https://www.sourcetreeapp.com/
 
 Clone code from remote with this url: https://github.com/johnewong/CZ2002-GroupProject.git
 
-Pull in source tree to get the latest code (if you have changes in code, must commit first before pulling code)
 
-Commit and check your changes
+model module: The data model.
 
-Push your updated code to the remote repo
+dao module: The module is to retrieve, add, update, delete data from source. There is no business logic in this module.
+
+service module: The business logic and program features are achieved in this module. 
+
+utility module: The utility functions
