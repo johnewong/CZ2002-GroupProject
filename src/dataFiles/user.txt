@@ -1,0 +1,2 @@
+id, matric_number,name, gender, nationality, role, email
+1,S12345G,Alex,0,Singapore,1,alex@email.com
