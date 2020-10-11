@@ -1,8 +1,25 @@
 package model;
 
+import java.util.Date;
+
 public class User {
+    public int userId; // not null,     alex-1
+    public String userName; //not null, primary key
+    public String displayName; // first name,last name
+    public String password; //not null
+    public String matricNumber; //nullable
+    public String nationality; //not null
+    public String school;
+    public int gender; //not null 0:Male 1:Female 2:Other
+    public int role; //not null 1: student 2:admin
+    public Date periodStartTime; //nullable
+    public Date periodEndTime; //nullable
+    public boolean hasFirstLogin;
+    public boolean isDeleted; // not null
 
-    private int id;
-    private String name;
-
+    public String getUserName(){
+        return this.userName;
+    }
 }
+
+
