@@ -13,6 +13,6 @@ public class Main {
 
         ArrayList<User> allUsers = new UserDAO().getAllUsers();
 
-        
+
     }
 }
