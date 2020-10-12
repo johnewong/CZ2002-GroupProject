@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class UserDAO {
 
     //1 create get update delete
-    //2 get all
+    //2 get all data
 
     public User getUser(int id){
         String dataString = DataUtility.loadData("user.txt");
