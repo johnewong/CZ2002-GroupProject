@@ -1,7 +1,7 @@
 package dao;
 
 import model.User;
-import utility.DataUtility;
+import utility.DataUtil;
 import java.util.ArrayList;
 
 
@@ -11,7 +11,7 @@ public class UserDAO {
     //2 get all data...
 
     public User getUser(int id){
-        String dataString = DataUtility.loadData("user.txt");
+        String dataString = DataUtil.loadFile("user.txt");
         User user = new User();
         user.displayName = "";
         user.password = "";
@@ -21,7 +21,7 @@ public class UserDAO {
     }
 
     public ArrayList<User> getAllUsers(){
-        String dataString = DataUtility.loadData("user.txt");
+        String dataString = DataUtil.loadFile("user.txt");
 
 
 

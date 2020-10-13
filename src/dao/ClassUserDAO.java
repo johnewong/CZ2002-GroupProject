@@ -1,7 +1,7 @@
 package dao;
 
 import model.ClassUser;
-import utility.DataUtility;
+import utility.DataUtil;
 
 import java.util.ArrayList;
 
@@ -9,18 +9,41 @@ public class ClassUserDAO {
 
     private ArrayList<ClassUser> classUsers = new ArrayList<>();
 
-    public ArrayList<ClassUser> getAllClassUsers(){
+    public ArrayList<ClassUser> getAllClassUsers() {
 
-        String dataString = DataUtility.loadData("dataFiles/classUser.txt");
+        String dataString = DataUtil.loadFile("dataFiles/classUser.txt");
+        String[] rows = dataString.split(";");
+        ArrayList<ClassUser> classUsers = new ArrayList<>();
+        for (int i = 1; i < rows.length; i++) {
+            ClassUser classUser = new ClassUser();
+            DataUtil.setObject(classUser, rows[0], rows[i]);
+            classUsers.add(classUser);
+        }
 
-        return null;
+        return classUsers;
     }
 
-    public ClassUser getClassUsers(){
+    public ClassUser getClassUsers(int userId, int classId) {
 
-        String dataString = DataUtility.loadData("dataFiles/classUser.txt");
+        String dataString = DataUtil.loadFile("dataFiles/classUser.txt");
+        String[] rows = dataString.split(";");
+        ClassUser classUser = new ClassUser();
+        DataUtil.setObject(classUser, rows[0], rows[1]);
 
-        return null;
+        return classUser;
+    }
+
+    public ClassUser getClassUsers(ArrayList<ClassUser> classUsers, int userId, int classId) {
+
+        ClassUser classUser = null;
+        for (ClassUser user : classUsers) {
+           if(user.userId == userId && user.classId == classId){
+               classUser = user;
+               break;
+           }
+        }
+
+        return classUser;
     }
 
 }

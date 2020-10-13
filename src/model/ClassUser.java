@@ -1,10 +1,10 @@
 package model;
 
 public class ClassUser {
-    private int classUserId;
-    private int userId;  // 1
-    private int classId; // 2
-    private int status; //0:rejected 1:registered 2:inWaitlist
-    private boolean isDeleted; // not null
+    public int classUserId;
+    public int userId;  // 1
+    public int classId; // 2
+    public int status; //0:rejected 1:registered 2:inWaitlist
+    public boolean isDeleted; // not null
 }
 

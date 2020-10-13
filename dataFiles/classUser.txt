@@ -1,6 +1,3 @@
-userId, matric_number,name, gender, nationality, role, email
-1,S12345G,Alex,0,Singapore,1,alex@email.com
-2,S12345G,Alex,0,Singapore,1,alex@email.com
-3,S12345G,Alex,0,Singapore,1,alex@email.com
-4,S12345G,Alex,0,Singapore,1,alex@email.com
-5,S12345G,Alex,0,Singapore,1,alex@email.com
+classUserId,  userId,classId  ,status,isDeleted
+1,2,3,0,true
+2,1,3,0,false

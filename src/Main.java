@@ -9,17 +9,13 @@ public class Main {
 
     public static void main(String[] args) {
 
-        System.out.println("Hello World! test");
+        ArrayList<ClassUser> classUsers = new ClassUserDAO().getAllClassUsers();
+        ClassUser classUser = new ClassUserDAO().getClassUsers(classUsers,2,3);
 
-        System.out.println("Hello World test 123!");
-
-        ClassUser classUser = new ClassUserDAO().getClassUsers();
-//        ArrayList<User> allUsers = new UserDAO().getAllUsers();
-//        User user = new User();
-//        user = new UserDAO().getUser(123);
-
-
-//        StudentService svc = new StudentService();
-//        svc.AddCourse();
+        System.out.println(String.format("classUserId: %d\n", classUser.classUserId));
+        System.out.println(String.format("classId: %d\n", classUser.classId));
+        System.out.println(String.format("userId: %d\n", classUser.userId));
+        System.out.println(String.format("isDeleted: %b\n", classUser.isDeleted));
+        System.out.println(String.format("status: %d\n", classUser.status));
     }
 }
