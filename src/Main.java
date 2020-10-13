@@ -10,7 +10,7 @@ public class Main {
     public static void main(String[] args) {
 
         ArrayList<ClassUser> classUsers = new ClassUserDAO().getAllClassUsers();
-        ClassUser classUser = new ClassUserDAO().getClassUsers(classUsers,2,3);
+        ClassUser classUser = new ClassUserDAO().getClassUser(classUsers,2,3);
 
         System.out.println(String.format("classUserId: %d\n", classUser.classUserId));
         System.out.println(String.format("classId: %d\n", classUser.classId));

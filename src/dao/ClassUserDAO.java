@@ -7,8 +7,6 @@ import java.util.ArrayList;
 
 public class ClassUserDAO {
 
-    private ArrayList<ClassUser> classUsers = new ArrayList<>();
-
     public ArrayList<ClassUser> getAllClassUsers() {
 
         String dataString = DataUtil.loadFile("dataFiles/classUser.txt");
@@ -23,7 +21,7 @@ public class ClassUserDAO {
         return classUsers;
     }
 
-    public ClassUser getClassUsers(int userId, int classId) {
+    public ClassUser getClassUser(int userId, int classId) {
 
         String dataString = DataUtil.loadFile("dataFiles/classUser.txt");
         String[] rows = dataString.split(";");
@@ -33,7 +31,7 @@ public class ClassUserDAO {
         return classUser;
     }
 
-    public ClassUser getClassUsers(ArrayList<ClassUser> classUsers, int userId, int classId) {
+    public ClassUser getClassUser(ArrayList<ClassUser> classUsers, int userId, int classId) {
 
         ClassUser classUser = null;
         for (ClassUser user : classUsers) {
@@ -46,4 +44,5 @@ public class ClassUserDAO {
         return classUser;
     }
 
+   
 }
