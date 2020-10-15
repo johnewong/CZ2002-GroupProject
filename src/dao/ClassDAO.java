@@ -14,8 +14,8 @@ public class ClassDAO {
 		 ArrayList<Class> Class = new ArrayList<>();
 		 for (int i = 1; i < rows.length; i++) {
 			 Class c = new Class();
-			 DataUtil.setObject(Class, rows[0], rows[i]);
-	            Class.addAll(Class);
+			 DataUtil.setObject(c, rows[0], rows[i]);
+	            Class.add(c);
 		 }
 		 
 		 return Class;
