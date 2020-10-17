@@ -1,6 +1,7 @@
 package dao;
 
 
+import model.ClassUser;
 import model.Course;
 import utility.DataUtil;
 import java.util.ArrayList;
@@ -15,13 +16,10 @@ public class CourseDAO {
 		ArrayList<Course> courseList = new ArrayList<>();
 		
 		for(int i=1; i<rows.length; i++) {
-			
 			Course course = new Course();
 			DataUtil.setObject(course, rows[0], rows[i]);
 			courseList.add(course);
-			
 		}
-		
 		return courseList;	
 	}
 	
@@ -40,15 +38,12 @@ public class CourseDAO {
     	Course course = null;
         for (Course courses : courseList) 
         {
-           if(courses.courseId == courseId)
-           {
-        	   course = courses;
-               break;
-           }
-        }
+           if(courses.courseId == courseId && !courses.isDeleted)
+        	   return course;
 
-        return course;
+        }
+        return null;
     }
-	
-	
+    
+    
 }
