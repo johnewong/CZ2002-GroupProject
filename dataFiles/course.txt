@@ -1,1 +1,2 @@
 courseId, courseCode, courseName, school, courseType, au, isDeleted
+1,CZ2001,Algorithm,2,1,3,False
