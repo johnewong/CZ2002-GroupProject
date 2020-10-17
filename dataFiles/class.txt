@@ -1,0 +1,1 @@
+classId,courseId,vacancyTaken,totalVacancy,numberInWaitlist,isDeleted

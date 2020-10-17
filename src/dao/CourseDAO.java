@@ -1,10 +1,13 @@
 package dao;
 
+<<<<<<< HEAD
 import model.Course;
 import utility.DataUtil;
 import java.util.ArrayList;
 
 
+=======
+>>>>>>> b9ac62f77e1a1a0b8b908a721b436567e49c283c
 public class CourseDAO {
 	
 	public ArrayList<Course> getAllCourse(){
