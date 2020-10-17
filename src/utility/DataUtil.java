@@ -74,8 +74,6 @@ public class DataUtil {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
     }
 
     public static void setObject(Object obj, String header, String row) {

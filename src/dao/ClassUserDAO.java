@@ -16,7 +16,8 @@ public class ClassUserDAO {
         for (int i = 1; i < rows.length; i++) {
             ClassUser classUser = new ClassUser();
             DataUtil.setObject(classUser, rows[0], rows[i]);
-            classUsers.add(classUser);
+            if(!classUser.isDeleted)
+                classUsers.add(classUser);
         }
 
         return classUsers;
@@ -33,20 +34,15 @@ public class ClassUserDAO {
     }
 
     public ClassUser getClassUser(ArrayList<ClassUser> classUsers, int userId, int classId) {
-
-        ClassUser classUser = null;
         for (ClassUser user : classUsers) {
-            if (user.userId == userId && user.classId == classId) {
-                classUser = user;
-                break;
+            if (user.userId == userId && user.classId == classId && !user.isDeleted ) {
+                return user;
             }
         }
-
-        return classUser;
+        return null;
     }
 
     public void addClassUser(ArrayList<ClassUser> classUsers, ClassUser newClassUser) {
-
         try {
             // validation
             for (ClassUser u : classUsers) {
@@ -63,5 +59,9 @@ public class ClassUserDAO {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
+    }
+
+    public void updateClassUser(ArrayList<ClassUser> classUsers, ClassUser classUser){
+
     }
 }

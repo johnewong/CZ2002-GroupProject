@@ -2,12 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="859a4f02-e7ff-46e9-8894-90bdd549316f" name="Default Changelist" comment="Add Util functions&#10;Add ClassUser get, getAll">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataFiles/classUser.txt" beforeDir="false" afterPath="$PROJECT_DIR$/dataFiles/classUser.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/dao/ClassUserDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dao/ClassUserDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dao/CourseDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dao/CourseDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/ClassUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/ClassUser.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/utility/DataUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/utility/DataUtil.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -48,14 +43,14 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="dummy" value="18" />
-          <entry key="java" value="6348" />
+          <entry key="java" value="6397" />
           <entry key="md" value="405" />
           <entry key="txt" value="435" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="6348" />
+          <entry key="JAVA" value="6397" />
           <entry key="Markdown" value="405" />
           <entry key="PLAIN_TEXT" value="453" />
         </counts>
@@ -100,8 +95,8 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/utility/DataUtil.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="411">
-                  <caret line="57" column="17" lean-forward="true" selection-start-line="57" selection-start-column="17" selection-end-line="57" selection-end-column="17" />
+                <state relative-caret-position="671">
+                  <caret line="75" column="9" selection-start-line="75" selection-start-column="9" selection-end-line="75" selection-end-column="9" />
                   <folding>
                     <element signature="imports" expanded="true" />
                   </folding>
@@ -112,8 +107,8 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/dao/ClassUserDAO.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="302">
-                  <caret line="53" column="66" selection-start-line="53" selection-start-column="66" selection-end-line="53" selection-end-column="66" />
+                <state relative-caret-position="219">
+                  <caret line="36" column="69" selection-start-line="36" selection-start-column="69" selection-end-line="36" selection-end-column="69" />
                   <folding>
                     <element signature="imports" expanded="true" />
                   </folding>
@@ -244,7 +239,7 @@
     <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file:///Users/yifei/Dropbox/NTU/Year2/CZ2002-OBJ ORIENTED DES &amp; PROG/GroupAssignment/src/dao/ClassUserDAO.java" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1602940604011" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1602941599588" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
@@ -299,7 +294,7 @@
       <workItem from="1602255465283" duration="14405000" />
       <workItem from="1602511621673" duration="17853000" />
       <workItem from="1602686995741" duration="5149000" />
-      <workItem from="1602865897491" duration="17399000" />
+      <workItem from="1602865897491" duration="18181000" />
     </task>
     <task id="LOCAL-00001" summary="change readme">
       <created>1602400555984</created>
@@ -347,7 +342,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="54806000" />
+    <option name="totallyTimeSpent" value="55588000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1921" y="-117" width="1920" height="1057" extended-state="6" />
@@ -626,16 +621,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/utility/DataUtil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="411">
-          <caret line="57" column="17" lean-forward="true" selection-start-line="57" selection-start-column="17" selection-end-line="57" selection-end-column="17" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
@@ -660,10 +645,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/utility/DataUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="671">
+          <caret line="75" column="9" selection-start-line="75" selection-start-column="9" selection-end-line="75" selection-end-column="9" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/dao/ClassUserDAO.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="302">
-          <caret line="53" column="66" selection-start-line="53" selection-start-column="66" selection-end-line="53" selection-end-column="66" />
+        <state relative-caret-position="219">
+          <caret line="36" column="69" selection-start-line="36" selection-start-column="69" selection-end-line="36" selection-end-column="69" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
