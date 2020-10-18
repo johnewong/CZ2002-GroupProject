@@ -1,5 +1,6 @@
 package dao;
 
+import model.ClassUser;
 import model.User;
 import utility.DataUtil;
 import java.util.ArrayList;
@@ -9,6 +10,11 @@ public class UserDAO {
     private ArrayList<User> _allUser;
     //1 create get update delete
     //2 get all data...
+	 public ArrayList<User> _allUsers;
+
+	    public UserDAO() {
+	        this._allUsers = getAllUsers();
+	    }
 
     public User getUser(int id){
         String dataString = DataUtil.loadFile("dataFiles/users.txt");
@@ -47,7 +53,8 @@ public class UserDAO {
     public User updateName(int userId, String name){
     	String dataString = DataUtil.loadFile("dataFiles/users.txt");
     	String[] rows = dataString.split(";");
-    	User users = new User();
+    	User users 
+    	= new User();
     	DataUtil.setObject(users, rows[0], rows[1]);
     	return users;
     }
