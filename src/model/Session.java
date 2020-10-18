@@ -1,13 +1,45 @@
 package model;
 
-import java.util.Date;
-
 public class Session {
     public int sessionId;
     public int classId;
-    public int teachingType; //0: lec, 1:lab, 2:tut
-    public int day;
-    private String venue;
-    private Date startTime;// not null
-    private Date endTime;// not null
+    public  int day;
+    public String time;
+    public String venue;
+    
+    // constructor
+    public Session() {}
+
+    public Session(int day, String time, String venue) {
+        this.day = day;
+        this.time = time;
+        this.venue = venue;
+    }
+    
+    // setter method
+    public void setDay(int day) {
+    	this.day = day;
+    }
+    
+    public void setTime(String time) {
+    	this.time = time;
+    }
+    
+    public void setVenue(String venue) {
+    	this.venue = venue;
+    }
+    
+    //getter method 
+    public int getDay() {
+    	return day;
+    }
+    
+    public String gettime() {
+    	return time;
+    }
+    
+    public String getVenue() {
+    	return venue;
+    }
+    
 }
