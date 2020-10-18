@@ -4,3 +4,4 @@ classUserId,userId,classId,status,isDeleted;
 3,2,1,0,true;
 4,2,2,0,false;
 5,2,6,0,false;
+6,2,7,0,false;

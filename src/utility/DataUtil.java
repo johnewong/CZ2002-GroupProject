@@ -85,7 +85,7 @@ public class DataUtil {
         try {
             for (int i = 0; i < columnNames.length; i++) {
                 String columnName = columnNames[i].trim();
-                Field f = obj.getClass().getField(columnName);
+                Field f = obj.getClass().getField(columnName); // java reflection
                 if (f.getType() == int.class) {
                     f.set(obj, Integer.parseInt(columnValues[i]));
                 } else if (f.getType() == boolean.class) {

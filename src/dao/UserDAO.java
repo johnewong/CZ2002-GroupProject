@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 
 public class UserDAO {
-
+    private ArrayList<User> _allUser;
     //1 create get update delete
     //2 get all data...
 
@@ -31,6 +31,17 @@ public class UserDAO {
         }
         return userList;
 
+    }
+
+    public User update(User user){
+        User updateUser = _allUser.get(user.userId);
+        updateUser.password = user.password;
+
+
+
+        DataUtil.writeFile(_allUser, "dataFiles/users.txt");
+
+        return null;
     }
 
     public User updateName(int userId, String name){

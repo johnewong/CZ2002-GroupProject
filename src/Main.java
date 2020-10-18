@@ -11,17 +11,15 @@ public class Main {
     public static void main(String[] args) {
 
         ClassUserDAO classUserDAO = new ClassUserDAO();
-        ArrayList<ClassUser> allClassUsers = classUserDAO.getAllClassUsers();
-        ClassUser classUser = classUserDAO.getClassUser(2, 3);
+        ArrayList<ClassUser> allClassUsers = classUserDAO.getAll();
+        ClassUser classUser = classUserDAO.get(2, 1);
 
-        ClassUser newClassUser = new ClassUser(2, 6, 0);
-        classUserDAO.addClassUser(newClassUser);
+        ClassUser newClassUser = new ClassUser(2, 7, 0);
+        classUserDAO.add(newClassUser);
 
 
-//        System.out.println(String.format("classUserId: %d\n", classUser.classUserId));
-//        System.out.println(String.format("classId: %d\n", classUser.classId));
-//        System.out.println(String.format("userId: %d\n", classUser.userId));
-//        System.out.println(String.format("isDeleted: %b\n", classUser.isDeleted));
-//        System.out.println(String.format("status: %d\n", classUser.status));
+
+
+
     }
 }

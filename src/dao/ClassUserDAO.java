@@ -4,17 +4,17 @@ import model.ClassUser;
 import utility.DataUtil;
 
 import java.util.ArrayList;
-import java.util.stream.Collectors;
 
-public class ClassUserDAO {
-    public ArrayList<ClassUser> _allClassUsers;
+public class ClassUserDAO implements IDAO<ClassUser>{
+    private ArrayList<ClassUser> _allClassUsers;
 
+    // constructor
     public ClassUserDAO() {
-        this._allClassUsers = getAllClassUsers();
+        this._allClassUsers = getAll();
     }
 
-    public ArrayList<ClassUser> getAllClassUsers() {
-
+    @Override
+    public ArrayList<ClassUser> getAll(){
         String dataString = DataUtil.loadFile("dataFiles/classUser.txt");
         String[] rows = dataString.split(";");
         ArrayList<ClassUser> classUsers = new ArrayList<>();
@@ -27,7 +27,17 @@ public class ClassUserDAO {
         return classUsers;
     }
 
-    public ClassUser getClassUser(int userId, int classId) {
+    @Override
+    public ClassUser get(int classUserId) {
+        for (ClassUser user : this._allClassUsers) {
+            if (user.classUserId == classUserId && !user.isDeleted) {
+                return user;
+            }
+        }
+        return null;
+    }
+
+    public ClassUser get(int userId, int classId){
         for (ClassUser user : this._allClassUsers) {
             if (user.userId == userId && user.classId == classId && !user.isDeleted) {
                 return user;
@@ -36,7 +46,8 @@ public class ClassUserDAO {
         return null;
     }
 
-    public void addClassUser(ClassUser newClassUser) {
+    @Override
+    public void add(ClassUser newClassUser) {
         try {
             ArrayList<ClassUser> classUsers = this._allClassUsers;
             // validation
@@ -56,7 +67,13 @@ public class ClassUserDAO {
         }
     }
 
-    public void updateClassUser(ArrayList<ClassUser> classUsers, ClassUser classUser) {
+    @Override
+    public void update(ClassUser classUser) {
+
+    }
+
+    @Override
+    public void delete(int id) {
 
     }
 }
