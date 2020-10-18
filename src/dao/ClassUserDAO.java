@@ -7,6 +7,11 @@ import java.util.ArrayList;
 import java.util.stream.Collectors;
 
 public class ClassUserDAO {
+    public ArrayList<ClassUser> _allClassUsers;
+
+    public ClassUserDAO() {
+        this._allClassUsers = getAllClassUsers();
+    }
 
     public ArrayList<ClassUser> getAllClassUsers() {
 
@@ -16,34 +21,24 @@ public class ClassUserDAO {
         for (int i = 1; i < rows.length; i++) {
             ClassUser classUser = new ClassUser();
             DataUtil.setObject(classUser, rows[0], rows[i]);
-            if(!classUser.isDeleted)
-                classUsers.add(classUser);
+            classUsers.add(classUser);
         }
 
         return classUsers;
     }
 
     public ClassUser getClassUser(int userId, int classId) {
-
-        String dataString = DataUtil.loadFile("dataFiles/classUser.txt");
-        String[] rows = dataString.split(";");
-        ClassUser classUser = new ClassUser();
-        DataUtil.setObject(classUser, rows[0], rows[1]);
-
-        return classUser;
-    }
-
-    public ClassUser getClassUser(ArrayList<ClassUser> classUsers, int userId, int classId) {
-        for (ClassUser user : classUsers) {
-            if (user.userId == userId && user.classId == classId && !user.isDeleted ) {
+        for (ClassUser user : this._allClassUsers) {
+            if (user.userId == userId && user.classId == classId && !user.isDeleted) {
                 return user;
             }
         }
         return null;
     }
 
-    public void addClassUser(ArrayList<ClassUser> classUsers, ClassUser newClassUser) {
+    public void addClassUser(ClassUser newClassUser) {
         try {
+            ArrayList<ClassUser> classUsers = this._allClassUsers;
             // validation
             for (ClassUser u : classUsers) {
                 if (u.classId == newClassUser.classId && u.userId == newClassUser.userId && !u.isDeleted) {
@@ -61,7 +56,7 @@ public class ClassUserDAO {
         }
     }
 
-    public void updateClassUser(ArrayList<ClassUser> classUsers, ClassUser classUser){
+    public void updateClassUser(ArrayList<ClassUser> classUsers, ClassUser classUser) {
 
     }
 }

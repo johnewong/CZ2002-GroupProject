@@ -12,10 +12,10 @@ public class Main {
 
         ClassUserDAO classUserDAO = new ClassUserDAO();
         ArrayList<ClassUser> allClassUsers = classUserDAO.getAllClassUsers();
-        ClassUser classUser = classUserDAO.getClassUser(allClassUsers, 2, 3);
+        ClassUser classUser = classUserDAO.getClassUser(2, 3);
 
-        ClassUser newClassUser = new ClassUser(2,6,0);
-        classUserDAO.addClassUser(allClassUsers, newClassUser);
+        ClassUser newClassUser = new ClassUser(2, 6, 0);
+        classUserDAO.addClassUser(newClassUser);
 
 
 //        System.out.println(String.format("classUserId: %d\n", classUser.classUserId));
