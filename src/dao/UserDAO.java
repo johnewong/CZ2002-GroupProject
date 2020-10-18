@@ -11,7 +11,7 @@ public class UserDAO {
     //2 get all data...
 
     public User getUser(int id){
-        String dataString = DataUtil.loadFile(filePath:"dataFiles/users.txt");
+        String dataString = DataUtil.loadFile("dataFiles/users.txt");
         User users = new User();
         users.displayName = "";
         users.password = "";
@@ -33,8 +33,8 @@ public class UserDAO {
 
     }
 
-    public void updateName(int userId, String name){
-    	String dataString = DataUtil.loadile("dataFiles/users.txt");
+    public User updateName(int userId, String name){
+    	String dataString = DataUtil.loadFile("dataFiles/users.txt");
     	String[] rows = dataString.split(";");
     	User users = new User();
     	DataUtil.setObject(users, rows[0], rows[1]);
