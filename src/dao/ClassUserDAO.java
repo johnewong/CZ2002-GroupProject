@@ -5,16 +5,18 @@ import utility.DataUtil;
 
 import java.util.ArrayList;
 
-public class ClassUserDAO implements IDAO<ClassUser>{
-    private ArrayList<ClassUser> _allClassUsers;
+public class ClassUserDAO implements IDAO<ClassUser> {
+    private ArrayList<ClassUser> allClassUsers;
+    private ArrayList<ClassUser> allValidClassUsers;
 
     // constructor
     public ClassUserDAO() {
-        this._allClassUsers = getAll();
+        this.allClassUsers = getAll();
+        this.allValidClassUsers = getAllValid();
     }
 
     @Override
-    public ArrayList<ClassUser> getAll(){
+    public ArrayList<ClassUser> getAll() {
         String dataString = DataUtil.loadFile("dataFiles/classUser.txt");
         String[] rows = dataString.split(";");
         ArrayList<ClassUser> classUsers = new ArrayList<>();
@@ -28,8 +30,19 @@ public class ClassUserDAO implements IDAO<ClassUser>{
     }
 
     @Override
+    public ArrayList<ClassUser> getAllValid() {
+        ArrayList<ClassUser> classUsers = new ArrayList<>();
+        for (ClassUser user : allClassUsers) {
+            if (!user.isDeleted)
+                classUsers.add(user);
+        }
+
+        return classUsers;
+    }
+
+    @Override
     public ClassUser get(int classUserId) {
-        for (ClassUser user : this._allClassUsers) {
+        for (ClassUser user : this.allClassUsers) {
             if (user.classUserId == classUserId && !user.isDeleted) {
                 return user;
             }
@@ -37,8 +50,8 @@ public class ClassUserDAO implements IDAO<ClassUser>{
         return null;
     }
 
-    public ClassUser get(int userId, int classId){
-        for (ClassUser user : this._allClassUsers) {
+    public ClassUser get(int userId, int classId) {
+        for (ClassUser user : this.allClassUsers) {
             if (user.userId == userId && user.classId == classId && !user.isDeleted) {
                 return user;
             }
@@ -49,7 +62,7 @@ public class ClassUserDAO implements IDAO<ClassUser>{
     @Override
     public void add(ClassUser newClassUser) {
         try {
-            ArrayList<ClassUser> classUsers = this._allClassUsers;
+            ArrayList<ClassUser> classUsers = this.allClassUsers;
             // validation
             for (ClassUser u : classUsers) {
                 if (u.classId == newClassUser.classId && u.userId == newClassUser.userId && !u.isDeleted) {
