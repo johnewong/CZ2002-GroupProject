@@ -5,17 +5,21 @@ import model.User;
 import utility.DataUtil;
 import java.util.ArrayList;
 
+<<<<<<< Updated upstream
 
 public class UserDAO {
     private ArrayList<User> _allUser;
     //1 create get update delete
+=======
+public class UserDAO implements IDAO<User>{
+	private ArrayList<User>_allUsers;
+ //1 create get update delete
+>>>>>>> Stashed changes
     //2 get all data...
-	 public ArrayList<User> _allUsers;
-
 	    public UserDAO() {
 	        this._allUsers = getAllUsers();
 	    }
-
+	
     public User getUser(int id){
         String dataString = DataUtil.loadFile("dataFiles/users.txt");
         User users = new User();
@@ -24,7 +28,7 @@ public class UserDAO {
 
         return users;
     }
-
+}    
     public ArrayList<User> getAllUsers(){
         String dataString = DataUtil.loadFile("dataFiles/users.txt");
         String[] rows = dataString.split( ";");
