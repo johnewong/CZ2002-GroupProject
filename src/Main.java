@@ -1,5 +1,7 @@
 import dao.ClassUserDAO;
 import model.ClassUser;
+import model.User;
+import page.StudentPage;
 
 import java.util.ArrayList;
 
@@ -14,8 +16,8 @@ public class Main {
         ClassUser newClassUser = new ClassUser(2, 7, 0);
         classUserDAO.add(newClassUser);
 
-
-
+        User user01 = new User("user01", "User 01");
+        new StudentPage(user01).showPage();
 
 
     }

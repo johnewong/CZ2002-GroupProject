@@ -1,6 +1,6 @@
 package page;
 
-public class AdminPage extends Page{
+public class LoginPage extends Page {
     @Override
     protected void showPage() {
 
