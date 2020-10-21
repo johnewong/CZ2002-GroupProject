@@ -6,7 +6,7 @@ import model.Class;
 
 import utility.DataUtil;
 
-public class ClassDAO {
+public class ClassDAO implements IDAO<Class>{
 
 	public ArrayList<Class> getAllClass(){
 		 String dataString = DataUtil.loadFile("class.txt");
@@ -29,8 +29,35 @@ public class ClassDAO {
 		
 		return c;
 	}
-	
-	
-	
 
+
+	@Override
+	public ArrayList<Class> getAll() {
+		return null;
+	}
+
+	@Override
+	public ArrayList<Class> getAllValid() {
+		return null;
+	}
+
+	@Override
+	public Class get(int id) {
+		return null;
+	}
+
+	@Override
+	public void add(Class item) {
+
+	}
+
+	@Override
+	public void update(Class item) {
+
+	}
+
+	@Override
+	public void delete(int id) {
+
+	}
 }

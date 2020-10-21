@@ -2,6 +2,7 @@ package dao;
 
 import model.ClassUser;
 import utility.DataUtil;
+import utility.StatusEnum;
 
 import java.util.ArrayList;
 
@@ -40,10 +41,20 @@ public class ClassUserDAO implements IDAO<ClassUser> {
         return classUsers;
     }
 
+    public ArrayList<ClassUser> getClassMates(int classId){
+        ArrayList<ClassUser> classUsers = new ArrayList<>();
+        for (ClassUser user : allValidClassUsers) {
+            if(user.classId == classId && user.status == StatusEnum.REGISTERED.toInt())
+                classUsers.add(user);
+        }
+
+        return classUsers;
+    }
+
     @Override
     public ClassUser get(int classUserId) {
-        for (ClassUser user : this.allClassUsers) {
-            if (user.classUserId == classUserId && !user.isDeleted) {
+        for (ClassUser user : this.allValidClassUsers) {
+            if (user.classUserId == classUserId) {
                 return user;
             }
         }
@@ -51,8 +62,8 @@ public class ClassUserDAO implements IDAO<ClassUser> {
     }
 
     public ClassUser get(int userId, int classId) {
-        for (ClassUser user : this.allClassUsers) {
-            if (user.userId == userId && user.classId == classId && !user.isDeleted) {
+        for (ClassUser user : this.allValidClassUsers) {
+            if (user.userId == userId && user.classId == classId) {
                 return user;
             }
         }
@@ -82,11 +93,13 @@ public class ClassUserDAO implements IDAO<ClassUser> {
 
     @Override
     public void update(ClassUser classUser) {
-
+        ClassUser existedClassUser = this.get(classUser.classUserId);
+        existedClassUser.status = classUser.status;
     }
 
     @Override
-    public void delete(int id) {
-
+    public void delete(int classUserId) {
+        ClassUser existedClassUser = this.get(classUserId);
+        existedClassUser.isDeleted = true;
     }
 }
