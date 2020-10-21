@@ -4,17 +4,19 @@ import model.ClassUser;
 import utility.DataUtil;
 
 import java.util.ArrayList;
-import java.util.stream.Collectors;
 
-public class ClassUserDAO {
-    public ArrayList<ClassUser> _allClassUsers;
+public class ClassUserDAO implements IDAO<ClassUser> {
+    private ArrayList<ClassUser> allClassUsers;
+    private ArrayList<ClassUser> allValidClassUsers;
 
+    // constructor
     public ClassUserDAO() {
-        this._allClassUsers = getAllClassUsers();
+        this.allClassUsers = getAll();
+        this.allValidClassUsers = getAllValid();
     }
 
-    public ArrayList<ClassUser> getAllClassUsers() {
-
+    @Override
+    public ArrayList<ClassUser> getAll() {
         String dataString = DataUtil.loadFile("dataFiles/classUser.txt");
         String[] rows = dataString.split(";");
         ArrayList<ClassUser> classUsers = new ArrayList<>();
@@ -27,8 +29,29 @@ public class ClassUserDAO {
         return classUsers;
     }
 
-    public ClassUser getClassUser(int userId, int classId) {
-        for (ClassUser user : this._allClassUsers) {
+    @Override
+    public ArrayList<ClassUser> getAllValid() {
+        ArrayList<ClassUser> classUsers = new ArrayList<>();
+        for (ClassUser user : allClassUsers) {
+            if (!user.isDeleted)
+                classUsers.add(user);
+        }
+
+        return classUsers;
+    }
+
+    @Override
+    public ClassUser get(int classUserId) {
+        for (ClassUser user : this.allClassUsers) {
+            if (user.classUserId == classUserId && !user.isDeleted) {
+                return user;
+            }
+        }
+        return null;
+    }
+
+    public ClassUser get(int userId, int classId) {
+        for (ClassUser user : this.allClassUsers) {
             if (user.userId == userId && user.classId == classId && !user.isDeleted) {
                 return user;
             }
@@ -36,9 +59,10 @@ public class ClassUserDAO {
         return null;
     }
 
-    public void addClassUser(ClassUser newClassUser) {
+    @Override
+    public void add(ClassUser newClassUser) {
         try {
-            ArrayList<ClassUser> classUsers = this._allClassUsers;
+            ArrayList<ClassUser> classUsers = this.allClassUsers;
             // validation
             for (ClassUser u : classUsers) {
                 if (u.classId == newClassUser.classId && u.userId == newClassUser.userId && !u.isDeleted) {
@@ -56,7 +80,13 @@ public class ClassUserDAO {
         }
     }
 
-    public void updateClassUser(ArrayList<ClassUser> classUsers, ClassUser classUser) {
+    @Override
+    public void update(ClassUser classUser) {
+
+    }
+
+    @Override
+    public void delete(int id) {
 
     }
 }

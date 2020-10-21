@@ -19,8 +19,6 @@ public class ClassDAO {
 		 }
 		 
 		 return Class;
-		 
-	     
 	}
 	
 	public Class getClass(int classId,String courseId) {

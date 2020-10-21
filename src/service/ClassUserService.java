@@ -1,6 +1,6 @@
 package service;
 
-public class StudentService {
+public class ClassUserService {
 
 
     public void AddCourse(){
