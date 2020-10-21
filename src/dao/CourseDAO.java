@@ -1,49 +1,83 @@
 package dao;
 
-
-import model.ClassUser;
 import model.Course;
 import utility.DataUtil;
 import java.util.ArrayList;
 
 
-public class CourseDAO {
-	
-	public ArrayList<Course> getAllCourse(){
-		
-		String dataString = DataUtil.loadFile("dataFiles/course.txt");
-		String[] rows = dataString.split(";");
-		ArrayList<Course> courseList = new ArrayList<>();
-		
-		for(int i=1; i<rows.length; i++) {
-			Course course = new Course();
-			DataUtil.setObject(course, rows[0], rows[i]);
-			courseList.add(course);
-		}
-		return courseList;	
-	}
-	
-    public Course getCourse(int courseId) {
+public class CourseDAO implements IDAO<Course> {
+    private ArrayList<Course> allCourses;
+    private ArrayList<Course> allValidCourses;
+
+    public CourseDAO(){
+        this.allCourses = getAll();
+        this.allValidCourses = getAllValid();
+    }
+
+    @Override
+    public ArrayList<Course> getAll() {
 
         String dataString = DataUtil.loadFile("dataFiles/course.txt");
         String[] rows = dataString.split(";");
-        Course course = new Course();
-        DataUtil.setObject(course, rows[0], rows[1]);
+        ArrayList<Course> courseList = new ArrayList<>();
 
-        return course;
+        for(int i=1; i<rows.length; i++) {
+            Course course = new Course();
+            DataUtil.setObject(course, rows[0], rows[i]);
+            courseList.add(course);
+        }
+        return courseList;
     }
 
-    public Course getCourse(ArrayList<Course> courseList, int courseId) {
+    @Override
+    public ArrayList<Course> getAllValid() {
+        ArrayList<Course> courseList = new ArrayList<>();
+        for (Course course: allCourses){
+            if(!course.isDeleted)
+                courseList.add(course);
+        }
+        return courseList;
+    }
 
-    	Course course = null;
-        for (Course courses : courseList) 
-        {
-           if(courses.courseId == courseId && !courses.isDeleted)
-        	   return course;
-
+    @Override
+    public Course get(int courseId) {
+        for (Course course : this.allCourses){
+            if(course.courseId == courseId && !course.isDeleted) {
+                return course;
+            }
         }
         return null;
     }
-    
-    
+
+    @Override
+    public void add(Course newCourse) {
+        try{
+            ArrayList<Course> courseList = this.allCourses;
+            for (Course c : courseList) {
+                if (c.courseId == newCourse.courseId && !c.isDeleted) {
+                    throw new Exception("The Course is already existed");
+                }
+            }
+            newCourse.courseId = courseList.get(courseList.size()-1).courseId +1;
+            courseList.add(newCourse);
+            DataUtil.writeFile(courseList, "dataFiles/course.txt");
+        }
+        catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+
+    }
+
+    @Override
+    public void update(Course item) {
+
+    }
+
+
+    @Override
+    public void delete(int id) {
+
+    }
 }
+
+
