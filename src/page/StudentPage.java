@@ -72,6 +72,6 @@ public class StudentPage extends Page {
 
     private void changeCourseIndex(){
         CourseService service = new CourseService();
-        service.printCourseList(this.user);
+        service.getRegisteredCourses(this.user);
     }
 }
