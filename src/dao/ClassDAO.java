@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import model.Class;
 
 
+import model.ClassUser;
 import utility.DataUtil;
 
 public class ClassDAO implements IDAO<Class> {
@@ -53,18 +54,23 @@ public class ClassDAO implements IDAO<Class> {
 		return null;
 	}
 
+
+
 	@Override
 	public void add(Class item) {
 
 	}
 
 	@Override
-	public void update(Class item) {
+	public void update(Class c) {
+
 
 	}
 
 	@Override
-	public void delete(int id) {
+	public void delete(int classId) {
+		Class existedClass = this.get(classId);
+		existedClass.isDeleted = true;
 
 	}
 

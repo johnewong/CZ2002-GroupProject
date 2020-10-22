@@ -12,6 +12,14 @@ public class Class {
     public int classType;// not null
     public String remark;
     public boolean isDeleted; // not null
+
+    public Class() {
+    }
+    public Class(int classId, int courseId) {
+        this.courseId = courseId;
+        this.classId = classId;
+
+    }
 }
 
 // 1 class -> 3  session
