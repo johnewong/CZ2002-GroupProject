@@ -2,10 +2,12 @@ package page;
 
 import dao.IDAO;
 import model.User;
+import service.CourseSM;
 import service.UserService;
 import service.CourseService;
 import service.ClassUserService;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class StudentPage extends Page {
@@ -70,8 +72,15 @@ public class StudentPage extends Page {
     }
 
 
-    private void changeCourseIndex(){
+    private void changeCourseIndex() {
         CourseService service = new CourseService();
-        service.getRegisteredCourses(this.user);
+        ArrayList<CourseSM> courses = service.getRegisteredCourses(this.user);
+
+        //print course list
+        for (CourseSM course : courses) {
+            System.out.println("Course list: ");
+            System.out.println(String.format("Name: {0} Code: {1}", course.courseName, course.courseCode));
+        }
+
     }
 }

@@ -1,9 +1,6 @@
 package service;
 
-import dao.ClassDAO;
-import dao.ClassUserDAO;
-import dao.CourseDAO;
-import dao.SessionDAO;
+import dao.*;
 import model.*;
 import model.Class;
 import utility.StatusEnum;
@@ -14,38 +11,22 @@ public class CourseService {
 
     public ArrayList<CourseSM> getRegisteredCourses(User user) {
         CourseDAO courseDAO = new CourseDAO();
-        ClassDAO classDAO = new ClassDAO();
-        SessionDAO sessionDAO = new SessionDAO();
-        ClassUserDAO classUserDAO = new ClassUserDAO();
-
-        ArrayList<Course> courses = courseDAO.getAllValid();
-        ArrayList<Class> classes = classDAO.getAllValid();
-        ArrayList<Session> sessions = sessionDAO.getAllValid();
-        ArrayList<ClassUser> classUsers = classUserDAO.getAllValid();
+        ClassService classService = new ClassService();
 
         // to get all registered classes
-        ArrayList<CourseSM> registeredCourses = null;
-        ArrayList<ClassSM> registeredClasses = null;
-        ArrayList<Integer> classIdList = null;
-        for (ClassUser classUser : classUsers) {
-            if (classUser.userId == user.userId && classUser.status == StatusEnum.REGISTERED.toInt())
-                classIdList.add(classUser.classId);
+        ArrayList<ClassSM> registeredClassSMs = classService.getRegisteredClasses(user.userId);
+
+        // to get all registered courses and their classes
+        ArrayList<CourseSM> registeredCourseSMs = new ArrayList<>();
+        for (ClassSM cls : registeredClassSMs) {
+            Course course = courseDAO.get(cls.courseId);
+            CourseSM courseSM = new CourseSM(course, classService.getCourseClasses(cls.courseId));
+            registeredCourseSMs.add(courseSM);
         }
 
-        for (Class cls : classes) {
-            if (classIdList.contains(cls.classId)) {
-
-                ClassSM classSM = new ClassSM(cls, new ClassService().getClassMates(cls.classId), sessionDAO.getClassSessions(cls.classId));
-                registeredClasses.add(classSM);
-            }
-
-        }
-
-        // to get all registered courses
-        for (ClassSM cls : registeredClasses) {
-            //registeredCourses.add(courseDAO.get(cls.courseId));
-        }
-
-        return registeredCourses;
+        return registeredCourseSMs;
     }
+
+
+
 }

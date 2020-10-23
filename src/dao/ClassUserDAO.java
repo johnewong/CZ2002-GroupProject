@@ -41,7 +41,7 @@ public class ClassUserDAO implements IDAO<ClassUser> {
         return classUsers;
     }
 
-    public ArrayList<ClassUser> getClassMates(int classId){
+    public ArrayList<ClassUser> getByClassId(int classId){
         ArrayList<ClassUser> classUsers = new ArrayList<>();
         for (ClassUser user : allValidClassUsers) {
             if(user.classId == classId && user.status == StatusEnum.REGISTERED.toInt())

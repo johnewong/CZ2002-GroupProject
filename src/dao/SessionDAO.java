@@ -48,7 +48,7 @@ public class SessionDAO implements IDAO<Session> {
         return null;
     }
 
-    public ArrayList<Session> getClassSessions(int classId) {
+    public ArrayList<Session> getByClassId(int classId) {
         ArrayList<Session> sessionList = new ArrayList<>();
         for (Session session : this.allValidSessions) {
             if (session.classId == classId)

@@ -1,26 +1,54 @@
 package service;
 
+
+import dao.ClassDAO;
 import dao.ClassUserDAO;
-import dao.UserDAO;
+import dao.SessionDAO;
+import model.Class;
 import model.ClassUser;
-import model.User;
 import utility.StatusEnum;
 
 import java.util.ArrayList;
 
 public class ClassService {
 
-    public ArrayList<User> getClassMates(int classId) {
+    public ArrayList<ClassSM> getRegisteredClasses(int userId) {
         ClassUserDAO classUserDAO = new ClassUserDAO();
-        UserDAO userDAO = new UserDAO();
+        ClassDAO classDAO = new ClassDAO();
+        SessionDAO sessionDAO = new SessionDAO();
+        UserService userService = new UserService();
+        ArrayList<Class> classes = classDAO.getAllValid();
+        ArrayList<ClassUser> classUsers = classUserDAO.getAllValid();
 
-        ArrayList<ClassUser> classUsers = classUserDAO.getClassMates(classId);
-        ArrayList<User> users = new ArrayList<>();
-        for (ClassUser cu : classUsers){
-            users.add(userDAO.get(cu.userId));
+        ArrayList<ClassSM> registeredClassSMs = new ArrayList<>();
+        ArrayList<Integer> registeredClassIds = new ArrayList<>();
+        for (ClassUser classUser : classUsers) {
+            if (classUser.userId == userId && classUser.status == StatusEnum.REGISTERED.toInt())
+                registeredClassIds.add(classUser.classId);
         }
 
-        return users;
+        for (Class cls : classes) {
+            if (registeredClassIds.contains(cls.classId)) {
+                ClassSM classSM = new ClassSM(cls, userService.getClassMates(cls.classId), sessionDAO.getByClassId(cls.classId));
+                registeredClassSMs.add(classSM);
+            }
+        }
+
+        return registeredClassSMs;
     }
 
+    public ArrayList<ClassSM> getCourseClasses(int courseId) {
+        ClassDAO classDAO = new ClassDAO();
+        SessionDAO sessionDAO = new SessionDAO();
+        UserService userService = new UserService();
+
+        ArrayList<Class> classes = classDAO.getByCourseId(courseId);
+        ArrayList<ClassSM> classSMs = new ArrayList<>();
+        for (Class cls : classes) {
+            ClassSM classSM = new ClassSM(cls, userService.getClassMates(cls.classId), sessionDAO.getByClassId(cls.classId));
+            classSMs.add(classSM);
+        }
+
+        return classSMs;
+    }
 }

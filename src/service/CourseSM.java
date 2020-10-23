@@ -1,6 +1,7 @@
 package service;
 
 import model.Class;
+import model.Course;
 
 import java.util.ArrayList;
 
@@ -13,4 +14,15 @@ public class CourseSM {
     public int au;
     public boolean isDeleted; // not null
     public ArrayList<ClassSM> classes;
+
+    public CourseSM(Course course, ArrayList<ClassSM> classes){
+        this.courseId = course.courseId;
+        this.courseCode = course.courseCode;
+        this.courseName = course.courseName;
+        this.school = course.school;
+        this.courseType = course.courseType;
+        this.au = course.au;
+        this.isDeleted = course.isDeleted;
+        this.classes = classes;
+    }
 }
