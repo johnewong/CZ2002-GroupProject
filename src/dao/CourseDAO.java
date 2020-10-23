@@ -75,8 +75,9 @@ public class CourseDAO implements IDAO<Course> {
 
 
     @Override
-    public void delete(int id) {
-
+    public void delete(int courseId) {
+        Course existCourse = this.get(courseId);
+        existCourse.isDeleted = true;
     }
 }
 
