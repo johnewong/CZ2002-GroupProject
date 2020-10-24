@@ -11,6 +11,8 @@ public class ClassDAO implements IDAO<Class> {
     private ArrayList<Class> allClasses;
     private ArrayList<Class> allValidClasses;
 
+
+
     public ArrayList<Class> getAllClass() {
         String dataString = DataUtil.loadFile("class.txt");
         String[] rows = dataString.split(";");
