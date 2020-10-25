@@ -70,6 +70,15 @@ public class CourseDAO implements IDAO<Course> {
 
     @Override
     public void update(Course item) {
+        Course existCourse = this.get(item.courseId);
+        if(existCourse != null){
+            existCourse.courseCode = item.courseCode;
+            // ...
+        }
+
+        else {
+            System.out.println("Course not found");
+        }
 
     }
 
@@ -77,7 +86,13 @@ public class CourseDAO implements IDAO<Course> {
     @Override
     public void delete(int courseId) {
         Course existCourse = this.get(courseId);
-        existCourse.isDeleted = true;
+        if(existCourse != null){
+            existCourse.isDeleted = true;
+        }
+        else {
+            System.out.println("Course not found");
+        }
+
     }
 }
 

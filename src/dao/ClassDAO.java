@@ -12,19 +12,19 @@ public class ClassDAO implements IDAO<Class> {
     private ArrayList<Class> allValidClasses;
 
 
-
-    public ArrayList<Class> getAllClass() {
-        String dataString = DataUtil.loadFile("class.txt");
-        String[] rows = dataString.split(";");
-        ArrayList<Class> Class = new ArrayList<>();
-        for (int i = 1; i < rows.length; i++) {
-            Class c = new Class();
-            DataUtil.setObject(c, rows[0], rows[i]);
-            Class.add(c);
-        }
-
-        return Class;
-    }
+//
+//    public ArrayList<Class> getAl() {
+//        String dataString = DataUtil.loadFile("class.txt");
+//        String[] rows = dataString.split(";");
+//        ArrayList<Class> Class = new ArrayList<>();
+//        for (int i = 1; i < rows.length; i++) {
+//            Class c = new Class();
+//            DataUtil.setObject(c, rows[0], rows[i]);
+//            Class.add(c);
+//        }
+//
+//        return Class;
+//    }
 
     public Class getClass(int classId, String courseId) {
         String dataString = DataUtil.loadFile("class.txt");
@@ -38,12 +38,21 @@ public class ClassDAO implements IDAO<Class> {
 
     @Override
     public ArrayList<Class> getAll() {
-        return null;
+        String dataString = DataUtil.loadFile("class.txt");
+        String[] rows = dataString.split(";");
+        ArrayList<Class> Class = new ArrayList<>();
+        for (int i = 1; i < rows.length; i++) {
+            Class c = new Class();
+            DataUtil.setObject(c, rows[0], rows[i]);
+            Class.add(c);
+        }
+
+        return Class;
     }
 
     @Override
     public ArrayList<Class> getAllValid() {
-        return null;
+        return new ArrayList<Class>();
     }
 
     public ArrayList<Class> getByCourseId(int courseId) {
