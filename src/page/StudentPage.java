@@ -1,11 +1,12 @@
 package page;
 
+import dao.ClassDAO;
+import dao.CourseDAO;
 import dao.IDAO;
+import model.Class;
+import model.Course;
 import model.User;
-import service.CourseSM;
-import service.UserService;
-import service.CourseService;
-import service.ClassUserService;
+import service.*;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -49,7 +50,7 @@ public class StudentPage extends Page {
                     //Todo
                     break;
                 case 4:
-                    //Todo
+                    checkVancancy();
                     break;
                 //Change Index Number of Course
                 case 5:
@@ -76,11 +77,38 @@ public class StudentPage extends Page {
         CourseService service = new CourseService();
         ArrayList<CourseSM> courses = service.getRegisteredCourses(this.user);
 
+
         //print course list
         for (CourseSM course : courses) {
             System.out.println("Course list: ");
             System.out.println(String.format("Name: {0} Code: {1}", course.courseName, course.courseCode));
+            for (ClassSM cls : course.classes) {
+                System.out.println(cls.indexNumber);
+            }
+
+
         }
 
+    }
+
+    private void checkVancancy() {
+        // get data
+        ClassDAO classDAO = new ClassDAO();
+        ArrayList<Class> classes = classDAO.getAllValid();
+
+        // display and user input
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Please enter index number: ");
+        String indexNumber = scanner.next();
+
+        for (Class cls : classes){
+            if(cls.indexNumber.equals(indexNumber)){
+                // print class info
+                System.out.println(cls.totalVacancy - cls.vacancyTaken);
+                break;
+            }
+        }
+
+        System.out.println("Index number not found");
     }
 }
