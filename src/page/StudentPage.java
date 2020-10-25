@@ -28,14 +28,7 @@ public class StudentPage extends Page {
         do {
             System.out.println(String.format("\nHi %s Welcome to Student Page!", user.displayName));
 
-            System.out.println("1. Add Course");
-            System.out.println("2. Drop Course ");
-            System.out.println("3. Check/Print Courses Registered");
-            System.out.println("4. Check Vacancies Available ");
-            System.out.println("5. Change Index Number of Course");
-            System.out.println("6. Swap Index Number with Another Student");
-            System.out.println("7. Exit");
-            System.out.println("Please choose an option:  ");
+            b
 
             sel = scanner.nextInt();
             switch (sel) {
