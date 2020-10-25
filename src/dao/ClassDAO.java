@@ -4,12 +4,13 @@ import java.util.ArrayList;
 
 import model.Class;
 
+import model.ClassUser;
 import utility.DataUtil;
 
 public class ClassDAO implements IDAO<Class> {
 
-    private ArrayList<Class> allClasses;
-    private ArrayList<Class> allValidClasses;
+    private ArrayList<Class> allClass;
+    private ArrayList<Class> allValidClass;
 
 
 //
@@ -25,8 +26,12 @@ public class ClassDAO implements IDAO<Class> {
 //
 //        return Class;
 //    }
+    public ClassDAO() {
+    this.allClass = getAll();
+    this.allValidClass = getAllValid();
+}
 
-    public Class getClass(int classId, String courseId) {
+    public Class getClass(int classId, int courseId) {
         String dataString = DataUtil.loadFile("class.txt");
         String[] rows = dataString.split(";");
         Class c = new Class();
@@ -52,12 +57,18 @@ public class ClassDAO implements IDAO<Class> {
 
     @Override
     public ArrayList<Class> getAllValid() {
-        return new ArrayList<Class>();
+        ArrayList<Class> cls = new ArrayList<>();
+        for (Class c : allClass) {
+            if (!c.isDeleted)
+                cls.add(c);
+        }
+
+        return cls;
     }
 
     public ArrayList<Class> getByCourseId(int courseId) {
 		ArrayList<Class> classList = new ArrayList<>();
-		for(Class cls: this.allValidClasses){
+		for(Class cls: this.allValidClass){
 		    if(cls.courseId == courseId)
 		        classList.add(cls);
         }
@@ -76,12 +87,16 @@ public class ClassDAO implements IDAO<Class> {
     }
 
     @Override
-    public void update(Class item) {
+    public void update(Class cls) {
+        Class existedClass = this.get(cls.classId);
+        existedClass.classType = cls.classType;
 
     }
 
     @Override
-    public void delete(int id) {
+    public void delete(int classId) {
+        Class existedClass = this.get(classId);
+        existedClass.isDeleted = true;
 
     }
 }

@@ -13,11 +13,13 @@ public class Class {
     public String remark;
     public boolean isDeleted; // not null
 
+
     public Class() {
     }
-    public Class(int classId, int courseId) {
+    public Class(int classId, int courseId, int classType) {
         this.courseId = courseId;
         this.classId = classId;
+        this.classType = classType;
 
     }
 }
