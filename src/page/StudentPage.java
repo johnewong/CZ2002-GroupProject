@@ -85,9 +85,9 @@ public class StudentPage extends Page {
             for (ClassSM cls : course.classes) {
                 System.out.println(cls.indexNumber);
             }
-
-
         }
+
+
 
     }
 

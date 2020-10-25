@@ -10,16 +10,16 @@ public class Main {
 
     public static void main(String[] args) {
 
-//        ClassUserDAO classUserDAO = new ClassUserDAO();
-//        ArrayList<ClassUser> allClassUsers = classUserDAO.getAll();
-//        ClassUser classUser = classUserDAO.get(2, 1);
-//
-//        ClassUser newClassUser = new ClassUser(2, 7, 0);
-//        classUserDAO.add(newClassUser);
-//
-//        User user01 = new User("user01", "User 01");
-//        new StudentPage(user01).showPage();
-        new LoginPage().showPage();
+        ClassUserDAO classUserDAO = new ClassUserDAO();
+        ArrayList<ClassUser> allClassUsers = classUserDAO.getAll();
+        ClassUser classUser = classUserDAO.get(2, 1);
+
+        ClassUser newClassUser = new ClassUser(2, 7, 0);
+        classUserDAO.add(newClassUser);
+
+        User user01 = new User("user01", "User 01");
+        new StudentPage(user01).showPage();
+ //       new LoginPage().showPage();
 
     }
 }
