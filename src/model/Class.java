@@ -16,10 +16,13 @@ public class Class {
 
     public Class() {
     }
-    public Class(int classId, int courseId, int classType) {
+    public Class(int classId, int courseId, int classType, int totalVacancy, int numberInWaitlist, int group) {
         this.courseId = courseId;
         this.classId = classId;
         this.classType = classType;
+        this.totalVacancy = totalVacancy;
+        this.numberInWaitlist = numberInWaitlist;
+        this.group = group;
 
     }
 }

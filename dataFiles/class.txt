@@ -1,1 +1,6 @@
 classId,courseId,vacancyTaken,totalVacancy,numberInWaitlist,isDeleted
+1,1,1,1,1,false;
+1,1,1,1,1,false;
+1,1,1,1,1,false;
+1,1,1,1,1,false;
+1,1,1,1,1,false;

@@ -31,7 +31,7 @@ public class ClassDAO implements IDAO<Class> {
     this.allValidClass = getAllValid();
 }
 
-    public Class getClass(int classId, int courseId) {
+    public Class getClass(int classId, int courseId, int totalVacancy, int numberInWaitlist, int group) {
         String dataString = DataUtil.loadFile("class.txt");
         String[] rows = dataString.split(";");
         Class c = new Class();
@@ -91,6 +91,7 @@ public class ClassDAO implements IDAO<Class> {
         Class existedClass = this.get(cls.classId);
         existedClass.classType = cls.classType;
 
+       
     }
 
     @Override
