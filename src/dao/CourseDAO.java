@@ -73,7 +73,10 @@ public class CourseDAO implements IDAO<Course> {
         Course existCourse = this.get(item.courseId);
         if(existCourse != null){
             existCourse.courseCode = item.courseCode;
-            // ...
+            existCourse.courseName = item.courseName;
+            existCourse.school = item.school;
+            existCourse.courseType = item.courseType;
+            existCourse.au = item.au;
         }
 
         else {
@@ -81,7 +84,6 @@ public class CourseDAO implements IDAO<Course> {
         }
 
     }
-
 
     @Override
     public void delete(int courseId) {

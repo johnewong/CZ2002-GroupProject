@@ -2,10 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="859a4f02-e7ff-46e9-8894-90bdd549316f" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/utility/CourseType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/utility/SchoolName.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataFiles/course.txt" beforeDir="false" afterPath="$PROJECT_DIR$/dataFiles/course.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/dao/CourseDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dao/CourseDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/page/StudentPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/page/StudentPage.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,6 +37,7 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file:///Users/yifei/Dropbox/NTU/Year2/CZ2002-OBJ ORIENTED DES &amp; PROG/GroupAssignment/src/dao/ClassUserDAO.java" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
@@ -63,13 +65,15 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="class" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -102,6 +106,7 @@
       <workItem from="1603551328310" duration="1190000" />
       <workItem from="1603594993015" duration="1540000" />
       <workItem from="1603457586619" duration="4663000" />
+      <workItem from="1603728949249" duration="1290000" />
     </task>
     <task id="LOCAL-00001" summary="change readme">
       <created>1602400555984</created>
@@ -198,7 +203,7 @@
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="1" />
+    <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.History.Properties">
     <option name="COLUMN_ORDER">
