@@ -1,4 +1,4 @@
-userId, matric_number,name, gender, nationality, role, email
+userId, userName, displayName, password, matricNumber, nationality, school, isDeleted
 1,S12345G,Alex,0,Singapore,1,alex@email.com
 2,S12345G,Alex,0,Singapore,1,alex@email.com
 3,S12345G,Alex,0,Singapore,1,alex@email.com
