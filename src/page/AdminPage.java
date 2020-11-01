@@ -1,19 +1,24 @@
 package page;
 
 import java.util.Scanner;
-
+import dao.ClassDAO;
+import dao.CourseDAO;
+import dao.IDAO;
+import model.Class;
+import model.Course;
+import model.User;
+import service.UserService;
 import dao.IDAO;
 import model.User;
 
 public class AdminPage<sel> extends Page {
     private User user;
-
+    Scanner scanner = new Scanner(System.in);
     public AdminPage(User user) {
         this.user = user;
     }
 
     public void showPage() {
-        Scanner scanner = new Scanner(System.in);
         int sel = 0;
         do {
             System.out.println(String.format("\n Hi %s Welcome to Admin Page!", user.displayName));
@@ -39,12 +44,45 @@ public class AdminPage<sel> extends Page {
                     //todo
                     break;
                 case 5:
+                    //todo
+                    printStudentListByIndex();
+                    break;
+                case 6:
+                    //todo
+                    printStudentListByCourse();
+                    break;
+                case 7:
                     System.out.println("Exit Admin Page.");
                     break;
                 default:
                     System.out.println("Invalid input. Please try again!");
             }
 
-        } while (sel != 5);
+        } while (sel != 7);
     }
+    
+    public void printStudentListByIndex() {
+    	
+    	//user input index no.
+        System.out.println("Please input an index number:  ");
+        String indexNumber = scanner.next();
+    	//convert index to classId
+        //UserService.getClassMates();
+    	//call user service getClassMates(int classId)
+    	//print classUsers
+    	//print error msg if index not found
+    	
+    	//UserDAO userDAO = new UserDAO();
+    	//ArrayList<User> users = userDAO.getAllValid();
+    	//for (User userList : users)
+    		//System.out.println();
+    	
+    }
+    public void printStudentListByCourse() {
+    	
+    	//ClassService
+    	
+    	
+    }
+    
 }

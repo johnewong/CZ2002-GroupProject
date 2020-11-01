@@ -1,5 +1,6 @@
 package dao;
 
+import model.Class;
 import model.Session;
 import utility.DataUtil;
 import java.util.ArrayList;
@@ -14,44 +15,34 @@ public class SessionDAO implements IDAO<Session> {
         this.allValidSessions = getAllValid();
     }
 
-    public ArrayList<Session> getAllSession() {
-
-        String dataString = DataUtil.loadFile("dataFiles/session.txt");
+    @Override
+    public ArrayList<Session> getAll() {
+        String dataString = DataUtil.loadFile("session.txt");
         String[] rows = dataString.split(";");
         ArrayList<Session> sessions = new ArrayList<>();
         for (int i = 1; i < rows.length; i++) {
-            Session session = new Session();
-            DataUtil.setObject(session, rows[0], rows[i]);
-            sessions.add(session);
+            Session s = new Session();
+            DataUtil.setObject(s, rows[0], rows[i]);
+            Session.add(s);
         }
+
         return sessions;
-    }	
-    
-    public Session getSession(int sessionId) {
-
-        String dataString = DataUtil.loadFile("dataFiles/session.txt");
-        String[] rows = dataString.split(";");
-        Session session = new Session();
-        DataUtil.setObject(session, rows[0], rows[1]);
-
-        return session;
-
-    }
-
-    @Override
-    public ArrayList<Session> getAll() {
-        return null;
     }
 
     @Override
     public ArrayList<Session> getAllValid() {
-        return null;
+        ArrayList<Session> session = new ArrayList<>();
+        for (Session s : allSessions) {
+            if (!s.isDeleted)
+                session.add(s);
+        }
+        return session;
     }
 
     public ArrayList<Session> getByClassId(int classId) {
         ArrayList<Session> sessionList = new ArrayList<>();
-        for (Session session : this.allValidSessions) {
-            if (session.classId == classId)
+        for(Session session: this.allValidSessions){
+            if(session.classId == classId)
                 sessionList.add(session);
         }
         return sessionList;
@@ -68,12 +59,14 @@ public class SessionDAO implements IDAO<Session> {
     }
 
     @Override
-    public void update(Session item) {
-
+    public void update(Session session) {
+        Session existedSession = this.get(session.sessionId);
+        existedSession.classId = session.classId;
     }
 
     @Override
-    public void delete(int id) {
-
+    public void delete(int sessionId) {
+        Session existedSession = this.get(sessionId);
+        existedSession.isDeleted = true;
     }
 }
