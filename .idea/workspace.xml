@@ -39,7 +39,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1603598940355" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Algorithm p2" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -99,6 +99,8 @@
       <workItem from="1603728949249" duration="1290000" />
       <workItem from="1604214384458" duration="5108000" />
       <workItem from="1604410073095" duration="94000" />
+      <workItem from="1604410505538" duration="9000" />
+      <workItem from="1604410540653" duration="579000" />
     </task>
     <task id="LOCAL-00001" summary="change readme">
       <created>1602400555984</created>
@@ -231,6 +233,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="679" y="320" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1603711277799" />
+    <state x="-1180" y="275" key="FileChooserDialogImpl" timestamp="1604410571173">
+      <screen x="-1920" y="0" width="1920" height="1040" />
+    </state>
+    <state x="-1180" y="275" key="FileChooserDialogImpl/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1604410571173" />
     <state width="1493" height="210" key="GridCell.Tab.0.bottom" timestamp="1604219287280">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
