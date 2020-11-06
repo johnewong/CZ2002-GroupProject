@@ -39,7 +39,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1603598940355" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Algorithm p2" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -101,6 +101,8 @@
       <workItem from="1604410073095" duration="94000" />
       <workItem from="1604410505538" duration="9000" />
       <workItem from="1604410540653" duration="579000" />
+      <workItem from="1604419706205" duration="7000" />
+      <workItem from="1604419730155" duration="169000" />
     </task>
     <task id="LOCAL-00001" summary="change readme">
       <created>1602400555984</created>
