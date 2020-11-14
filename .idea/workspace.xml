@@ -1,0 +1,364 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="859a4f02-e7ff-46e9-8894-90bdd549316f" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dao/ClassDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dao/ClassDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/page/StudentPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/page/StudentPage.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CoverageDataManager">
+    <SUITE FILE_PATH="coverage/GroupAssignment$Main.ic" NAME="Main Coverage Results" MODIFIED="1603012873105" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+        <option value="Enum" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1jMhIDgG3O26Oa9c5yMYNvSxC9k" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file:///Users/yifei/Dropbox/NTU/Year2/CZ2002-OBJ ORIENTED DES &amp; PROG/GroupAssignment/src/dao/ClassUserDAO.java" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1605334141024" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
+    <property name="settings.editor.selected.configurable" value="configurable.group.tools" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/dataFiles" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true">
+      <option name="MAIN_CLASS_NAME" value="Main" />
+      <module name="Lab" />
+      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Main" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="false" />
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="859a4f02-e7ff-46e9-8894-90bdd549316f" name="Default Changelist" comment="" />
+      <created>1602255464120</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1602255464120</updated>
+      <workItem from="1602255465283" duration="14405000" />
+      <workItem from="1602511621673" duration="17853000" />
+      <workItem from="1602686995741" duration="5149000" />
+      <workItem from="1602865897491" duration="43160000" />
+      <workItem from="1603260739900" duration="144000" />
+      <workItem from="1603260896973" duration="4659000" />
+      <workItem from="1603289279337" duration="19035000" />
+      <workItem from="1603457586619" duration="105000" />
+      <workItem from="1603551328310" duration="1190000" />
+      <workItem from="1603594993015" duration="1540000" />
+      <workItem from="1603457586619" duration="4663000" />
+      <workItem from="1603728949249" duration="1290000" />
+      <workItem from="1604214384458" duration="5108000" />
+      <workItem from="1604410073095" duration="94000" />
+      <workItem from="1604410505538" duration="9000" />
+      <workItem from="1604410540653" duration="579000" />
+      <workItem from="1604419706205" duration="7000" />
+      <workItem from="1604419730155" duration="169000" />
+    </task>
+    <task id="LOCAL-00001" summary="change readme">
+      <created>1602400555984</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1602400555984</updated>
+    </task>
+    <task id="LOCAL-00002" summary="add data file">
+      <created>1602400956605</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1602400956606</updated>
+    </task>
+    <task id="LOCAL-00003" summary="add discussion changes">
+      <created>1602409778950</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1602409778950</updated>
+    </task>
+    <task id="LOCAL-00004" summary="1. add loadData function&#10;2. change data file location">
+      <created>1602523128202</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1602523128205</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Add Util functions&#10;Add ClassUser get, getAll">
+      <created>1602590008724</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1602590008725</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Add Util functions&#10;Add ClassUser get, getAll">
+      <created>1602772889625</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1602772889625</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Add page package&#10;Add services&#10;Add getAllValid function">
+      <created>1603097294371</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1603097294373</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Merge and solve conflict">
+      <created>1603261238307</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1603261238307</updated>
+    </task>
+    <task id="LOCAL-00009" summary="workspace">
+      <created>1603267601736</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1603267601736</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Large update">
+      <created>1603301861043</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1603301861043</updated>
+    </task>
+    <task id="LOCAL-00011" summary="change workspace.xml">
+      <created>1603457637372</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1603457637372</updated>
+    </task>
+    <task id="LOCAL-00012" summary="add checkVancancy">
+      <created>1603597158746</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1603597158746</updated>
+    </task>
+    <task id="LOCAL-00013" summary="add login">
+      <created>1603598400453</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1603598400453</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ORDER">
+      <list>
+        <option value="0" />
+        <option value="2" />
+        <option value="3" />
+        <option value="1" />
+      </list>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="change readme" />
+    <MESSAGE value="add data file" />
+    <MESSAGE value="add discussion changes" />
+    <MESSAGE value="1. add loadData function&#10;2. change data file location" />
+    <MESSAGE value="Add Util functions&#10;Add ClassUser get, getAll" />
+    <MESSAGE value="Add page package&#10;Add services&#10;Add getAllValid function" />
+    <MESSAGE value="Merge and solve conflict" />
+    <MESSAGE value="workspace" />
+    <MESSAGE value="Large update" />
+    <MESSAGE value="change workspace.xml" />
+    <MESSAGE value="add checkVancancy" />
+    <MESSAGE value="add login" />
+    <MESSAGE value="J test" />
+    <option name="LAST_COMMIT_MESSAGE" value="J test" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="249" y="0" key="#Project_Structure" timestamp="1604214503943">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="249" y="0" key="#Project_Structure/0.0.1536.824@0.0.1536.824" timestamp="1604214503943" />
+    <state x="679" y="320" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1603711277799">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="679" y="320" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1603711277799" />
+    <state x="-1180" y="275" key="FileChooserDialogImpl" timestamp="1604410571173">
+      <screen x="-1920" y="0" width="1920" height="1040" />
+    </state>
+    <state x="-1180" y="275" key="FileChooserDialogImpl/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1604410571173" />
+    <state width="1238" height="99" key="GridCell.Tab.0.bottom" timestamp="1605341894691">
+      <screen x="0" y="0" width="1280" height="800" />
+    </state>
+    <state width="1238" height="99" key="GridCell.Tab.0.bottom/0.0.1280.800@0.0.1280.800" timestamp="1605341894691" />
+    <state width="1493" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1604219287280" />
+    <state width="1860" height="241" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1603619863626" />
+    <state width="1860" height="241" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1603711546507" />
+    <state width="1238" height="99" key="GridCell.Tab.0.center" timestamp="1605341894689">
+      <screen x="0" y="0" width="1280" height="800" />
+    </state>
+    <state width="1238" height="99" key="GridCell.Tab.0.center/0.0.1280.800@0.0.1280.800" timestamp="1605341894689" />
+    <state width="1493" height="210" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1604219287280" />
+    <state width="1860" height="241" key="GridCell.Tab.0.center/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1603619863626" />
+    <state width="1860" height="241" key="GridCell.Tab.0.center/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1603711546507" />
+    <state width="1238" height="99" key="GridCell.Tab.0.left" timestamp="1605341894688">
+      <screen x="0" y="0" width="1280" height="800" />
+    </state>
+    <state width="1238" height="99" key="GridCell.Tab.0.left/0.0.1280.800@0.0.1280.800" timestamp="1605341894688" />
+    <state width="1493" height="210" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1604219287280" />
+    <state width="1860" height="241" key="GridCell.Tab.0.left/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1603619863626" />
+    <state width="1860" height="241" key="GridCell.Tab.0.left/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1603711546507" />
+    <state width="1238" height="99" key="GridCell.Tab.0.right" timestamp="1605341894690">
+      <screen x="0" y="0" width="1280" height="800" />
+    </state>
+    <state width="1238" height="99" key="GridCell.Tab.0.right/0.0.1280.800@0.0.1280.800" timestamp="1605341894690" />
+    <state width="1493" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1604219287280" />
+    <state width="1860" height="241" key="GridCell.Tab.0.right/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1603619863626" />
+    <state width="1860" height="241" key="GridCell.Tab.0.right/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1603711546507" />
+    <state width="1493" height="261" key="GridCell.Tab.1.bottom" timestamp="1604215353421">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="261" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1604215353421" />
+    <state width="1493" height="261" key="GridCell.Tab.1.center" timestamp="1604215353420">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="261" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1604215353420" />
+    <state width="1493" height="261" key="GridCell.Tab.1.left" timestamp="1604215353420">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="261" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1604215353420" />
+    <state width="1493" height="261" key="GridCell.Tab.1.right" timestamp="1604215353420">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="261" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1604215353420" />
+    <state x="-1464" y="100" key="SettingsEditor" timestamp="1604410102223">
+      <screen x="-1920" y="0" width="1920" height="1040" />
+    </state>
+    <state x="-1464" y="100" key="SettingsEditor/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1604410102223" />
+    <state x="240" y="118" key="Vcs.Push.Dialog.v2" timestamp="1605336155963">
+      <screen x="0" y="23" width="1280" height="713" />
+    </state>
+    <state x="240" y="118" key="Vcs.Push.Dialog.v2/0.23.1280.713@0.23.1280.713" timestamp="1605336155963" />
+    <state x="312" y="44" width="763" height="691" key="dock-window-1" timestamp="1605340751082">
+      <screen x="0" y="23" width="1280" height="713" />
+    </state>
+    <state x="517" y="44" width="763" height="691" key="dock-window-1/0.0.1280.800@0.0.1280.800" timestamp="1605338823266" />
+    <state x="312" y="44" width="763" height="691" key="dock-window-1/0.23.1280.713@0.23.1280.713" timestamp="1605340751082" />
+    <state x="-1258" y="118" width="596" height="804" key="find.popup" timestamp="1603626102276">
+      <screen x="-1920" y="0" width="1920" height="1040" />
+    </state>
+    <state x="-1258" y="118" width="596" height="804" key="find.popup/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1603626102276" />
+  </component>
+  <component name="XDebuggerManager">
+    <watches-manager>
+      <configuration name="Application">
+        <watch expression="f" language="JAVA" />
+        <watch expression="columnNames[i].trim()" language="JAVA" />
+      </configuration>
+    </watches-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/CZ2002_GroupProject$Main.ic" NAME="Main Coverage Results" MODIFIED="1604218691766" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+  </component>
+  <component name="debuggerHistoryManager">
+    <expressions id="watch">
+      <expression>
+        <expression-string>columnNames[i].trim()</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>f</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>sb.toString()</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>a.exists()</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>new File(&quot;dataFiles/user.txt&quot;)</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>dataFiles/user.txt</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>File(filePath)</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+    </expressions>
+  </component>
+</project>
