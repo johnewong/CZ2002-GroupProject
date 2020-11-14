@@ -15,7 +15,7 @@ public class LoginPage extends Page {
         String password="";
 
         ArrayList<User> users = new UserDAO().getAllValid();
-        String encryptedPassword= DataUtil.encryptPassword(password);
+        String encryptedPassword= DataUtil.getEncryptPassword(password);
 
         for (User user : users){
             if(user.password.equals(encryptedPassword)){
