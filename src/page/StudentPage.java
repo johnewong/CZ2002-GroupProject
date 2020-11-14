@@ -77,6 +77,7 @@ public class StudentPage extends Page {
         CourseService service = new CourseService();
         ArrayList<CourseSM> courses = service.getRegisteredCourses(this.user);
 
+
         //print course list
         for (CourseSM course : courses) {
             System.out.println("Course list: ");

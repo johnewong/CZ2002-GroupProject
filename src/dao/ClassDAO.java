@@ -63,13 +63,34 @@ public class ClassDAO implements IDAO<Class> {
     }
 
     @Override
-    public Class get(int id) {
+    public Class get(int classId ) {
+        for (Class cls : this.allValidClass){
+            if (cls.classId == classId){
+                return cls;
+            }
+        }
         return null;
     }
 
     @Override
-    public void add(Class item) {
+    public void add(Class newCls) {
+        try {
+            ArrayList<Class> cls = this.allClass;
+            // validation
+            for (Class u : cls) {
+                if (u.classId == newCls.classId  && !u.isDeleted) {
+                    throw new Exception("The class is already existed");
+                }
+            }
 
+            cls.sort((a, b) -> a.classId - b.classId);
+            newCls.classId = cls.get(cls.size() - 1).classId + 1;
+            cls.add(newCls);
+            DataUtil.writeFile(cls, "dataFiles/class.txt");
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     @Override
