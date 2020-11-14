@@ -21,8 +21,8 @@ public class Main {
 
         //User user01 = new User("user01", "User 01");
         //new StudentPage(user01).showPage();
-        //new LoginPage().showPage();
-        new AdminPage(new User("bb","cc")).showPage();
+        new LoginPage().showPage();
+        //new AdminPage(new User("bb","cc")).showPage();
 
     }
 }

@@ -26,7 +26,9 @@ public class LoginPage extends Page {
             if(user.userName.equals(userName) && user.password.equals(password)){
                 if(user.role == RoleType.Student.toInt()){
                     //get today's time
-                    Date now = new Date(System.currentTimeMillis());
+                    //Date now = new Date(System.currentTimeMillis());
+                    Date now = new Date();
+                    System.out.println(now);
 
                     if(now.after(user.periodStartTime) && now.before(user.periodEndTime))
                     {
