@@ -15,16 +15,15 @@ public class LoginPage extends Page {
         System.out.println("Username: ");
         Scanner scanner = new Scanner(System.in);
         String userName = scanner.next();
-
         System.out.println("Password: ");
-        Scanner scanner2 = new Scanner(System.in);
-        String password = scanner2.next();
+        String password = scanner.next();
 
         ArrayList<User> users = new UserDAO().getAllValid();
-        String encryptedPassword= DataUtil.encryptPassword(password);
+        //String encryptedPassword= DataUtil.encryptPassword(password);
 
         for (User user : users){
-            if(user.password.equals(encryptedPassword)){
+            //user.password.equals(encryptedPassword)
+            if(user.userName.equals(userName) && user.password.equals(password)){
                 if(user.role == RoleType.Student.toInt()){
                     //get today's time
                     Date now = new Date(System.currentTimeMillis());

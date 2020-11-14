@@ -11,11 +11,15 @@ import service.UserService;
 import dao.IDAO;
 import model.User;
 
-public class AdminPage<sel> extends Page {
+public class AdminPage extends Page {
     private User user;
     Scanner scanner = new Scanner(System.in);
     public AdminPage(User user) {
         this.user = user;
+    }
+
+    public AdminPage() {
+
     }
 
     public void showPage() {
