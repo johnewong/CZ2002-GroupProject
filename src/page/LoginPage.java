@@ -4,6 +4,8 @@ import dao.UserDAO;
 import model.User;
 import utility.DataUtil;
 import utility.RoleType;
+
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
@@ -18,6 +20,7 @@ public class LoginPage extends Page {
         System.out.println("Password: ");
         String password = scanner.next();
 
+
         ArrayList<User> users = new UserDAO().getAllValid();
         //String encryptedPassword= DataUtil.encryptPassword(password);
 
@@ -27,8 +30,11 @@ public class LoginPage extends Page {
                 if(user.role == RoleType.Student.toInt()){
                     //get today's time
                     //Date now = new Date(System.currentTimeMillis());
+
                     Date now = new Date();
-                    System.out.println(now);
+                    //SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+                    //System.out.println(formatter.format(now));
+                    //String currentDate = formatter.format(now);
 
                     if(now.after(user.periodStartTime) && now.before(user.periodEndTime))
                     {

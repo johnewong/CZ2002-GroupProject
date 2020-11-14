@@ -5,6 +5,7 @@ import model.User;
 import page.AdminPage;
 import page.LoginPage;
 import page.StudentPage;
+import utility.DataUtil;
 
 import java.util.ArrayList;
 
@@ -21,7 +22,7 @@ public class Main {
 
         //User user01 = new User("user01", "User 01");
         //new StudentPage(user01).showPage();
-        new LoginPage().showPage();
+        //new LoginPage().showPage();
         //new AdminPage(new User("bb","cc")).showPage();
 
     }
