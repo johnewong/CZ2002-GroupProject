@@ -19,8 +19,8 @@ public class Main {
         classUserDAO.add(newClassUser);
 
         User user01 = new User("user01", "User 01");
-        new StudentPage(user01).showPage();
- //       new LoginPage().showPage();
+        //new StudentPage(user01).showPage();
+        new LoginPage().showPage();
 
     }
 }
