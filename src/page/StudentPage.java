@@ -8,11 +8,15 @@ import model.Course;
 import model.User;
 import service.*;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class StudentPage extends Page {
     private User user;
+
 
     public StudentPage() {
 
@@ -41,7 +45,7 @@ public class StudentPage extends Page {
             sel = scanner.nextInt();
             switch (sel) {
                 case 1:
-                    //Todo
+                    addCourse();
                     break;
                 case 2:
                     //Todo
@@ -72,23 +76,63 @@ public class StudentPage extends Page {
         } while (sel != 7);
     }
 
+    private void addCourse() {
+        CourseService service = new CourseService();
+        ArrayList<CourseSM> courses = service.getRegisteredCourses(this.user);
+        //BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+        Scanner scanner = new Scanner(System.in);
+
+        printCourseList(courses);
+        System.out.println("Enter the course code: ");
+
+        String courseCode = scanner.next();
+        ArrayList<ClassSM> selectedClasses = new ArrayList<>();
+        for(CourseSM course : courses){
+            if(courseCode == course.courseCode){
+                selectedClasses = course.classes;
+            }
+
+        }
+        if(selectedClasses.size()==0) {
+            printClassList(selectedClasses);
+        }
+        else
+        {
+            System.out.println("selectedClasses Not Found");
+        }
+
+        System.out.println("Enter the course section ID: ");
+        //String Id = in.readLine();
+
+
+
+
+    }
 
     private void changeCourseIndex() {
         CourseService service = new CourseService();
         ArrayList<CourseSM> courses = service.getRegisteredCourses(this.user);
-
-
+        printCourseList(courses);
+    }
+    private void printCourseList(ArrayList<CourseSM>courses){
         //print course list
         for (CourseSM course : courses) {
             System.out.println("Course list: ");
             System.out.println(String.format("Name: {0} Code: {1}", course.courseName, course.courseCode));
-            for (ClassSM cls : course.classes) {
-                System.out.println(cls.indexNumber);
-            }
+//            for (ClassSM cls : course.classes) {
+//                System.out.println(cls.indexNumber);
+//            }
         }
-
-
-
+    }
+    private void printClassList(ArrayList<ClassSM>classes){
+        //print course list
+        for (ClassSM classSM : classes) {
+            System.out.println("Course list: ");
+            System.out.println(String.format("Name: {0} Code: {1} Index:{2}", classSM.classId, classSM.courseId,classSM.indexNumber));
+//            for (ClassSM cls : course.classes) {
+//                System.out.println(cls.indexNumber);
+//            }
+        }
     }
 
     private void checkVancancy() {
@@ -112,3 +156,4 @@ public class StudentPage extends Page {
         System.out.println("Index number not found");
     }
 }
+
