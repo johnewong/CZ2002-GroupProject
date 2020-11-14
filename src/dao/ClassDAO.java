@@ -68,7 +68,7 @@ public class ClassDAO implements IDAO<Class> {
     }
 
     @Override
-    public void add(Class item) {
+    public void add(Class item) {//test
 
     }
 
