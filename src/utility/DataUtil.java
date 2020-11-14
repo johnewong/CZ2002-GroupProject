@@ -101,7 +101,7 @@ public class DataUtil {
         }
     }
 
-    public static String encryptPassword(String password) {
+    public static String getEncryptPassword(String password) {
         return null;
     } //password
 
