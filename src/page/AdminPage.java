@@ -66,6 +66,9 @@ public class AdminPage<sel> extends Page {
     	//user input index no.
         System.out.println("Please input an index number:  ");
         String indexNumber = scanner.next();
+
+        //index -> classId -> call getClassMates(classId) ->
+
     	//convert index to classId
         //UserService.getClassMates();
     	//call user service getClassMates(int classId)

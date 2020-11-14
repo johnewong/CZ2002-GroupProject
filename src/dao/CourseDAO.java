@@ -58,6 +58,7 @@ public class CourseDAO implements IDAO<Course> {
                     throw new Exception("The Course is already existed");
                 }
             }
+            courseList.sort((a, b) -> a.courseId - b.courseId);
             newCourse.courseId = courseList.get(courseList.size()-1).courseId +1;
             courseList.add(newCourse);
             DataUtil.writeFile(courseList, "dataFiles/course.txt");
