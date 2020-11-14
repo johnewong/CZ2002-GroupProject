@@ -1,10 +1,10 @@
-classId,courseId,indexNumber,vacancyTaken,totalVacancy,numberInWaitlist,group,remark,isDeleted
-1,1,00011,12,20,0,1,CZ2001 class 1,false
-2,1,00012,8,20,0,2,CZ2001 class 2,false
-3,1,00013,8,20,0,3,CZ2001 class 3,false
-4,2,00021,8,20,0,1,CE2001 class 1,false
-5,2,00022,8,20,0,2,CE2001 class 2,false
-6,3,00031,20,20,3,1,CZ2002 class 1,false
-7,3,00032,2,20,0,2,CZ2002 class 2,false
-8,4,00041,18,25,1,CZ2003 class 1,false
-9,5,00041,15,15,1,LAO009 class 1,false
+classId,courseId,indexNumber,vacancyTaken,totalVacancy,numberInWaitlist,group,remark,isDeleted;
+1,1,00011,12,20,0,1,CZ2001 class 1,false;
+2,1,00012,8,20,0,2,CZ2001 class 2,false;
+3,1,00013,8,20,0,3,CZ2001 class 3,false;
+4,2,00021,8,20,0,1,CE2001 class 1,false;
+5,2,00022,8,20,0,2,CE2001 class 2,false;
+6,3,00031,20,20,3,1,CZ2002 class 1,false;
+7,3,00032,2,20,0,2,CZ2002 class 2,false;
+8,4,00041,18,25,1,CZ2003 class 1,false;
+9,5,00041,15,15,1,LAO009 class 1,false;

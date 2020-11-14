@@ -17,19 +17,10 @@ public class ClassDAO implements IDAO<Class> {
     this.allValidClass = getAllValid();
 }
 
-    public Class getClass(int classId, int courseId, int totalVacancy, int numberInWaitlist, int group) {
-        String dataString = DataUtil.loadFile("class.txt");
-        String[] rows = dataString.split(";");
-        Class c = new Class();
-        DataUtil.setObject(c, rows[0], rows[1]);
-
-        return c;
-    }
-
 
     @Override
     public ArrayList<Class> getAll() {
-        String dataString = DataUtil.loadFile("class.txt");
+        String dataString = DataUtil.loadFile("dataFiles/class.txt");
         String[] rows = dataString.split(";");
         ArrayList<Class> Class = new ArrayList<>();
         for (int i = 1; i < rows.length; i++) {

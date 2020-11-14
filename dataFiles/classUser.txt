@@ -1,1 +1,3 @@
-classUserId,userId,classId,status,isDeleted
+classUserId,userId,classId,status,isDeleted;
+1,1,1,1,false;
+2,2,7,0,false;
