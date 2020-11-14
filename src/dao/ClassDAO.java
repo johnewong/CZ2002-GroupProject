@@ -96,9 +96,6 @@ public class ClassDAO implements IDAO<Class> {
     @Override
     public void update(Class cls) {
         Class existedClass = this.get(cls.classId);
-        existedClass.classType = cls.classType;
-
-       
     }
 
     @Override

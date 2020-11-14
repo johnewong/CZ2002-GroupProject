@@ -14,7 +14,6 @@ public class ClassSM {
     public int totalVacancy;
     public int numberInWaitlist;
     public int group;
-    public int classType;// not null
     public String remark;
     public boolean isDeleted; // not null
     public ArrayList<User> users;
@@ -29,7 +28,6 @@ public class ClassSM {
         this.totalVacancy = cls.totalVacancy;
         this.numberInWaitlist = cls.numberInWaitlist;
         this.group = cls.group;
-        this.classType = cls.classType;
         this.remark = cls.remark;
         this.isDeleted = cls.isDeleted;
         this.users = users;
