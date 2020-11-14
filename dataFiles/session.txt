@@ -1,4 +1,7 @@
-courseId, courseCode, group, day, time, venue;
-1, 1, 1, M, 1100, en-01;
-2, 1, 2, M, 1100, en-01;
-3, 1, 3, M, 1100, en-01;
+sessionId,classId,day,time,venue,classType,isDeleted;
+1,1,1,9:00,LT-4,1,false
+2,1,4,10:00,LR-12,2,false
+3,1,5,10:00,SoftwareLab-1,3,false
+4,2,1,10:00,LT-3,1,false
+5,2,4,10:00,LR-15,2,false
+6,3,1,15:00,LT-3,1,false

@@ -1,5 +1,6 @@
 courseId, courseCode, courseName, school, courseType, au, isDeleted;
 1,CZ2001,Algorithm,2,0,3,false;
-2,CZ2002,Obj Oriented DES & PROG,2,0,3,false;
-3,CZ2003,Computer Graphics & Visual,2,0,3,false;
-4,LAO009,Cits Demo and Test Site,1,4,0,ture;
+2,CE2001,Algorithm,1,1,3,false;
+3,CZ2002,Obj Oriented DES & PROG,2,0,3,false;
+4,CZ2003,Computer Graphics & Visual,2,0,3,false;
+5,LAO009,Cits Demo and Test Site,1,4,0,ture;
