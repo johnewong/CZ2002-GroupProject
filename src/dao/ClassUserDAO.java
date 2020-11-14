@@ -95,11 +95,13 @@ public class ClassUserDAO implements IDAO<ClassUser> {
     public void update(ClassUser classUser) {
         ClassUser existedClassUser = this.get(classUser.classUserId);
         existedClassUser.status = classUser.status;
+        DataUtil.writeFile(this.allClassUsers, "dataFiles/classUser.txt");
     }
 
     @Override
     public void delete(int classUserId) {
         ClassUser existedClassUser = this.get(classUserId);
         existedClassUser.isDeleted = true;
+        DataUtil.writeFile(this.allClassUsers, "dataFiles/classUser.txt");
     }
 }

@@ -1,6 +1,4 @@
-userId, userName, displayName, password, matricNumber, nationality, school, isDeleted
-1,S12345G,Alex,0,Singapore,1,alex@email.com
-2,S12345G,Alex,0,Singapore,1,alex@email.com
-3,S12345G,Alex,0,Singapore,1,alex@email.com
-4,S12345G,Alex,0,Singapore,1,alex@email.com
-5,S12345G,Alex,0,Singapore,1,alex@email.com
+userId, userName, displayName, password, matricNumber, nationality, school, gender, role, periodStartTime, periodEndTime, hasFirstLogin,isDeleted
+1,Alex,Alex Wang,123456,U1900000F,China,SCSE,0,0,2020-11-01,2020-12-30,true,false
+2,Benjamin,Benjamin Lee,000000,U1911000F,Singapore,,0,1,2020-11-01,2020-12-30,true,false
+3,Jessica,Jessica Lim,9999,U1922000F,Singapore,SCSE,1,0,2020-11-01,2020-12-30,true,false
