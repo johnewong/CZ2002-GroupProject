@@ -9,6 +9,7 @@ import model.User;
 import service.*;
 
 import java.io.BufferedReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -104,6 +105,17 @@ public class StudentPage extends Page {
         System.out.println("Enter the course section ID: ");
         //String Id = in.readLine();
 
+        try
+        {
+            String filename = "user.txt";
+            FileWriter fw = new FileWriter(filename,true);
+            fw.write(("add a line"));
+            fw.close();
+        }
+        catch(IOException e)
+        {
+           System.err.println("Selected Coures:"+e.getMessage());
+        }
 
 
 
@@ -128,7 +140,7 @@ public class StudentPage extends Page {
         //print course list
         for (ClassSM classSM : classes) {
             System.out.println("Course list: ");
-            System.out.println(String.format("Name: {0} Code: {1} Index:{2}", classSM.classId, classSM.courseId,classSM.indexNumber));
+            System.out.println(String.format("Name: {0} Code: {1} Index:{2} Vacancy:{3} TotalVacancy{4} WaitList{5}", classSM.classId, classSM.courseId,classSM.indexNumber,classSM.vacancyTaken,classSM.totalVacancy,classSM.numberInWaitlist));
 //            for (ClassSM cls : course.classes) {
 //                System.out.println(cls.indexNumber);
 //            }
