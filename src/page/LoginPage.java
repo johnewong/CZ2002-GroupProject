@@ -5,6 +5,7 @@ import model.User;
 import utility.DataUtil;
 import utility.RoleType;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -32,11 +33,24 @@ public class LoginPage extends Page {
                     //Date now = new Date(System.currentTimeMillis());
 
                     Date now = new Date();
-                    //SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                     //System.out.println(formatter.format(now));
                     //String currentDate = formatter.format(now);
-
-                    if(now.after(user.periodStartTime) && now.before(user.periodEndTime))
+                    Date date=new Date();
+                    try {
+						date = sdf.parse(user.periodStartTime);
+					} catch (ParseException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} 
+                    Date date2=new Date();
+                    try {
+						date2 = sdf.parse(user.periodEndTime);
+					} catch (ParseException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} 
+                    if(now.after(date) && now.before(date2))
                     {
                         new StudentPage(user).showPage();
                     }
@@ -51,11 +65,6 @@ public class LoginPage extends Page {
         }
 
     }
-
-
-
-
-
 
 
 }
