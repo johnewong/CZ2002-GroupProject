@@ -23,11 +23,11 @@ public class LoginPage extends Page {
 
 
         ArrayList<User> users = new UserDAO().getAllValid();
-        //String encryptedPassword= DataUtil.encryptPassword(password);
+        String encryptedPassword= DataUtil.encryptPassword(password);
 
         for (User user : users){
             //user.password.equals(encryptedPassword)
-            if(user.userName.equals(userName) && user.password.equals(password)){
+            if(user.userName.equals(userName) && user.password.equals(encryptedPassword)){
                 if(user.role == RoleType.Student.toInt()){
                     //get today's time
                     //Date now = new Date(System.currentTimeMillis());
