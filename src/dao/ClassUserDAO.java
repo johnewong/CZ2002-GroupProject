@@ -18,6 +18,10 @@ public class ClassUserDAO implements IDAO<ClassUser> {
 
     @Override
     public ArrayList<ClassUser> getAll() {
+        if(this.allClassUsers != null){
+            return this.allClassUsers;
+        }
+
         String dataString = DataUtil.loadFile("dataFiles/classUser.txt");
         String[] rows = dataString.split(";");
         ArrayList<ClassUser> classUsers = new ArrayList<>();
@@ -32,6 +36,10 @@ public class ClassUserDAO implements IDAO<ClassUser> {
 
     @Override
     public ArrayList<ClassUser> getAllValid() {
+        if(this.allValidClassUsers != null){
+            return this.allValidClassUsers;
+        }
+
         ArrayList<ClassUser> classUsers = new ArrayList<>();
         for (ClassUser user : allClassUsers) {
             if (!user.isDeleted)
@@ -94,14 +102,24 @@ public class ClassUserDAO implements IDAO<ClassUser> {
     @Override
     public void update(ClassUser classUser) {
         ClassUser existedClassUser = this.get(classUser.classUserId);
-        existedClassUser.status = classUser.status;
-        DataUtil.writeFile(this.allClassUsers, "dataFiles/classUser.txt");
+        if(existedClassUser !=null){
+            existedClassUser.status = classUser.status;
+            DataUtil.writeFile(this.allClassUsers, "dataFiles/classUser.txt");
+        }
+        else {
+            System.out.println("Class user not found");
+        }
     }
 
     @Override
     public void delete(int classUserId) {
         ClassUser existedClassUser = this.get(classUserId);
-        existedClassUser.isDeleted = true;
-        DataUtil.writeFile(this.allClassUsers, "dataFiles/classUser.txt");
+        if(existedClassUser != null){
+            existedClassUser.isDeleted = true;
+            DataUtil.writeFile(this.allClassUsers, "dataFiles/classUser.txt");
+        }
+        else {
+            System.out.println("Class user not found");
+        }
     }
 }

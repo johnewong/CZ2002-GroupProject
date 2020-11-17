@@ -9,12 +9,12 @@ import utility.DataUtil;
 
 public class ClassDAO implements IDAO<Class> {
 
-    private ArrayList<Class> allClass;
-    private ArrayList<Class> allValidClass;
+    private ArrayList<Class> allClasses;
+    private ArrayList<Class> allValidClasses;
     
     public ClassDAO() {
-    this.allClass = getAll();
-    this.allValidClass = getAllValid();
+    this.allClasses = getAll();
+    this.allValidClasses = getAllValid();
 }
 
 
@@ -35,7 +35,7 @@ public class ClassDAO implements IDAO<Class> {
     @Override
     public ArrayList<Class> getAllValid() {
         ArrayList<Class> cls = new ArrayList<>();
-        for (Class c : allClass) {
+        for (Class c : allClasses) {
             if (!c.isDeleted)
                 cls.add(c);
         }
@@ -45,7 +45,7 @@ public class ClassDAO implements IDAO<Class> {
 
     public ArrayList<Class> getByCourseId(int courseId) {
 		ArrayList<Class> classList = new ArrayList<>();
-		for(Class cls: this.allValidClass){
+		for(Class cls: this.allValidClasses){
 		    if(cls.courseId == courseId)
 		        classList.add(cls);
         }
@@ -55,7 +55,7 @@ public class ClassDAO implements IDAO<Class> {
 
     @Override
     public Class get(int classId ) {
-        for (Class cls : this.allValidClass){
+        for (Class cls : this.allValidClasses){
             if (cls.classId == classId){
                 return cls;
             }
@@ -66,7 +66,7 @@ public class ClassDAO implements IDAO<Class> {
     @Override
     public void add(Class newCls) {
         try {
-            ArrayList<Class> cls = this.allClass;
+            ArrayList<Class> cls = this.allClasses;
             // validation
             for (Class u : cls) {
                 if (u.classId == newCls.classId  && !u.isDeleted) {
@@ -87,12 +87,30 @@ public class ClassDAO implements IDAO<Class> {
     @Override
     public void update(Class cls) {
         Class existedClass = this.get(cls.classId);
+        if(existedClass !=null){
+            existedClass.courseId = cls.courseId;
+            existedClass.vacancyTaken = cls.vacancyTaken;
+            existedClass.totalVacancy = cls.totalVacancy;
+            existedClass.indexNumber = cls.indexNumber;
+            existedClass.group = cls.group;
+            existedClass.numberInWaitlist = cls.numberInWaitlist;
+            existedClass.remark = cls.remark;
+            DataUtil.writeFile(this.allClasses, "dataFiles/classUser.txt");
+        }
+        else {
+            System.out.println("Class user not found");
+        }
     }
 
     @Override
     public void delete(int classId) {
         Class existedClass = this.get(classId);
-        existedClass.isDeleted = true;
-
+        if(existedClass != null){
+            existedClass.isDeleted = true;
+            DataUtil.writeFile(this.allClasses, "dataFiles/classUser.txt");
+        }
+        else {
+            System.out.println("Class not found");
+        }
     }
 }
