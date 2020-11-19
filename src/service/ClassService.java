@@ -51,4 +51,31 @@ public class ClassService {
 
         return classSMs;
     }
+
+    public ArrayList<ClassSM> getWaitlistClasses(int userId){
+        ClassUserDAO classUserDAO = new ClassUserDAO();
+        ClassDAO classDAO = new ClassDAO();
+        SessionDAO sessionDAO = new SessionDAO();
+        UserService userService = new UserService();
+        ArrayList<Class> classes = classDAO.getAllValid();
+        ArrayList<ClassUser> classUsers = classUserDAO.getAllValid();
+
+        ArrayList<ClassSM> waitlistClassSMs = new ArrayList<>();
+        ArrayList<Integer> waitlistClassIds = new ArrayList<>();
+
+
+        for(ClassUser waitlistClassUser : classUsers){
+            if(waitlistClassUser.userId == userId && waitlistClassUser.status == StatusEnum.INWAITLIST.toInt())
+                waitlistClassIds.add(waitlistClassUser.classId);
+        }
+        for(Class waitlistClass : classes){
+            if(waitlistClassIds.contains(waitlistClass.classId)){
+                ClassSM classSM = new ClassSM(waitlistClass, userService.getClassMates(waitlistClass.classId), sessionDAO.getByClassId(waitlistClass.classId));
+                waitlistClassSMs.add(classSM);
+            }
+
+        }
+        return waitlistClassSMs;
+
+    }
 }
