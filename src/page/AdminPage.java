@@ -41,12 +41,15 @@ public class AdminPage extends Page {
 	public void showPage() {
 		int sel = 0;
 		do {
-			System.out.println(String.format("\n Hi %s Welcome to Admin Page!", user.displayName));
-			System.out.println("1. Edit Student Access Period");
-			System.out.println("2. Add Sudent Information");
-			System.out.println("3. Add Courses");
-			System.out.println("4. Update Courses ");
-			System.out.println("5. Exit");
+			System.out.println(String.format("\n ============ Hi %s Welcome to Admin Page! 		=========", user.displayName));
+			System.out.println("||===========1. Edit Student Access Period 		=========||");
+			System.out.println("||===========2. Add Student Information 			=========||");
+			System.out.println("||===========3. Add Courses 			  		    =========||");
+			System.out.println("||===========4. Update Courses 		  			    =========||");
+			System.out.println("||===========5. Check Course Availability Slots    =========||");
+			System.out.println("||===========6. Print Student List By Index Number =========||");
+			System.out.println("||===========7. Print Student List By Course	    =========||");
+			System.out.println("||===========8. Exit 							    =========||");
 			System.out.println("Please choose an option:  ");
 
 			try {
@@ -100,6 +103,16 @@ public class AdminPage extends Page {
 				}
 				break;
 			case 5:
+					// todo
+				/*try {
+					printStudentListByIndex();
+				} catch (Exception e) {
+						// TODO Auto-generated catch block
+					e.printStackTrace();
+				}*/
+				break;
+
+			case 6:
 				// todo
 				try {
 					printStudentListByIndex();
@@ -108,18 +121,23 @@ public class AdminPage extends Page {
 					e.printStackTrace();
 				}
 				break;
-			case 6:
+			case 7:
 				// todo
 				printStudentListByCourse();
 				break;
-			case 7:
-				System.out.println("Exit Admin Page.");
+			case 8:
+				try {
+					exitAdminPage();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				break;
 			default:
 				System.out.println("Invalid input. Please try again!");
 			}
 
-		} while (sel != 7);
+		} while (sel != 8);
 	}
 
 	// Add student
@@ -260,6 +278,11 @@ public class AdminPage extends Page {
 
 		// ClassService
 
+	}
+	public void exitAdminPage() throws Exception {
+
+		System.out.println("Thank you for using MYSTARTS Planner. System is closed!!!!");
+		System.exit(0);
 	}
 
 }
