@@ -56,8 +56,7 @@ public class StudentPage extends Page {
                 case 2:
                     //Todo
                     break;
-                case 3:
-                    //Todo 123123
+                case 3:printCoursesRegistered();
                     break;
                 case 4:
                     checkVancancy();
@@ -238,23 +237,22 @@ public class StudentPage extends Page {
 
     private void printCoursesInfo(ArrayList<CourseSM> courses, boolean isRegistered) {
         if (isRegistered) {
-            System.out.println("Register Course:");
+            System.out.println("-----------------");
+            System.out.println("Registered Course:");
             System.out.println("-----------------");
         } else {
+            System.out.println("--------------------");
             System.out.println("In Waitlist Course:");
             System.out.println("--------------------");
         }
-        System.out.println("Course Code" + "  " + "AU" + "  " + "Course Type" + "  " + "Index Number");
+        System.out.println("Course Code" + "  " + "AU" + "  " + "Index Number" + "  " + "Course Type");
         System.out.println("-------------------------------------------");
         for (CourseSM course : courses) {
 
-            System.out.println(course.courseCode + "       " + course.au + "    " + CourseType.getValue(course.courseType) + "         " + course.classes.get(0).indexNumber);
+            System.out.println(course.courseCode + "       " + course.au + "      " + course.classes.get(0).indexNumber + "        " + CourseType.getValue(course.courseType));
             System.out.println("-------------------------------------------");
 
-//            if (isRegistered)
-//                System.out.println("Register");
-//            else
-//                System.out.println("In Waitlist");
+
 
         }
     }

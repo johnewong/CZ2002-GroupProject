@@ -3,6 +3,6 @@ courseId,courseCode,courseName,school,courseType,au,isDeleted;
 2,CE2001,Algorithm,1,1,3,false;
 3,CZ2002,Obj Oriented DES & PROG,2,0,3,false;
 4,CZ2003,Computer Graphics & Visual,2,0,3,false;
-5,LAO009,Cits Demo and Test Site,1,4,0,false;
+5,LAO009,Cits Demo and Test Site,1,1,0,false;
 6,sadasda,2asdas,1,1,0,false;
 7,dasdsa,sdada,1,1,0,false;
