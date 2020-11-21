@@ -9,6 +9,7 @@ import model.ClassUser;
 import model.Course;
 import model.User;
 import service.*;
+import utility.CourseType;
 import utility.StatusEnum;
 
 import java.io.BufferedReader;
@@ -164,7 +165,7 @@ public class StudentPage extends Page {
         CourseService service = new CourseService();
         ArrayList<CourseSM> courses = service.getRegisteredCourses(this.user);
         if (courses != null) {
-           // IDAO dao = new ClassDAO();
+            // IDAO dao = new ClassDAO();
             //dao.delete();
 
         }
@@ -226,15 +227,24 @@ public class StudentPage extends Page {
     }
 
     private void printCoursesInfo(ArrayList<CourseSM> courses, boolean isRegistered) {
+        if (isRegistered) {
+            System.out.println("Register Course:");
+            System.out.println("-----------------");
+        } else {
+            System.out.println("In Waitlist Course:");
+            System.out.println("--------------------");
+        }
+        System.out.println("Course Code" + "  " + "AU" + "  " + "Course Type" + "  " + "Index Number");
+        System.out.println("-------------------------------------------");
         for (CourseSM course : courses) {
-            System.out.println("Course Code" + "  " + "AU"+"  " + "Course Type" + "  " + "Index Number");
-            System.out.println("-----------------------------------------------------------------------");
-            System.out.println(course.courseCode + "  " + course.au + "  " + course.courseType + "  " + course.classes.get(0).indexNumber);
 
-            if (isRegistered)
-                System.out.println("Register");
-            else
-                System.out.println("In Waitlist");
+            System.out.println(course.courseCode + "       " + course.au + "    " + CourseType.getValue(course.courseType) + "         " + course.classes.get(0).indexNumber);
+            System.out.println("-------------------------------------------");
+
+//            if (isRegistered)
+//                System.out.println("Register");
+//            else
+//                System.out.println("In Waitlist");
 
         }
     }
