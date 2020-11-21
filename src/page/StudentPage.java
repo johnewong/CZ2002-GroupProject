@@ -1,12 +1,15 @@
 package page;
 
 import dao.ClassDAO;
+import dao.ClassUserDAO;
 import dao.CourseDAO;
 import dao.IDAO;
 import model.Class;
+import model.ClassUser;
 import model.Course;
 import model.User;
 import service.*;
+import utility.StatusEnum;
 
 import java.io.BufferedReader;
 import java.io.FileWriter;
@@ -79,16 +82,16 @@ public class StudentPage extends Page {
 
     private void addCourse() {
         CourseService service = new CourseService();
-        ArrayList<CourseSM> courses = service.getRegisteredCourses(this.user);
+        ArrayList<CourseSM> unregisteredCourses = service.getRegisteredCourses(this.user);
         //BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
         Scanner scanner = new Scanner(System.in);
 
-        printCourseList(courses);
+        printCourseList(unregisteredCourses);
         System.out.println("Enter the course code: ");
 
         String courseCode = scanner.next();
         ArrayList<ClassSM> selectedClasses = new ArrayList<>();
-        for (CourseSM course : courses) {
+        for (CourseSM course : unregisteredCourses) {
             if (courseCode == course.courseCode) {
                 selectedClasses = course.classes;
             }
@@ -96,6 +99,34 @@ public class StudentPage extends Page {
         }
         if (selectedClasses.size() == 0) {
             printClassList(selectedClasses);
+
+            //1 let user input class index number
+            System.out.println("Typy in index number");
+            String index = scanner.next();
+            //ArrayList<ClassSM> indexNumber = new ArrayList<>();
+            CourseSM selectedCourse = null;
+            for (CourseSM course : unregisteredCourses) {
+                if (index == course.courseCode) {
+                    selectedCourse = course;
+                    selectedClasses = course.classes;
+                }
+
+            }
+            System.out.println("Add to WaitList ");
+            Class selectedClass = new Class();
+
+            // +1 in class.numberInWaitlist
+            ClassDAO classDAO = new ClassDAO();
+            selectedClass.numberInWaitlist++;
+            classDAO.update(selectedClass);
+
+            // add classUser status -> inWaitlist
+            ClassUser classUser = new ClassUser(this.user.userId, selectedClass.classId, StatusEnum.INWAITLIST.toInt());
+            ClassUserDAO classUserDAO = new ClassUserDAO();
+            classUserDAO.add(classUser);
+
+
+
         } else {
             System.out.println("selectedClasses Not Found");
         }
@@ -103,17 +134,17 @@ public class StudentPage extends Page {
         System.out.println("Enter the course section ID: ");
         //String Id = in.readLine();
 
-        try {
-            String filename = "user.txt";
-            FileWriter fw = new FileWriter(filename, true);
-            fw.write(("add a line"));
-            fw.close();
-        } catch (IOException e) {
-            System.err.println("Selected Coures:" + e.getMessage());
-        }
 
-
+        //try {
+        // String filename = "user.txt";
+        //FileWriter fw = new FileWriter(filename, true);
+        //fw.write(("Enter the course section ID"));
+        //fw.close();
+        //} catch (IOException e) {
+        //  System.err.println("Selected Coures:" + e.getMessage());
+        //}
     }
+
 
     private void changeCourseIndex() {
         CourseService service = new CourseService();
