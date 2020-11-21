@@ -9,6 +9,7 @@ import model.ClassUser;
 import model.Course;
 import model.User;
 import service.*;
+import utility.StatusEnum;
 import utility.CourseType;
 import utility.StatusEnum;
 
@@ -53,10 +54,10 @@ public class StudentPage extends Page {
                     addCourse();
                     break;
                 case 2:
-                    dropCourse();
+                    //Todo
                     break;
                 case 3:
-                    printCoursesRegistered();
+                    //Todo 123123
                     break;
                 case 4:
                     checkVancancy();
@@ -81,29 +82,23 @@ public class StudentPage extends Page {
         } while (sel != 7);
     }
 
-
     private void addCourse() {
         CourseService service = new CourseService();
-        // available courses/  unregistered courses
         ArrayList<CourseSM> unregisteredCourses = service.getRegisteredCourses(this.user);
+        //BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
         Scanner scanner = new Scanner(System.in);
 
         printCourseList(unregisteredCourses);
         System.out.println("Enter the course code: ");
 
         String courseCode = scanner.next();
-        CourseSM selectedCourse = null;
         ArrayList<ClassSM> selectedClasses = new ArrayList<>();
         for (CourseSM course : unregisteredCourses) {
             if (courseCode == course.courseCode) {
-                selectedCourse = course;
                 selectedClasses = course.classes;
             }
 
         }
-
-        // there are available classes to register
-        //
         if (selectedClasses.size() > 0) {
             printClassList(selectedClasses);
             Class vancancyTanken = new Class();
@@ -119,10 +114,12 @@ public class StudentPage extends Page {
 
         if (selectedClasses.size() == 0) {
             printClassList(selectedClasses);
-            //Todo let user input class index number
+
+            //1 let user input class index number
             System.out.println("Typy in index number");
             String index = scanner.next();
             //ArrayList<ClassSM> indexNumber = new ArrayList<>();
+            CourseSM selectedCourse = null;
             for (CourseSM course : unregisteredCourses) {
                 if (index == course.courseCode) {
                     selectedCourse = course;
@@ -144,11 +141,15 @@ public class StudentPage extends Page {
             classUserDAO.add(classUser);
 
 
+
         } else {
             System.out.println("selectedClasses Not Found");
         }
 
 
+
+
+            // System.out.println("Enter the course section ID: ");
         //String Id = in.readLine();
 
         //try {
@@ -170,8 +171,17 @@ public class StudentPage extends Page {
 
         }
 
-
+        //try {
+        // String filename = "user.txt";
+        //FileWriter fw = new FileWriter(filename, true);
+        //fw.write(("Enter the course section ID"));
+        //fw.close();
+        //} catch (IOException e) {
+        //  System.err.println("Selected Coures:" + e.getMessage());
+        //}
     }
+
+
 
 
     private void changeCourseIndex() {
@@ -210,8 +220,8 @@ public class StudentPage extends Page {
         for (Class cls : classes) {
             if (cls.indexNumber.equals(indexNumber)) {
                 // print class info
-                System.out.println(cls.totalVacancy - cls.vacancyTaken);
-                break;
+                System.out.println(String.format("Current available vacancy: %d", cls.totalVacancy - cls.vacancyTaken));
+                return;
             }
         }
 
