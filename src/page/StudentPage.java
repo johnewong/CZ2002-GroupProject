@@ -118,14 +118,18 @@ public class StudentPage extends Page {
 
         if (selectedClasses.size() == 0) {
             printClassList(selectedClasses);
-            System.out.println("Add to WaitList ");
-
             //Todo let user input class index number
-            System.out.println("Typy in index number i");
+            System.out.println("Typy in index number");
+            String index = scanner.next();
+            //ArrayList<ClassSM> indexNumber = new ArrayList<>();
+            for (CourseSM course : unregisteredCourses) {
+                if (index == course.courseCode) {
+                    selectedCourse = course;
+                    selectedClasses = course.classes;
+                }
 
-
-
-
+            }
+            System.out.println("Add to WaitList ");
             Class selectedClass = new Class();
 
             // +1 in class.numberInWaitlist
