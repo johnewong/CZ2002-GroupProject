@@ -20,7 +20,7 @@ public class SessionDAO implements IDAO<Session> {
         if(this.allSessions != null){
             return this.allSessions;
         }
-        String dataString = DataUtil.loadFile("session.txt");
+        String dataString = DataUtil.loadFile("dataFiles/session.txt");
         String[] rows = dataString.split(";");
         ArrayList<Session> sessions = new ArrayList<>();
         for (int i = 1; i < rows.length; i++) {

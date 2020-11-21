@@ -8,6 +8,20 @@ import java.util.ArrayList;
 
 public class CourseService {
 
+    public CourseSM getCourseByCourseCode(String courseCode) {
+        // to get all registered classes
+
+        Course course = new CourseDAO().getByCode(courseCode);
+        if (course == null) {
+            return null;
+        }
+
+        ClassService classService = new ClassService();
+        ArrayList<ClassSM> classSMS = classService.getCourseClasses(course.courseId);
+
+        return new CourseSM(course, classSMS);
+    }
+
     public ArrayList<CourseSM> getRegisteredCourses(User user) {
         CourseDAO courseDAO = new CourseDAO();
         ClassService classService = new ClassService();
@@ -26,14 +40,14 @@ public class CourseService {
         return registeredCourseSMs;
     }
 
-    public ArrayList<CourseSM> getWaitlistClasses(User user){
+    public ArrayList<CourseSM> getWaitlistClasses(User user) {
         CourseDAO courseDAO = new CourseDAO();
         ClassService classService = new ClassService();
 
         ArrayList<ClassSM> waitlistClassSMs = classService.getWaitlistClasses(user.userId);
 
         ArrayList<CourseSM> waitlistCourseSMs = new ArrayList<>();
-        for(ClassSM waitlistClass : waitlistClassSMs){
+        for (ClassSM waitlistClass : waitlistClassSMs) {
             Course course = courseDAO.get(waitlistClass.courseId);
             CourseSM courseSM = new CourseSM(course, classService.getCourseClasses(waitlistClass.courseId));
             waitlistCourseSMs.add(courseSM);
@@ -41,7 +55,6 @@ public class CourseService {
 
         return waitlistCourseSMs;
     }
-
 
 
 }

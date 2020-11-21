@@ -88,35 +88,29 @@ public class StudentPage extends Page {
 
         String courseCode = scanner.next();
         ArrayList<ClassSM> selectedClasses = new ArrayList<>();
-        for(CourseSM course : courses){
-            if(courseCode == course.courseCode){
+        for (CourseSM course : courses) {
+            if (courseCode == course.courseCode) {
                 selectedClasses = course.classes;
             }
 
         }
-        if(selectedClasses.size()==0) {
+        if (selectedClasses.size() == 0) {
             printClassList(selectedClasses);
-        }
-        else
-        {
+        } else {
             System.out.println("selectedClasses Not Found");
         }
 
         System.out.println("Enter the course section ID: ");
         //String Id = in.readLine();
 
-        try
-        {
+        try {
             String filename = "user.txt";
-            FileWriter fw = new FileWriter(filename,true);
+            FileWriter fw = new FileWriter(filename, true);
             fw.write(("add a line"));
             fw.close();
+        } catch (IOException e) {
+            System.err.println("Selected Coures:" + e.getMessage());
         }
-        catch(IOException e)
-        {
-           System.err.println("Selected Coures:"+e.getMessage());
-        }
-
 
 
     }
@@ -127,24 +121,20 @@ public class StudentPage extends Page {
         printCourseList(courses);
     }
 
-    private void printCourseList(ArrayList<CourseSM>courses){
+    private void printCourseList(ArrayList<CourseSM> courses) {
         //print course list
         for (CourseSM course : courses) {
             System.out.println("Course list: ");
-            System.out.println(String.format("Name: {0} Code: {1}", course.courseName, course.courseCode));
-//            for (ClassSM cls : course.classes) {
-//                System.out.println(cls.indexNumber);
-//            }
+            System.out.println(String.format("Name: %s Code: %s", course.courseName, course.courseCode));
         }
     }
-    private void printClassList(ArrayList<ClassSM>classes){
+
+    private void printClassList(ArrayList<ClassSM> classes) {
         //print course list
         for (ClassSM classSM : classes) {
             System.out.println("Course list: ");
-            System.out.println(String.format("Name: {0} Code: {1} Index:{2} Vacancy:{3} TotalVacancy{4} WaitList{5}", classSM.classId, classSM.courseId,classSM.indexNumber,classSM.vacancyTaken,classSM.totalVacancy,classSM.numberInWaitlist));
-//            for (ClassSM cls : course.classes) {
-//                System.out.println(cls.indexNumber);
-//            }
+            System.out.println(String.format("Name: %d Code: {1} Index:{2} Vacancy:{3} TotalVacancy{4} WaitList{5}"
+                    , classSM.classId, classSM.courseId, classSM.indexNumber, classSM.vacancyTaken, classSM.totalVacancy, classSM.numberInWaitlist));
         }
     }
 
@@ -158,11 +148,11 @@ public class StudentPage extends Page {
         System.out.println("Please enter index number: ");
         String indexNumber = scanner.next();
 
-        for (Class cls : classes){
-            if(cls.indexNumber.equals(indexNumber)){
+        for (Class cls : classes) {
+            if (cls.indexNumber.equals(indexNumber)) {
                 // print class info
-                System.out.println(cls.totalVacancy - cls.vacancyTaken);
-                break;
+                System.out.println(String.format("Current available vacancy: %d", cls.totalVacancy - cls.vacancyTaken));
+                return;
             }
         }
 

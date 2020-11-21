@@ -1,19 +1,15 @@
 package page;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 import java.util.Scanner;
 
 import dao.ClassDAO;
@@ -23,10 +19,10 @@ import dao.UserDAO;
 import model.Class;
 import model.Course;
 import model.User;
+import service.ClassSM;
+import service.CourseSM;
+import service.CourseService;
 import service.UserService;
-import dao.IDAO;
-import model.User;
-import dao.UserDAO;
 
 public class AdminPage extends Page {
     private User user;
@@ -318,30 +314,52 @@ public class AdminPage extends Page {
 
     }
 
-    public void printStudentListByIndex() throws Exception {
+    public void printStudentListByIndex() {
+        System.out.println("Please input an index number: ");
+        String indexNumber = scanner.next();
 
-        // user input index no.
-        System.out.println("Please input an index number:  ");
-        String indexNumber = reader.readLine();
+        Integer classId = null;
+        ArrayList<Class> classes = new ClassDAO().getAllValid();
+        for (Class cls : classes) {
+            if (cls.indexNumber.equals(indexNumber)) {
+                classId = cls.classId;
+            }
+        }
 
-        // index -> classId -> call getClassMates(classId) ->
+        if (classId == null) {
+            System.out.println("Index number not found!");
+            return;
+        }
 
-        // convert index to classId
-        // UserService.getClassMates();
-        // call user service getClassMates(int classId)
-        // print classUsers
-        // print error msg if index not found
+        UserService userService = new UserService();
+        ArrayList<User> students = userService.getClassMatesById(classId);
 
-        // UserDAO userDAO = new UserDAO();
-        // ArrayList<User> users = userDAO.getAllValid();
-        // for (User userList : users)
-        // System.out.println();
-
+        for (User student : students) {
+            System.out.println(String.format("Name: %s Matric Number: %s", student.userName, student.matricNumber));
+        }
     }
 
     public void printStudentListByCourse() {
+        System.out.println("Please input an course code: ");
+        String courseCode = scanner.next();
 
-        // ClassService
+        CourseService courseService = new CourseService();
+        CourseSM course = courseService.getCourseByCourseCode(courseCode);
+
+        if (course == null) {
+            System.out.println("Course code not found!");
+            return;
+        }
+
+        UserService userService = new UserService();
+
+        for (ClassSM cls : course.classes) {
+            System.out.println(String.format("Index number: %s", cls.indexNumber));
+            ArrayList<User> students = userService.getClassMatesById(cls.classId);
+            for (User student : students) {
+                System.out.println(String.format("Name: %s Matric Number: %s", student.userName, student.matricNumber));
+            }
+        }
 
     }
 

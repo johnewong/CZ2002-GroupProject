@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public class UserService {
 
-    public ArrayList<User> getClassMates(int classId) {
+    public ArrayList<User> getClassMatesById(int classId) {
         ClassUserDAO classUserDAO = new ClassUserDAO();
         UserDAO userDAO = new UserDAO();
 
