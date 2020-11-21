@@ -64,9 +64,9 @@ public class ClassService {
         ArrayList<Integer> waitlistClassIds = new ArrayList<>();
 
 
-        for(ClassUser waitlistClassUser : classUsers){
-            if(waitlistClassUser.userId == userId && waitlistClassUser.status == StatusEnum.INWAITLIST.toInt())
-                waitlistClassIds.add(waitlistClassUser.classId);
+        for(ClassUser classUser : classUsers){
+            if(classUser.userId == userId && classUser.status == StatusEnum.INWAITLIST.toInt())
+                waitlistClassIds.add(classUser.classId);
         }
         for(Class cls : classes){
             if(waitlistClassIds.contains(cls.classId)){

@@ -224,22 +224,22 @@ public class StudentPage extends Page {
 
     private void printCoursesRegistered() {
         CourseService service = new CourseService();
-        ArrayList<CourseSM> reCourses = service.getRegisteredCourses(this.user);
-        ArrayList<CourseSM> wlCourses = service.getWaitlistCourses(this.user);
-        printCoursesInfo(reCourses, true);
-        printCoursesInfo(wlCourses, false);
+        ArrayList<CourseSM> registCourses = service.getRegisteredCourses(this.user);
+        ArrayList<CourseSM> waitCourses = service.getWaitlistCourses(this.user);
+        printCoursesInfo(registCourses, true);
+        printCoursesInfo(waitCourses, false);
     }
 
     private void printCoursesInfo(ArrayList<CourseSM> courses, boolean isRegistered) {
         for (CourseSM course : courses) {
-            System.out.println(course.courseCode);
-            System.out.println(course.au);
-            System.out.println(course.courseType);
-            System.out.println(course.classes.get(0).indexNumber);
+            System.out.println("Course Code" + "  " + "AU"+"  " + "Course Type" + "  " + "Index Number");
+            System.out.println("-----------------------------------------------------------------------");
+            System.out.println(course.courseCode + "  " + course.au + "  " + course.courseType + "  " + course.classes.get(0).indexNumber);
+
             if (isRegistered)
-                System.out.println("regis");
+                System.out.println("Register");
             else
-                System.out.println("unregis");
+                System.out.println("In Waitlist");
 
         }
     }
