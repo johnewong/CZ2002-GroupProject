@@ -27,6 +27,7 @@ import service.UserService;
 import dao.IDAO;
 import model.User;
 import dao.UserDAO;
+import utility.DataUtil;
 
 public class AdminPage extends Page {
     private User user;
@@ -67,7 +68,7 @@ public class AdminPage extends Page {
             switch (sel) {
                 case 1:
                     try {
-                        getDateAndTime();
+                        changeAccessPeriod();
                     } catch (Exception e2) {
                         // TODO Auto-generated catch block
                         e2.printStackTrace();
@@ -84,7 +85,7 @@ public class AdminPage extends Page {
                 case 3:
                     try {
                         addCourses();
-                        courseAddedTime();
+                        //courseAddedTime();
                     } catch (IOException e) {
                         // TODO Auto-generated catch block
                         e.printStackTrace();
@@ -96,7 +97,7 @@ public class AdminPage extends Page {
                 case 4:
                     try {
                         updateCourses();
-                        courseUpdateTime();
+                        //courseUpdateTime();
                     } catch (IOException e1) {
                         // TODO Auto-generated catch block
                         e1.printStackTrace();
@@ -157,7 +158,7 @@ public class AdminPage extends Page {
         User selectedUser = null;
 
         while (selectedUser == null) {
-            System.out.println("please input student name   (-1 to exit)");
+            System.out.println("Please input student name   (-1 to exit)");
             String username = scanner.next();
             for (User student : students) {
                 if (student.userName == username) {
@@ -216,7 +217,7 @@ public class AdminPage extends Page {
         System.out.println("Enter display name ");
         user.displayName = reader.readLine();
         System.out.println("Enter password ");
-        user.password = reader.readLine();
+        user.password = DataUtil.encryptPassword(reader.readLine());
         System.out.println("Enter matric number ");
         user.matricNumber = reader.readLine();
         System.out.println("Enter nationality ");
@@ -276,7 +277,7 @@ public class AdminPage extends Page {
         dao.update(course);
         System.out.println("Courses updated successfully !!!!!");
     }
-
+/*
     // access period
     public void courseAddedTime() throws Exception {
         User user = new User();
@@ -317,7 +318,7 @@ public class AdminPage extends Page {
 
 
     }
-
+*/
     public void printStudentListByIndex() throws Exception {
 
         // user input index no.
