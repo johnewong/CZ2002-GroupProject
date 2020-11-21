@@ -6,12 +6,15 @@ import java.io.FileWriter;
 import java.io.BufferedWriter;
 import java.io.RandomAccessFile;
 import java.lang.reflect.Field;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Date;
 
 // provide static utility methods for all classes
 public class DataUtil {
+    private static SimpleDateFormat DATE_FORMATTER = new SimpleDateFormat("yyyy/MM/dd");
 
     public static String loadFile(String filePath) {
         StringBuilder sb = null;
@@ -79,8 +82,6 @@ public class DataUtil {
     }
 
     public static void setObject(Object obj, String header, String row) {
-//        if(row.isEmpty())
-//            return;
 
         String[] columnNames = header.split(",");
         String[] columnValues = row.split(",");
@@ -94,7 +95,12 @@ public class DataUtil {
                     f.set(obj, Boolean.parseBoolean(columnValues[i]));
                 } else if (f.getType() == float.class) {
                     f.set(obj, Float.parseFloat(columnValues[i]));
-                } else
+                }  else if(f.getType() == Date.class){
+                    Date date = DATE_FORMATTER.parse(columnValues[i]);
+                    f.set(obj, date);
+                }
+
+                else
                     f.set(obj, columnValues[i]);
             }
         } catch (Exception e) {

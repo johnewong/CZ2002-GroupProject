@@ -2,6 +2,7 @@ package dao;
 
 import model.User;
 import utility.DataUtil;
+import utility.RoleType;
 
 import java.util.ArrayList;
 
@@ -43,6 +44,15 @@ public class UserDAO implements IDAO<User> {
         ArrayList<User> userList = new ArrayList<>();
         for (User user : allUsers) {
             if (!user.isDeleted)
+                userList.add(user);
+        }
+        return userList;
+    }
+
+    public ArrayList<User> getAllValidStudents() {
+        ArrayList<User> userList = new ArrayList<>();
+        for (User user : allValidUsers) {
+            if (user.role == RoleType.Student.toInt())
                 userList.add(user);
         }
         return userList;

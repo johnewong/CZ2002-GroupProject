@@ -15,6 +15,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
+
 import dao.ClassDAO;
 import dao.CourseDAO;
 import dao.IDAO;
@@ -25,264 +26,329 @@ import model.User;
 import service.UserService;
 import dao.IDAO;
 import model.User;
+import dao.UserDAO;
 
 public class AdminPage extends Page {
-	private User user;
-	BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+    private User user;
+    private Scanner scanner = new Scanner(System.in);
+    BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
-	public AdminPage(User user) {
-		this.user = user;
-	}
+    public AdminPage(User user) {
+        this.user = user;
+    }
 
-	public AdminPage() {
+    public AdminPage() {
 
-	}
+    }
 
-	public void showPage() {
-		int sel = 0;
-		do {
-			System.out.println(String.format("\n ============ Hi %s Welcome to Admin Page! 		=========", user.displayName));
-			System.out.println("||===========1. Edit Student Access Period 		=========||");
-			System.out.println("||===========2. Add Student Information 			=========||");
-			System.out.println("||===========3. Add Courses 			  		    =========||");
-			System.out.println("||===========4. Update Courses 		  			    =========||");
-			System.out.println("||===========5. Check Course Availability Slots    =========||");
-			System.out.println("||===========6. Print Student List By Index Number =========||");
-			System.out.println("||===========7. Print Student List By Course	    =========||");
-			System.out.println("||===========8. Exit 							    =========||");
-			System.out.println("Please choose an option:  ");
+    public void showPage() {
+        int sel = 0;
+        do {
+            System.out.println(String.format("\n ============ Hi %s Welcome to Admin Page! 		=========", user.displayName));
+            System.out.println("||===========1. Edit Student Access Period 		=========||");
+            System.out.println("||===========2. Add Student Information 			=========||");
+            System.out.println("||===========3. Add Courses 			  		    =========||");
+            System.out.println("||===========4. Update Courses 		  			    =========||");
+            System.out.println("||===========5. Check Course Availability Slots    =========||");
+            System.out.println("||===========6. Print Student List By Index Number =========||");
+            System.out.println("||===========7. Print Student List By Course	    =========||");
+            System.out.println("||===========8. Exit 							    =========||");
+            System.out.println("Please choose an option:  ");
 
-			try {
-				sel = Integer.parseInt(reader.readLine());
-			} catch (NumberFormatException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-			switch (sel) {
-			case 1:
-				try {
-					getDateAndTime();
-				} catch (Exception e2) {
-					// TODO Auto-generated catch block
-					e2.printStackTrace();
-				}
-				break;
-			case 2:
-				try {
-					addStudent();
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				break;
-			case 3:
-				try {
-					addCourses();
-					courseAddedTime();
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				break;
-			case 4:
-				try {
-					updateCourses();
-					courseUpdateTime();
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (Exception e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				break;
-			case 5:
-					// todo
+            try {
+                sel = Integer.parseInt(reader.readLine());
+            } catch (NumberFormatException e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            } catch (IOException e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            }
+            switch (sel) {
+                case 1:
+                    try {
+                        getDateAndTime();
+                    } catch (Exception e2) {
+                        // TODO Auto-generated catch block
+                        e2.printStackTrace();
+                    }
+                    break;
+                case 2:
+                    try {
+                        addStudent();
+                    } catch (Exception e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
+                    break;
+                case 3:
+                    try {
+                        addCourses();
+                        courseAddedTime();
+                    } catch (IOException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    } catch (Exception e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
+                    break;
+                case 4:
+                    try {
+                        updateCourses();
+                        courseUpdateTime();
+                    } catch (IOException e1) {
+                        // TODO Auto-generated catch block
+                        e1.printStackTrace();
+                    } catch (Exception e1) {
+                        // TODO Auto-generated catch block
+                        e1.printStackTrace();
+                    }
+                    break;
+                case 5:
+                    // todo
 				/*try {
 					printStudentListByIndex();
 				} catch (Exception e) {
 						// TODO Auto-generated catch block
 					e.printStackTrace();
 				}*/
-				break;
+                    break;
 
-			case 6:
-				// todo
-				try {
-					printStudentListByIndex();
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				break;
-			case 7:
-				// todo
-				printStudentListByCourse();
-				break;
-			case 8:
-				try {
-					exitAdminPage();
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				break;
-			default:
-				System.out.println("Invalid input. Please try again!");
-			}
+                case 6:
+                    // todo
+                    try {
+                        printStudentListByIndex();
+                    } catch (Exception e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
+                    break;
+                case 7:
+                    // todo
+                    printStudentListByCourse();
+                    break;
+                case 8:
+                    try {
+                        exitAdminPage();
+                    } catch (Exception e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
+                    break;
+                default:
+                    System.out.println("Invalid input. Please try again!");
+            }
 
-		} while (sel != 8);
-	}
+        } while (sel != 8);
+    }
 
-	// Add student
-	public void addStudent() throws Exception {
-		User user = new User();
-		System.out.println("Enter user id  ");
-		user.userId = Integer.parseInt(reader.readLine());
-		System.out.println("Enter user name ");
-		user.userName = reader.readLine();
-		System.out.println("Enter display name ");
-		user.displayName = reader.readLine();
-		System.out.println("Enter password ");
-		user.password = reader.readLine();
-		System.out.println("Enter matric number ");
-		user.matricNumber = reader.readLine();
-		System.out.println("Enter nationality ");
-		user.nationality = reader.readLine();
-		System.out.println("Enter gender e.g 0:Male 1:Female 2:Other");
-		user.gender = Integer.parseInt(reader.readLine());
-		System.out.println("Enter role e.g  0: student 1:admin");
-		user.role = Integer.parseInt(reader.readLine());
-		System.out.println("Enter start Period e.g format 22-10-2020");
-		String str = reader.readLine();
-		System.out.println("Enter End Period e.g format 22-10-2020");
-		String end = reader.readLine();
-		try {
-			user.periodStartTime = str;
-			user.periodEndTime = end;
-		} catch (Exception e) {
-			System.out.println("Parse Exception");
+    private void changeAccessPeriod() {
 
-		}
-		IDAO dao = new UserDAO();
-		dao.add(user);
-		System.out.println("Student data is added successfully!!!!!");
-	}
+        // get all student info
+        UserDAO userDAO = new UserDAO();
+        ArrayList<User> students = userDAO.getAllValidStudents();
 
-	// Add Courses
-	public void addCourses() throws Exception, IOException {
-		Course course = new Course();
-		System.out.println("Enter course id  ");
-		course.courseId = Integer.parseInt(reader.readLine());
-		System.out.println("Enter course code ");
-		course.courseCode = reader.readLine();
-		System.out.println("Enter course name  ");
-		course.courseName = reader.readLine();
-		System.out.println("Enter school e.g 1 eee 2 scse 3 nbs  ");
-		course.school = Integer.parseInt(reader.readLine());
-		System.out.println("Enter course type e.g 0 Core 1 Elective  ");
-		course.courseType = Integer.parseInt(reader.readLine());
-		IDAO dao = new CourseDAO();
-		dao.add(course);
-		System.out.println("Courses added successfully !!!!!");
-	}
+        for (User student : students) {
+            System.out.println(String.format("Username: {0} DisplayName: {1} MatricNumber: {2} PeriodStartTime: {3} PeriodStartTime: {4} "
+                    , student.userName, student.displayName, student.matricNumber, student.periodStartTime, student.periodEndTime));
+        }
+        // let admin choose student to edit
+        User selectedUser = null;
 
-	// Update Courses
-	public void updateCourses() throws Exception, IOException {
-		Course course = new Course();
-		System.out.println("Enter course id  ");
-		course.courseId = Integer.parseInt(reader.readLine());
-		System.out.println("Enter course code ");
-		course.courseCode = reader.readLine();
-		System.out.println("Enter course name  ");
-		course.courseName = reader.readLine();
-		System.out.println("Enter school e.g 1 eee 2 scse 3 nbs  ");
-		course.school = Integer.parseInt(reader.readLine());
-		System.out.println("Enter course type e.g 0 Core 1 Elective  ");
-		course.courseType = Integer.parseInt(reader.readLine());
-		IDAO dao = new CourseDAO();
-		dao.update(course);
-		System.out.println("Courses updated successfully !!!!!");
-	}
+        while (selectedUser == null) {
+            System.out.println("please input student name   (-1 to exit)");
+            String username = scanner.next();
+            for (User student : students) {
+                if (student.userName == username) {
+                    selectedUser = student;
+                }
+            }
 
-	// access period
-	public void courseAddedTime() throws Exception {
-		User user = new User();
-		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
-		LocalDateTime now = LocalDateTime.now();
-		PrintWriter pw = new PrintWriter("dataFiles/accessPeriod.txt");
-		pw.write("Last Added Time"+" "+dtf.format(now));
-		pw.close();
-	}
+            if (username.equals("-1"))
+                new AdminPage(this.user).showPage();
+        }
 
-	public void courseUpdateTime() throws Exception {
-		User user = new User();
-		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
-		LocalDateTime now = LocalDateTime.now();
-		PrintWriter pw = new PrintWriter("dataFiles/accessPeriod.txt");
-		pw.write("Last Updated Time "+" "+dtf.format(now));
-		pw.close();
-	}
 
-	// Get Time for access period
-	public void getDateAndTime() throws Exception {
-		FileReader reader = new FileReader("dataFiles/accessPeriod.txt");
-		BufferedReader br = new BufferedReader(reader);
-		List list = new ArrayList();
-		String line=br.readLine();
-		while ( line!= null) {
-			list.add(line);
-			line=br.readLine();
+        // get admin input start/end period
+        String inputStartPeriod = null;
+        String inputEndPeriod = null;
+        setUserInputDate(inputStartPeriod, inputEndPeriod);
 
-		}
-		if(list.size()==0) {
-			System.out.println("No course is added recently");
-		}
-		else {
-			
-			System.out.println( list.get(0));
+        Date startDate = null;
+        Date endDate = null;
+        try {
+            startDate = DATE_FORMATTER.parse(inputStartPeriod);
+            endDate = DATE_FORMATTER.parse(inputEndPeriod);
+        } catch (Exception e) {
+            System.out.println("Invalid date input");
+            e.printStackTrace();
+        }
+
+        if (startDate == null && endDate == null) {
+
+        }
+
+        selectedUser.periodStartTime = startDate;
+        selectedUser.periodEndTime = endDate;
+
+        // call StudentDAO.Update()
+        userDAO.update(selectedUser);
+    }
+
+    private void setUserInputDate(String startDate, String endDate) {
+        System.out.println(String.format("Current user start period: {0}.  Please input start period (format: yyyy/MM/dd)"
+                , DATE_FORMATTER.format(user.periodStartTime)));
+        startDate = scanner.next();
+
+        System.out.println(String.format("Current user end period: {0}.  Please input end period (format: yyyy/MM/dd)"
+                , DATE_FORMATTER.format(user.periodEndTime)));
+        endDate = scanner.next();
+    }
+
+    // Add student
+    public void addStudent() throws Exception {
+        User user = new User();
+        System.out.println("Enter user id  ");
+        user.userId = Integer.parseInt(reader.readLine());
+        System.out.println("Enter user name ");
+        user.userName = reader.readLine();
+        System.out.println("Enter display name ");
+        user.displayName = reader.readLine();
+        System.out.println("Enter password ");
+        user.password = reader.readLine();
+        System.out.println("Enter matric number ");
+        user.matricNumber = reader.readLine();
+        System.out.println("Enter nationality ");
+        user.nationality = reader.readLine();
+        System.out.println("Enter gender e.g 0:Male 1:Female 2:Other");
+        user.gender = Integer.parseInt(reader.readLine());
+        System.out.println("Enter role e.g  0: student 1:admin");
+        user.role = Integer.parseInt(reader.readLine());
+        System.out.println("Enter start Period e.g format 22-10-2020");
+        String str = reader.readLine();
+        System.out.println("Enter End Period e.g format 22-10-2020");
+        String end = reader.readLine();
+        try {
+//            user.periodStartTime = str;
+//            user.periodEndTime = end;
+        } catch (Exception e) {
+            System.out.println("Parse Exception");
+
+        }
+        IDAO dao = new UserDAO();
+        dao.add(user);
+        System.out.println("Student data is added successfully!!!!!");
+    }
+
+    // Add Courses
+    public void addCourses() throws Exception, IOException {
+        Course course = new Course();
+        System.out.println("Enter course id  ");
+        course.courseId = Integer.parseInt(reader.readLine());
+        System.out.println("Enter course code ");
+        course.courseCode = reader.readLine();
+        System.out.println("Enter course name  ");
+        course.courseName = reader.readLine();
+        System.out.println("Enter school e.g 1 eee 2 scse 3 nbs  ");
+        course.school = Integer.parseInt(reader.readLine());
+        System.out.println("Enter course type e.g 0 Core 1 Elective  ");
+        course.courseType = Integer.parseInt(reader.readLine());
+        IDAO dao = new CourseDAO();
+        dao.add(course);
+        System.out.println("Courses added successfully !!!!!");
+    }
+
+    // Update Courses
+    public void updateCourses() throws Exception, IOException {
+        Course course = new Course();
+        System.out.println("Enter course id  ");
+        course.courseId = Integer.parseInt(reader.readLine());
+        System.out.println("Enter course code ");
+        course.courseCode = reader.readLine();
+        System.out.println("Enter course name  ");
+        course.courseName = reader.readLine();
+        System.out.println("Enter school e.g 1 eee 2 scse 3 nbs  ");
+        course.school = Integer.parseInt(reader.readLine());
+        System.out.println("Enter course type e.g 0 Core 1 Elective  ");
+        course.courseType = Integer.parseInt(reader.readLine());
+        IDAO dao = new CourseDAO();
+        dao.update(course);
+        System.out.println("Courses updated successfully !!!!!");
+    }
+
+    // access period
+    public void courseAddedTime() throws Exception {
+        User user = new User();
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+        LocalDateTime now = LocalDateTime.now();
+        PrintWriter pw = new PrintWriter("dataFiles/accessPeriod.txt");
+        pw.write("Last Added Time" + " " + dtf.format(now));
+        pw.close();
+    }
+
+    public void courseUpdateTime() throws Exception {
+        User user = new User();
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+        LocalDateTime now = LocalDateTime.now();
+        PrintWriter pw = new PrintWriter("dataFiles/accessPeriod.txt");
+        pw.write("Last Updated Time " + " " + dtf.format(now));
+        pw.close();
+    }
+
+    // Get Time for access period
+    public void getDateAndTime() throws Exception {
+        FileReader reader = new FileReader("dataFiles/accessPeriod.txt");
+        BufferedReader br = new BufferedReader(reader);
+        List list = new ArrayList();
+        String line = br.readLine();
+        while (line != null) {
+            list.add(line);
+            line = br.readLine();
+
+        }
+        if (list.size() == 0) {
+            System.out.println("No course is added recently");
+        } else {
+
+            System.out.println(list.get(0));
 //			System.out.println("Last course updated " + list.get(1));
-		}
-		
+        }
 
-	}
 
-	public void printStudentListByIndex() throws Exception {
+    }
 
-		// user input index no.
-		System.out.println("Please input an index number:  ");
-		String indexNumber = reader.readLine();
+    public void printStudentListByIndex() throws Exception {
 
-		// index -> classId -> call getClassMates(classId) ->
+        // user input index no.
+        System.out.println("Please input an index number:  ");
+        String indexNumber = reader.readLine();
 
-		// convert index to classId
-		// UserService.getClassMates();
-		// call user service getClassMates(int classId)
-		// print classUsers
-		// print error msg if index not found
+        // index -> classId -> call getClassMates(classId) ->
 
-		// UserDAO userDAO = new UserDAO();
-		// ArrayList<User> users = userDAO.getAllValid();
-		// for (User userList : users)
-		// System.out.println();
+        // convert index to classId
+        // UserService.getClassMates();
+        // call user service getClassMates(int classId)
+        // print classUsers
+        // print error msg if index not found
 
-	}
+        // UserDAO userDAO = new UserDAO();
+        // ArrayList<User> users = userDAO.getAllValid();
+        // for (User userList : users)
+        // System.out.println();
 
-	public void printStudentListByCourse() {
+    }
 
-		// ClassService
+    public void printStudentListByCourse() {
 
-	}
-	public void exitAdminPage() throws Exception {
+        // ClassService
 
-		System.out.println("Thank you for using MYSTARTS Planner. System is closed!!!!");
-		System.exit(0);
-	}
+    }
+
+    public void exitAdminPage() throws Exception {
+
+        System.out.println("Thank you for using MYSTARTS Planner. System is closed!!!!");
+        System.exit(0);
+    }
 
 }
