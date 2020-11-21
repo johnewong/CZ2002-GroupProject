@@ -5,7 +5,7 @@ import model.User;
 import utility.DataUtil;
 import utility.RoleType;
 
-import java.text.ParseException;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -21,8 +21,8 @@ public class LoginPage extends Page {
         System.out.println("Password: ");
         String password = scanner.next();
 
-        Date now = new Date();
-        System.out.println(now);
+        //Date now = new Date();
+        //System.out.println(now);
 
 
         ArrayList<User> users = new UserDAO().getAllValid();
@@ -31,23 +31,36 @@ public class LoginPage extends Page {
         for (User user : users){
             //user.password.equals(encryptedPassword)
 
-            //if( user.periodStartTime)
-
             if(user.userName.equals(userName) && user.password.equals(encryptedPassword)){
 
+
                 if(user.role == RoleType.Student.toInt()){
-                    System.out.println("Compare time:" +now.compareTo(user.periodStartTime));
 
+                    //get Current Date
+                    Date now = new Date();
 
-                    new StudentPage(user).showPage();
-//                    }
-//                    else
-//                        System.out.println("Your have no access to the page");
+                    //verify the access period
+                    if((now.compareTo(user.periodStartTime)==1 && now.compareTo(user.periodEndTime)== -1)
+                    || (now.compareTo(user.periodStartTime)==1 && now.compareTo(user.periodEndTime)== 1)){
+                        new StudentPage(user).showPage();
+                    }
+
+                    else{
+                        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                        String strPeriod = dateFormat.format(user.periodStartTime);
+                        String endPeriod = dateFormat.format(user.periodEndTime);
+                        System.out.println("You have no access to the page now");
+                        System.out.println("You may access the page from " +  strPeriod +  " " + "to " + endPeriod);
+                    }
+
 
                 }
+
                 else
                     new AdminPage(user).showPage();
             }
+//            else
+//                System.out.println("User Name or Password Wrong");
 
         }
 

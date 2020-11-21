@@ -1,5 +1,6 @@
 userId,userName,displayName,password,matricNumber,nationality,school,gender,role,periodStartTime,periodEndTime,hasFirstLogin,isDeleted;
-1,Alex,Alex Wang,8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92,U1900000F,China,2,0,0,2020-11-01,2020-12-30,true,false;
-2,Benjamin,Benjamin Lee,000000,U1911000F,Singapore,0,0,1,2020-11-01,2020-12-30,true,false;
-3,Jessica,Jessica Lim,9999,U1922000F,Singapore,2,1,0,2020-11-01,2020-12-30,true,false;
-4,csada,skye,231123,u79893,chinese,null,1,0,2020-11-22,2020-11-23,false,false;
+1,Alex,Alex Wang,8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92,U1900000F,China,2,0,0,2020-11-01 09:00:00,2020-11-21 22:00:00,false,false;
+2,Lee,Benjamin Lee,91b4d142823f7d20c5f08df69122de43f35f057a988d9619f6d3138485c9a203,U1911000F,Singapore,0,0,1,2020-11-01,2020-12-01,false,false;
+3,Jessica,Jessica Lim,9999,U1922000F,Singapore,2,1,0,2020-12-01,2020-12-01,false,false;
+4,Peter,Peter Lim,91b4d142823f7d20c5f08df69122de43f35f057a988d9619f6d3138485c9a203,U1900112,Singapore,null,0,0,2020-11-01,2020-12-01,false,false;
+5,Apple,Apple Lee,8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92,U1900024D,Saingapore,null,1,0,2020-11-01,2020-12-01,false,false;
