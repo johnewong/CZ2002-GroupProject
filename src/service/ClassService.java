@@ -70,7 +70,7 @@ public class ClassService {
         }
         for(Class cls : classes){
             if(waitlistClassIds.contains(cls.classId)){
-                ClassSM classSM = new ClassSM(cls, userService.getClassMates(cls.classId), sessionDAO.getByClassId(cls.classId));
+                ClassSM classSM = new ClassSM(cls, userService.getClassMatesById(cls.classId), sessionDAO.getByClassId(cls.classId));
                 waitlistClassSMs.add(classSM);
             }
 
