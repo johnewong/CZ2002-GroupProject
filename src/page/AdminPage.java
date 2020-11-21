@@ -1,15 +1,19 @@
 package page;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Scanner;
 
 import dao.ClassDAO;
@@ -63,7 +67,7 @@ public class AdminPage extends Page {
             switch (sel) {
                 case 1:
                     try {
-                        getDateAndTime();
+                        changeAccessPeriod();
                     } catch (Exception e2) {
                         // TODO Auto-generated catch block
                         e2.printStackTrace();
@@ -80,7 +84,7 @@ public class AdminPage extends Page {
                 case 3:
                     try {
                         addCourses();
-                        courseAddedTime();
+                        //courseAddedTime();
                     } catch (IOException e) {
                         // TODO Auto-generated catch block
                         e.printStackTrace();
@@ -92,7 +96,7 @@ public class AdminPage extends Page {
                 case 4:
                     try {
                         updateCourses();
-                        courseUpdateTime();
+                        //courseUpdateTime();
                     } catch (IOException e1) {
                         // TODO Auto-generated catch block
                         e1.printStackTrace();
@@ -153,7 +157,7 @@ public class AdminPage extends Page {
         User selectedUser = null;
 
         while (selectedUser == null) {
-            System.out.println("please input student name   (-1 to exit)");
+            System.out.println("Please input student name   (-1 to exit)");
             String username = scanner.next();
             for (User student : students) {
                 if (student.userName == username) {
@@ -212,7 +216,7 @@ public class AdminPage extends Page {
         System.out.println("Enter display name ");
         user.displayName = reader.readLine();
         System.out.println("Enter password ");
-        user.password = reader.readLine();
+        user.password = DataUtil.encryptPassword(reader.readLine());
         System.out.println("Enter matric number ");
         user.matricNumber = reader.readLine();
         System.out.println("Enter nationality ");
@@ -314,9 +318,11 @@ public class AdminPage extends Page {
 
     }
 
-    public void printStudentListByIndex() {
-        System.out.println("Please input an index number: ");
-        String indexNumber = scanner.next();
+    public void printStudentListByIndex() throws Exception {
+
+        // user input index no.
+        System.out.println("Please input an index number:  ");
+        String indexNumber = reader.readLine();
 
         Integer classId = null;
         ArrayList<Class> classes = new ClassDAO().getAllValid();

@@ -40,14 +40,14 @@ public class CourseService {
         return registeredCourseSMs;
     }
 
-    public ArrayList<CourseSM> getWaitlistClasses(User user) {
+    public ArrayList<CourseSM> getWaitlistCourses(User user){
         CourseDAO courseDAO = new CourseDAO();
         ClassService classService = new ClassService();
 
         ArrayList<ClassSM> waitlistClassSMs = classService.getWaitlistClasses(user.userId);
 
         ArrayList<CourseSM> waitlistCourseSMs = new ArrayList<>();
-        for (ClassSM waitlistClass : waitlistClassSMs) {
+        for(ClassSM waitlistClass : waitlistClassSMs){
             Course course = courseDAO.get(waitlistClass.courseId);
             CourseSM courseSM = new CourseSM(course, classService.getCourseClasses(waitlistClass.courseId));
             waitlistCourseSMs.add(courseSM);
@@ -55,6 +55,7 @@ public class CourseService {
 
         return waitlistCourseSMs;
     }
+
 
 
 }
