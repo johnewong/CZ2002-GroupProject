@@ -97,6 +97,19 @@ public class StudentPage extends Page {
             }
 
         }
+        if (selectedClasses.size() > 0) {
+            printClassList(selectedClasses);
+            Class vancancyTanken = new Class();
+
+            ClassDAO classDAO = new ClassDAO();
+            vancancyTanken.vacancyTaken++;
+            classDAO.update(vancancyTanken);
+            ClassUser classUser = new ClassUser(this.user.userId, vancancyTanken.classId, StatusEnum.REGISTERED.toInt());
+            ClassUserDAO classUserDAO = new ClassUserDAO();
+            classUserDAO.add(classUser);
+
+        }
+
         if (selectedClasses.size() == 0) {
             printClassList(selectedClasses);
 
@@ -131,7 +144,10 @@ public class StudentPage extends Page {
             System.out.println("selectedClasses Not Found");
         }
 
-        System.out.println("Enter the course section ID: ");
+            
+
+
+            // System.out.println("Enter the course section ID: ");
         //String Id = in.readLine();
 
 
