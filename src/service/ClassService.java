@@ -68,9 +68,9 @@ public class ClassService {
             if(waitlistClassUser.userId == userId && waitlistClassUser.status == StatusEnum.INWAITLIST.toInt())
                 waitlistClassIds.add(waitlistClassUser.classId);
         }
-        for(Class waitlistClass : classes){
-            if(waitlistClassIds.contains(waitlistClass.classId)){
-                ClassSM classSM = new ClassSM(waitlistClass, userService.getClassMates(waitlistClass.classId), sessionDAO.getByClassId(waitlistClass.classId));
+        for(Class cls : classes){
+            if(waitlistClassIds.contains(cls.classId)){
+                ClassSM classSM = new ClassSM(cls, userService.getClassMates(cls.classId), sessionDAO.getByClassId(cls.classId));
                 waitlistClassSMs.add(classSM);
             }
 

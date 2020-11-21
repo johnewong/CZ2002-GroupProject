@@ -52,7 +52,7 @@ public class StudentPage extends Page {
                     //Todo
                     break;
                 case 3:
-                    //Todo 123123
+                    printCoursesRegistered();
                     break;
                 case 4:
                     checkVancancy();
@@ -179,14 +179,18 @@ public class StudentPage extends Page {
 
     private void printCoursesInfo(ArrayList<CourseSM> courses, boolean isRegistered) {
         for (CourseSM course : courses) {
+            System.out.println("Course Code:");
             System.out.println(course.courseCode);
+            System.out.println("AU:");
             System.out.println(course.au);
+            System.out.println("Course Type:");
             System.out.println(course.courseType);
+            System.out.println("Index Number:");
             System.out.println(course.classes.get(0).indexNumber);
             if (isRegistered)
-                System.out.println("regis");
+                System.out.println("Register");
             else
-                System.out.println("unregis");
+                System.out.println("In Waitlist");
 
         }
     }

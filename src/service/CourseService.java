@@ -33,9 +33,9 @@ public class CourseService {
         ArrayList<ClassSM> waitlistClassSMs = classService.getWaitlistClasses(user.userId);
 
         ArrayList<CourseSM> waitlistCourseSMs = new ArrayList<>();
-        for(ClassSM waitlistClass : waitlistClassSMs){
-            Course course = courseDAO.get(waitlistClass.courseId);
-            CourseSM courseSM = new CourseSM(course, classService.getCourseClasses(waitlistClass.courseId));
+        for(ClassSM cls : waitlistClassSMs){
+            Course course = courseDAO.get(cls.courseId);
+            CourseSM courseSM = new CourseSM(course, classService.getCourseClasses(cls.courseId));
             waitlistCourseSMs.add(courseSM);
         }
 
