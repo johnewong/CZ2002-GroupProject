@@ -164,7 +164,7 @@ public class StudentPage extends Page {
         CourseService service = new CourseService();
         ArrayList<CourseSM> courses = service.getRegisteredCourses(this.user);
         if (courses != null) {
-            IDAO dao = new ClassDAO();
+           // IDAO dao = new ClassDAO();
             //dao.delete();
 
         }
