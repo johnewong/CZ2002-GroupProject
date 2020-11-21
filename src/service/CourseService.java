@@ -26,7 +26,7 @@ public class CourseService {
         return registeredCourseSMs;
     }
 
-    public ArrayList<CourseSM> getWaitlistClasses(User user){
+    public ArrayList<CourseSM> getWaitlistCourses(User user){
         CourseDAO courseDAO = new CourseDAO();
         ClassService classService = new ClassService();
 

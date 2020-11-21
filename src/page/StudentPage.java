@@ -1,12 +1,15 @@
 package page;
 
 import dao.ClassDAO;
+import dao.ClassUserDAO;
 import dao.CourseDAO;
 import dao.IDAO;
 import model.Class;
+import model.ClassUser;
 import model.Course;
 import model.User;
 import service.*;
+import utility.StatusEnum;
 
 import java.io.BufferedReader;
 import java.io.FileWriter;
@@ -49,7 +52,7 @@ public class StudentPage extends Page {
                     addCourse();
                     break;
                 case 2:
-                    //Todo
+                    dropCourse();
                     break;
                 case 3:
                     //Todo 123123
@@ -77,49 +80,94 @@ public class StudentPage extends Page {
         } while (sel != 7);
     }
 
+
     private void addCourse() {
         CourseService service = new CourseService();
-        ArrayList<CourseSM> courses = service.getRegisteredCourses(this.user);
-        //BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+        // available courses/  unregistered courses
+        ArrayList<CourseSM> unregisteredCourses = service.getRegisteredCourses(this.user);
         Scanner scanner = new Scanner(System.in);
 
-        printCourseList(courses);
+        printCourseList(unregisteredCourses);
         System.out.println("Enter the course code: ");
 
         String courseCode = scanner.next();
+        CourseSM selectedCourse = null;
         ArrayList<ClassSM> selectedClasses = new ArrayList<>();
-        for(CourseSM course : courses){
-            if(courseCode == course.courseCode){
+        for (CourseSM course : unregisteredCourses) {
+            if (courseCode == course.courseCode) {
+                selectedCourse = course;
                 selectedClasses = course.classes;
             }
 
         }
-        if(selectedClasses.size()==0) {
+
+        // there are available classes to register
+        //
+        if (selectedClasses.size() > 0) {
             printClassList(selectedClasses);
+            Class vancancyTanken = new Class();
+
+            ClassDAO classDAO = new ClassDAO();
+            vancancyTanken.vacancyTaken++;
+            classDAO.update(vancancyTanken);
+            ClassUser classUser = new ClassUser(this.user.userId, vancancyTanken.classId, StatusEnum.REGISTERED.toInt());
+            ClassUserDAO classUserDAO = new ClassUserDAO();
+            classUserDAO.add(classUser);
+
         }
-        else
-        {
+
+        if (selectedClasses.size() == 0) {
+            printClassList(selectedClasses);
+            System.out.println("Add to WaitList ");
+
+            //Todo let user input class index number
+            System.out.println("Typy in index number i");
+
+
+
+
+            Class selectedClass = new Class();
+
+            // +1 in class.numberInWaitlist
+            ClassDAO classDAO = new ClassDAO();
+            selectedClass.numberInWaitlist++;
+            classDAO.update(selectedClass);
+
+            // add classUser status -> inWaitlist
+            ClassUser classUser = new ClassUser(this.user.userId, selectedClass.classId, StatusEnum.INWAITLIST.toInt());
+            ClassUserDAO classUserDAO = new ClassUserDAO();
+            classUserDAO.add(classUser);
+
+
+        } else {
             System.out.println("selectedClasses Not Found");
         }
 
-        System.out.println("Enter the course section ID: ");
+
         //String Id = in.readLine();
 
-        try
-        {
-            String filename = "user.txt";
-            FileWriter fw = new FileWriter(filename,true);
-            fw.write(("add a line"));
-            fw.close();
-        }
-        catch(IOException e)
-        {
-           System.err.println("Selected Coures:"+e.getMessage());
-        }
+        //try {
+        // String filename = "user.txt";
+        //FileWriter fw = new FileWriter(filename, true);
+        //fw.write(("Enter the course section ID"));
+        //fw.close();
+        //} catch (IOException e) {
+        //  System.err.println("Selected Coures:" + e.getMessage());
+        //}
+    }
 
+    private void dropCourse() {
+        CourseService service = new CourseService();
+        ArrayList<CourseSM> courses = service.getRegisteredCourses(this.user);
+        if (courses != null) {
+            IDAO dao = new ClassDAO();
+            //dao.delete();
+
+        }
 
 
     }
+
 
     private void changeCourseIndex() {
         CourseService service = new CourseService();
@@ -127,7 +175,7 @@ public class StudentPage extends Page {
         printCourseList(courses);
     }
 
-    private void printCourseList(ArrayList<CourseSM>courses){
+    private void printCourseList(ArrayList<CourseSM> courses) {
         //print course list
         for (CourseSM course : courses) {
             System.out.println("Course list: ");
@@ -137,11 +185,12 @@ public class StudentPage extends Page {
 //            }
         }
     }
-    private void printClassList(ArrayList<ClassSM>classes){
+
+    private void printClassList(ArrayList<ClassSM> classes) {
         //print course list
         for (ClassSM classSM : classes) {
             System.out.println("Course list: ");
-            System.out.println(String.format("Name: {0} Code: {1} Index:{2} Vacancy:{3} TotalVacancy{4} WaitList{5}", classSM.classId, classSM.courseId,classSM.indexNumber,classSM.vacancyTaken,classSM.totalVacancy,classSM.numberInWaitlist));
+            System.out.println(String.format("Name: {0} Code: {1} Index:{2} Vacancy:{3} TotalVacancy{4} WaitList{5}", classSM.classId, classSM.courseId, classSM.indexNumber, classSM.vacancyTaken, classSM.totalVacancy, classSM.numberInWaitlist));
 //            for (ClassSM cls : course.classes) {
 //                System.out.println(cls.indexNumber);
 //            }
@@ -158,8 +207,8 @@ public class StudentPage extends Page {
         System.out.println("Please enter index number: ");
         String indexNumber = scanner.next();
 
-        for (Class cls : classes){
-            if(cls.indexNumber.equals(indexNumber)){
+        for (Class cls : classes) {
+            if (cls.indexNumber.equals(indexNumber)) {
                 // print class info
                 System.out.println(cls.totalVacancy - cls.vacancyTaken);
                 break;
