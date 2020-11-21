@@ -29,7 +29,7 @@ public class ClassService {
 
         for (Class cls : classes) {
             if (registeredClassIds.contains(cls.classId)) {
-                ClassSM classSM = new ClassSM(cls, userService.getClassMates(cls.classId), sessionDAO.getByClassId(cls.classId));
+                ClassSM classSM = new ClassSM(cls, userService.getClassMatesById(cls.classId), sessionDAO.getByClassId(cls.classId));
                 registeredClassSMs.add(classSM);
             }
         }
@@ -45,7 +45,7 @@ public class ClassService {
         ArrayList<Class> classes = classDAO.getByCourseId(courseId);
         ArrayList<ClassSM> classSMs = new ArrayList<>();
         for (Class cls : classes) {
-            ClassSM classSM = new ClassSM(cls, userService.getClassMates(cls.classId), sessionDAO.getByClassId(cls.classId));
+            ClassSM classSM = new ClassSM(cls, userService.getClassMatesById(cls.classId), sessionDAO.getByClassId(cls.classId));
             classSMs.add(classSM);
         }
 
@@ -70,7 +70,7 @@ public class ClassService {
         }
         for(Class cls : classes){
             if(waitlistClassIds.contains(cls.classId)){
-                ClassSM classSM = new ClassSM(cls, userService.getClassMates(cls.classId), sessionDAO.getByClassId(cls.classId));
+                ClassSM classSM = new ClassSM(cls, userService.getClassMatesById(cls.classId), sessionDAO.getByClassId(cls.classId));
                 waitlistClassSMs.add(classSM);
             }
 

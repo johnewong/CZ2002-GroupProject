@@ -15,6 +15,7 @@ public class CourseSM {
     public boolean isDeleted; // not null
     public ArrayList<ClassSM> classes;
 
+    public CourseSM(){};
     public CourseSM(Course course, ArrayList<ClassSM> classes){
         this.courseId = course.courseId;
         this.courseCode = course.courseCode;

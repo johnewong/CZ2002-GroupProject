@@ -14,7 +14,7 @@ import java.util.Date;
 
 // provide static utility methods for all classes
 public class DataUtil {
-    private static SimpleDateFormat DATE_FORMATTER = new SimpleDateFormat("yyyy/MM/dd");
+    private static SimpleDateFormat DATE_FORMATTER = new SimpleDateFormat("yyyy-MM-dd");
 
     public static String loadFile(String filePath) {
         StringBuilder sb = null;

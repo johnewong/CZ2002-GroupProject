@@ -183,10 +183,7 @@ public class StudentPage extends Page {
         //print course list
         for (CourseSM course : courses) {
             System.out.println("Course list: ");
-            System.out.println(String.format("Name: {0} Code: {1}", course.courseName, course.courseCode));
-//            for (ClassSM cls : course.classes) {
-//                System.out.println(cls.indexNumber);
-//            }
+            System.out.println(String.format("Name: %s Code: %s", course.courseName, course.courseCode));
         }
     }
 
@@ -194,10 +191,8 @@ public class StudentPage extends Page {
         //print course list
         for (ClassSM classSM : classes) {
             System.out.println("Course list: ");
-            System.out.println(String.format("Name: {0} Code: {1} Index:{2} Vacancy:{3} TotalVacancy{4} WaitList{5}", classSM.classId, classSM.courseId, classSM.indexNumber, classSM.vacancyTaken, classSM.totalVacancy, classSM.numberInWaitlist));
-//            for (ClassSM cls : course.classes) {
-//                System.out.println(cls.indexNumber);
-//            }
+            System.out.println(String.format("Name: %d Code: {1} Index:{2} Vacancy:{3} TotalVacancy{4} WaitList{5}"
+                    , classSM.classId, classSM.courseId, classSM.indexNumber, classSM.vacancyTaken, classSM.totalVacancy, classSM.numberInWaitlist));
         }
     }
 
