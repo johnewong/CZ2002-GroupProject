@@ -55,7 +55,7 @@ public class StudentPage extends Page {
                     dropCourse();
                     break;
                 case 3:
-                    //Todo 123123
+                    printCoursesRegistered();
                     break;
                 case 4:
                     checkVancancy();
@@ -221,5 +221,28 @@ public class StudentPage extends Page {
 
         System.out.println("Index number not found");
     }
+
+    private void printCoursesRegistered() {
+        CourseService service = new CourseService();
+        ArrayList<CourseSM> reCourses = service.getRegisteredCourses(this.user);
+        ArrayList<CourseSM> wlCourses = service.getWaitlistCourses(this.user);
+        printCoursesInfo(reCourses, true);
+        printCoursesInfo(wlCourses, false);
+    }
+
+    private void printCoursesInfo(ArrayList<CourseSM> courses, boolean isRegistered) {
+        for (CourseSM course : courses) {
+            System.out.println(course.courseCode);
+            System.out.println(course.au);
+            System.out.println(course.courseType);
+            System.out.println(course.classes.get(0).indexNumber);
+            if (isRegistered)
+                System.out.println("regis");
+            else
+                System.out.println("unregis");
+
+        }
+    }
+
 }
 
