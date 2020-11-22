@@ -158,46 +158,35 @@ public class StudentPage extends Page {
     
     private void dropCourse() {
 
-        //printCourseList(registeredCourses);
+
+        CourseService service = new CourseService();
+        ArrayList<CourseSM> registeredCourses = service.getRegisteredCourses(this.user);
+
+
+        printCourseList(registeredCourses);
+
         System.out.println("Enter the drop course code: ");
-        //if(){
+        String code = scanner.next();
+        for(CourseSM course : registeredCourses){
+            if(code.equals(course.courseCode) ){
+                System.out.println("Drop Selected Course: YES(1)/NO(0) ");
+                int drop = scanner.nextInt();
+                if(drop == 1 ) {
+                    Class vancancyTanken = new Class();
 
-        }//else{
-            //System.out.println("selectedClasses Not Found");
-        // System.out.println("Enter the course section ID: ");
-        //String Id = in.readLine();
+                    ClassDAO classDAO = new ClassDAO();
+                    vancancyTanken.vacancyTaken--;
+                    classDAO.update(vancancyTanken);
+                }else{
+                    System.out.println("return student Page ");
 
-        //try {
-        // String filename = "user.txt";
-        //FileWriter fw = new FileWriter(filename, true);
-        //fw.write(("Enter the course section ID"));
-        //fw.close();
-        //} catch (IOException e) {
-        //  System.err.println("Selected Coures:" + e.getMessage());
+                }
 
-        //}
-        //String courseCode = scanner.next();
-        //for (CourseSM course : registeredCourses) {
-          //  if (courseCode == course.courseCode) {
-                
-                // selectedClasses = course.classes;
-            //}
+            }
+        }
 
 
-
-
-        //System.out.println("Drop registeredCourse: YES(1)/NO(0)");
-        //if(index == course.courseCode)
-
-
-
-
-
-
-
-
-
-
+    }
 
 
 
