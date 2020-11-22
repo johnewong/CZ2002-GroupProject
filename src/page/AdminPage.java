@@ -45,15 +45,15 @@ public class AdminPage extends Page {
     public void showPage() {
         int sel = 0;
         do {
-            System.out.println(String.format("\n ============   Hi %s Welcome to Admin Page!   =========", user.displayName));
-            System.out.println("||===========   1. Edit Student Access Period           =========||");
-            System.out.println("||===========   2. Add Student Information              =========||");
-            System.out.println("||===========   3. Add Courses                          =========||");
-            System.out.println("||===========   4. Update Courses                       =========||");
-            System.out.println("||===========   5. Check Course Availability Slots      =========||");
-            System.out.println("||===========   6. Print Student List By Index Number   =========||");
-            System.out.println("||===========   7. Print Student List By Course         =========||");
-            System.out.println("||===========   8. Exit                                 =========||");
+            System.out.println(String.format("\nHi %s Welcome to Admin Page!", user.displayName));
+            System.out.println("1. Edit Student Access Period");
+            System.out.println("2. Add Student Information");
+            System.out.println("3. Add Courses");
+            System.out.println("4. Update Courses");
+            System.out.println("5. Check Course Availability Slots");
+            System.out.println("6. Print Student List By Index Number");
+            System.out.println("7. Print Student List By Course");
+            System.out.println("8. Exit");
             System.out.println("Please choose an option:  ");
 
             try {
