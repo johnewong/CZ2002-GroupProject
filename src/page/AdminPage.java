@@ -45,7 +45,7 @@ public class AdminPage extends Page {
     public void showPage() {
         int sel = 0;
         do {
-            System.out.println(String.format("\n ============   Hi %s Welcome to Admin Page!             =========", user.displayName));
+            System.out.println(String.format("\n ============   Hi %s Welcome to Admin Page!   =========", user.displayName));
             System.out.println("||===========   1. Edit Student Access Period           =========||");
             System.out.println("||===========   2. Add Student Information              =========||");
             System.out.println("||===========   3. Add Courses                          =========||");
@@ -108,12 +108,12 @@ public class AdminPage extends Page {
                     break;
                 case 5:
                     // todo
-				/*try {
-					printStudentListByIndex();
+				try {
+					checkVancancy();
 				} catch (Exception e) {
 						// TODO Auto-generated catch block
 					e.printStackTrace();
-				}*/
+				}
                     break;
 
                 case 6:
@@ -220,14 +220,18 @@ public class AdminPage extends Page {
         user.matricNumber = reader.readLine();
         System.out.println("Enter nationality ");
         user.nationality = reader.readLine();
+        System.out.println("Enter school e.g 1.EEE  2.SCSE  3.CEE ");
+        user.school = reader.readLine();
         System.out.println("Enter gender e.g 0:Male 1:Female 2:Other");
         user.gender = Integer.parseInt(reader.readLine());
         System.out.println("Enter role e.g  0: student 1:admin");
         user.role = Integer.parseInt(reader.readLine());
-        System.out.println("Enter start Period e.g format 22-10-2020");
-        String str = reader.readLine();
-        System.out.println("Enter End Period e.g format 22-10-2020");
-        String end = reader.readLine();
+        System.out.println("Enter start Period e.g format 2020-10-01");
+        user.periodStartTime = DATE_FORMATTER.parse(reader.readLine());
+
+        System.out.println("Enter End Period e.g format 2020-10-01");
+        user.periodEndTime = DATE_FORMATTER.parse(reader.readLine());
+
         try {
 //            user.periodStartTime = str;
 //            user.periodEndTime = end;
@@ -249,7 +253,7 @@ public class AdminPage extends Page {
         course.courseCode = reader.readLine();
         System.out.println("Enter course name  ");
         course.courseName = reader.readLine();
-        System.out.println("Enter school e.g 1 eee 2 scse 3 nbs  ");
+        System.out.println("Enter school e.g 1.EEE   2.SCSSE    3.CEE  ");
         course.school = Integer.parseInt(reader.readLine());
         System.out.println("Enter course type e.g 0 Core 1 Elective  ");
         course.courseType = Integer.parseInt(reader.readLine());
@@ -333,6 +337,26 @@ public class AdminPage extends Page {
 
         System.out.println("Thank you for using MYSTARTS Planner. System is closed!!!!");
         System.exit(0);
+    }
+
+    private void checkVancancy() {
+        // get data
+        ClassDAO classDAO = new ClassDAO();
+        ArrayList<Class> classes = classDAO.getAllValid();
+
+        // display and user input
+        System.out.println("Please enter index number: ");
+        String indexNumber = scanner.next();
+
+        for (Class cls : classes) {
+            if (cls.indexNumber.equals(indexNumber)) {
+                // print class info
+                System.out.println(String.format("Current available vacancy: %d", cls.totalVacancy - cls.vacancyTaken));
+                return;
+            }
+        }
+
+        System.out.println("Index number not found");
     }
 
 }
