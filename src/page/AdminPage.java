@@ -151,8 +151,8 @@ public class AdminPage extends Page {
         ArrayList<User> students = userDAO.getAllValidStudents();
 
         for (User student : students) {
-            System.out.println(String.format("Username: {0} DisplayName: {1} MatricNumber: {2} PeriodStartTime: {3} PeriodStartTime: {4} "
-                    , student.userName, student.displayName, student.matricNumber, student.periodStartTime, student.periodEndTime));
+            System.out.println(String.format("Username: %s DisplayName: %s MatricNumber: %s PeriodStartTime: %s PeriodStartTime: %s "
+                    , student.userName, student.displayName, student.matricNumber, DATE_FORMATTER.format(student.periodStartTime), DATE_FORMATTER.format(student.periodEndTime)));
         }
         // let admin choose student to edit
         User selectedUser = null;
@@ -161,7 +161,7 @@ public class AdminPage extends Page {
             System.out.println("Please input student name   (-1 to exit)");
             String username = scanner.next();
             for (User student : students) {
-                if (student.userName == username) {
+                if (student.userName.equals(username)) {
                     selectedUser = student;
                 }
             }
@@ -170,24 +170,32 @@ public class AdminPage extends Page {
                 new AdminPage(this.user).showPage();
         }
 
-
-        // get admin input start/end period
-        String inputStartPeriod = null;
-        String inputEndPeriod = null;
-        setUserInputDate(inputStartPeriod, inputEndPeriod);
-
         Date startDate = null;
         Date endDate = null;
-        try {
-            startDate = DATE_FORMATTER.parse(inputStartPeriod);
-            endDate = DATE_FORMATTER.parse(inputEndPeriod);
-        } catch (Exception e) {
-            System.out.println("Invalid date input");
-            e.printStackTrace();
-        }
+        Boolean isValid = false;
+        while (!isValid) {
+            System.out.println(String.format("Current user start period: %s.  Please input start period (format: yyyy-MM-dd)"
+                    , DATE_FORMATTER.format(selectedUser.periodStartTime)));
+            String inputStartPeriod = scanner.next();
 
-        if (startDate == null && endDate == null) {
+            System.out.println(String.format("Current user end period: %s.  Please input end period (format: yyyy-MM-dd)"
+                    , DATE_FORMATTER.format(selectedUser.periodEndTime)));
+            String inputEndPeriod = scanner.next();
 
+
+            try {
+                startDate = DATE_FORMATTER.parse(inputStartPeriod);
+                endDate = DATE_FORMATTER.parse(inputEndPeriod);
+                if(startDate.compareTo(endDate)>0){
+                    throw new Exception("Error: Start date cannot be later than end date");
+                }
+                isValid = true;
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+                System.out.println("Error: Invalid date input. Please input again!");
+                isValid = false;
+                //e.printStackTrace();
+            }
         }
 
         selectedUser.periodStartTime = startDate;
@@ -195,16 +203,6 @@ public class AdminPage extends Page {
 
         // call StudentDAO.Update()
         userDAO.update(selectedUser);
-    }
-
-    private void setUserInputDate(String startDate, String endDate) {
-        System.out.println(String.format("Current user start period: {0}.  Please input start period (format: yyyy/MM/dd)"
-                , DATE_FORMATTER.format(user.periodStartTime)));
-        startDate = scanner.next();
-
-        System.out.println(String.format("Current user end period: {0}.  Please input end period (format: yyyy/MM/dd)"
-                , DATE_FORMATTER.format(user.periodEndTime)));
-        endDate = scanner.next();
     }
 
     // Add student

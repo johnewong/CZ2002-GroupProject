@@ -56,7 +56,11 @@ public class DataUtil {
                             header += ",";
                     }
                     fields[i].setAccessible(true);
-                    row += fields[i].get(obj);
+                    if(fields[i].get(obj).getClass() == Date.class){
+                        row +=  DATE_FORMATTER.format(fields[i].get(obj));
+                    }else {
+                        row += fields[i].get(obj);
+                    }
 
                     if (i < fields.length - 1)
                         row += ",";

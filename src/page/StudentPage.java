@@ -22,6 +22,7 @@ import java.util.Scanner;
 
 public class StudentPage extends Page {
     private User user;
+    private Scanner scanner = new Scanner(System.in);
 
 
     public StudentPage() {
@@ -33,7 +34,6 @@ public class StudentPage extends Page {
     }
 
     public void showPage() {
-        Scanner scanner = new Scanner(System.in);
         int sel = 0;
 
         do {
@@ -56,7 +56,8 @@ public class StudentPage extends Page {
                 case 2:
                     dropCourse();//Todo
                     break;
-                case 3:printCoursesRegistered();
+                case 3:
+                    printCoursesRegistered();
                     break;
                 case 4:
                     checkVancancy();
@@ -85,7 +86,6 @@ public class StudentPage extends Page {
         CourseService service = new CourseService();
         ArrayList<CourseSM> unregisteredCourses = service.getRegisteredCourses(this.user);
         //BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
-        Scanner scanner = new Scanner(System.in);
 
         printCourseList(unregisteredCourses);
         System.out.println("Enter the course code: ");
@@ -150,13 +150,12 @@ public class StudentPage extends Page {
             classUserDAO.add(classUser);
 
 
-
         } else {
             System.out.println("selectedClasses Not Found");
         }
 
     }
-
+    
     private void dropCourse() {
 
         //printCourseList(registeredCourses);
@@ -165,6 +164,17 @@ public class StudentPage extends Page {
 
         }//else{
             //System.out.println("selectedClasses Not Found");
+        // System.out.println("Enter the course section ID: ");
+        //String Id = in.readLine();
+
+        //try {
+        // String filename = "user.txt";
+        //FileWriter fw = new FileWriter(filename, true);
+        //fw.write(("Enter the course section ID"));
+        //fw.close();
+        //} catch (IOException e) {
+        //  System.err.println("Selected Coures:" + e.getMessage());
+
         //}
         //String courseCode = scanner.next();
         //for (CourseSM course : registeredCourses) {
@@ -191,26 +201,30 @@ public class StudentPage extends Page {
 
 
 
-
-
     private void changeCourseIndex() {
         CourseService service = new CourseService();
         ArrayList<CourseSM> courses = service.getRegisteredCourses(this.user);
         printCourseList(courses);
+
+        System.out.println("Please key in the course code");
+        String inputCourseCode =  scanner.next();
+
+
     }
 
     private void printCourseList(ArrayList<CourseSM> courses) {
         //print course list
+        System.out.println("Course list: ");
         for (CourseSM course : courses) {
-            System.out.println("Course list: ");
             System.out.println(String.format("Name: %s Code: %s", course.courseName, course.courseCode));
         }
     }
 
     private void printClassList(ArrayList<ClassSM> classes) {
-        //print course list
+        //print class list
+        System.out.println("Class list: ");
         for (ClassSM classSM : classes) {
-            System.out.println("Course list: ");
+
             System.out.println(String.format("Name: %d Code: {1} Index:{2} Vacancy:{3} TotalVacancy{4} WaitList{5}"
                     , classSM.classId, classSM.courseId, classSM.indexNumber, classSM.vacancyTaken, classSM.totalVacancy, classSM.numberInWaitlist));
         }
@@ -222,7 +236,6 @@ public class StudentPage extends Page {
         ArrayList<Class> classes = classDAO.getAllValid();
 
         // display and user input
-        Scanner scanner = new Scanner(System.in);
         System.out.println("Please enter index number: ");
         String indexNumber = scanner.next();
 
@@ -261,7 +274,6 @@ public class StudentPage extends Page {
 
             System.out.println(course.courseCode + "       " + course.au + "      " + course.classes.get(0).indexNumber + "        " + CourseType.getValue(course.courseType));
             System.out.println("-------------------------------------------");
-
 
 
         }
