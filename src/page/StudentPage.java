@@ -99,7 +99,7 @@ public class StudentPage extends Page {
 
         }
         if (selectedClasses.size() > 0) {
-            printClassList(selectedClasses);
+            //printClassList(selectedClasses);
             System.out.println("Type in index number");
             String index = scanner.next();
             CourseSM selectedCourse = null;

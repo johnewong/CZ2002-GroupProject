@@ -150,9 +150,15 @@ public class AdminPage extends Page {
         UserDAO userDAO = new UserDAO();
         ArrayList<User> students = userDAO.getAllValidStudents();
 
+        System.out.print("Matric Number" + "    "+ "Username" + "    " + "DisplayName" + "      " + "Period Start Time" + "      " + "Period End Time");
+        System.out.print('\n');
+
         for (User student : students) {
-            System.out.println(String.format("Username: %s      DisplayName: %s       Matric Number: %s      Period Start Time: %s       Period Start Time: %s "
-                    , student.userName, student.displayName, student.matricNumber, DATE_FORMATTER.format(student.periodStartTime), DATE_FORMATTER.format(student.periodEndTime)));
+            System.out.println(student.matricNumber + "        " + student.userName + "        " + student.displayName + "          "  + DATE_FORMATTER.format(student.periodStartTime)+ "          " + DATE_FORMATTER.format(student.periodEndTime));
+
+            //System.out.println(String.format("Username: %s      DisplayName: %s       Matric Number: %s      Period Start Time: %s       Period Start Time: %s "
+            //        , student.userName, student.displayName, student.matricNumber, DATE_FORMATTER.format(student.periodStartTime), DATE_FORMATTER.format(student.periodEndTime)));
+
         }
         // let admin choose student to edit
         User selectedUser = null;
@@ -301,11 +307,17 @@ public class AdminPage extends Page {
             return;
         }
 
+        System.out.print("Matric Number" + "    " + "Name");
+        System.out.print('\n');
+        System.out.print("-----------------------");
+        System.out.print('\n');
         UserService userService = new UserService();
         ArrayList<User> students = userService.getClassMatesById(classId);
 
         for (User student : students) {
-            System.out.println(String.format("Name: %s Matric Number: %s", student.userName, student.matricNumber));
+            //System.out.println(String.format("Name: %s Matric Number: %s", student.userName, student.matricNumber));
+            System.out.print(student.matricNumber + "        " + student.displayName);
+            System.out.print('\n');
         }
     }
 
@@ -323,12 +335,26 @@ public class AdminPage extends Page {
 
         UserService userService = new UserService();
 
+
         for (ClassSM cls : course.classes) {
+
+            System.out.print("-------------------");
+            System.out.print('\n');
             System.out.println(String.format("Index number: %s", cls.indexNumber));
+            System.out.print("--------------------------------");
+            System.out.print('\n');
+            System.out.print("Matric Number" + "      " + "Name");
+            System.out.print('\n');
+            System.out.print("--------------------------------");
+            System.out.print('\n');
             ArrayList<User> students = userService.getClassMatesById(cls.classId);
             for (User student : students) {
-                System.out.println(String.format("Name: %s Matric Number: %s", student.userName, student.matricNumber));
+                //System.out.println(String.format("Name: %s Matric Number: %s", student.userName, student.matricNumber));
+                System.out.print(student.matricNumber + "          "+student.displayName);
+                System.out.print('\n');
+
             }
+
         }
 
     }

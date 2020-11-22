@@ -21,11 +21,11 @@ classUserId,userId,classId,status,isDeleted;
 20,9,12,1,false;
 21,6,1,1,false;
 22,7,1,1,false;
-23,8,1,1,false;
-24,9,1,1,false;
-25,10,1,1,false;
-26,15,1,1,false;
-27,16,1,1,false;
-28,17,1,1,false;
+23,8,2,1,false;
+24,9,2,1,false;
+25,10,2,1,false;
+26,15,3,1,false;
+27,16,3,1,false;
+28,17,3,1,false;
 
 
