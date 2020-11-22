@@ -7,4 +7,10 @@ classId,courseId,indexNumber,vacancyTaken,totalVacancy,numberInWaitlist,group,re
 6,3,00031,20,20,3,1,CZ2002 class 1,false;
 7,3,00032,2,20,0,2,CZ2002 class 2,false;
 8,4,00041,18,25,1,1,CZ2003 class 1,false;
-9,5,00041,15,15,1,2,LAO009 class 1,false;
+9,5,00042,15,15,1,2,LAO009 class 2,false;
+10,6,00051,10,20,0,1,CZ2005 Class 1,false;
+11,6,00052,14,20,0,2,CZ2005 Class 2,false;
+12,7,00061,14,20,0,1,CZ2006 Class 1,false;
+13,7,00062,18,20,0,2,CZ2006 Class 2,false;
+
+

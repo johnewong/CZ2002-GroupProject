@@ -1,7 +1,7 @@
 package utility;
 
 public enum GenderType {
-    REJECTED(0), REGISTERED(1), INWAITLIST(2);
+    Male(0), Female(1), Others(2);
 
     private int number;
 
