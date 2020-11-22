@@ -177,10 +177,15 @@ public class StudentPage extends Page {
                     ClassDAO classDAO = new ClassDAO();
                     vancancyTanken.vacancyTaken--;
                     classDAO.update(vancancyTanken);
+                    System.out.println(("Course Drop and return page"));
                 }else{
                     System.out.println("return student Page ");
 
+
                 }
+
+            }else{
+                System.out.println("Course not found");
 
             }
         }
