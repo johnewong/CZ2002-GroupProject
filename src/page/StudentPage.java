@@ -100,6 +100,16 @@ public class StudentPage extends Page {
         }
         if (selectedClasses.size() > 0) {
             printClassList(selectedClasses);
+            System.out.println("Typy in index number");
+            String index = scanner.next();
+            CourseSM selectedCourse = null;
+            for (CourseSM course : unregisteredCourses) {
+                if (index == course.courseCode) {
+                    selectedCourse = course;
+                    selectedClasses = course.classes;
+                }
+
+            }
             Class vancancyTanken = new Class();
 
             ClassDAO classDAO = new ClassDAO();
@@ -163,8 +173,16 @@ public class StudentPage extends Page {
 
     private void dropCourse() {
         CourseService service = new CourseService();
-        ArrayList<CourseSM> courses = service.getRegisteredCourses(this.user);
-        if (courses != null) {
+        ArrayList<CourseSM> unregisteredCourses = service.getRegisteredCourses(this.user);
+        Scanner scanner = new Scanner(System.in);
+
+        printCourseList(unregisteredCourses);
+        System.out.println("Drop registeredCourse: YES(1)/NO(0)");
+        //if
+
+        //CourseService service = new CourseService();
+        //ArrayList<CourseSM> courses = service.getRegisteredCourses(this.user);
+        //if (courses != null) {
             // IDAO dao = new ClassDAO();
             //dao.delete();
 
@@ -178,7 +196,7 @@ public class StudentPage extends Page {
         //} catch (IOException e) {
         //  System.err.println("Selected Coures:" + e.getMessage());
         //}
-    }
+
 
 
 
