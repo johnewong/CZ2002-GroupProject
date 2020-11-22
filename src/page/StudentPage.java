@@ -54,7 +54,7 @@ public class StudentPage extends Page {
                     addCourse();
                     break;
                 case 2:
-                    //Todo
+                    dropCourse();//Todo
                     break;
                 case 3:printCoursesRegistered();
                     break;
@@ -100,7 +100,7 @@ public class StudentPage extends Page {
         }
         if (selectedClasses.size() > 0) {
             printClassList(selectedClasses);
-            System.out.println("Typy in index number");
+            System.out.println("Type in index number");
             String index = scanner.next();
             CourseSM selectedCourse = null;
             for (CourseSM course : unregisteredCourses) {
@@ -125,7 +125,7 @@ public class StudentPage extends Page {
             printClassList(selectedClasses);
 
             //1 let user input class index number
-            System.out.println("Typy in index number");
+            System.out.println("Type in index number");
             String index = scanner.next();
             //ArrayList<ClassSM> indexNumber = new ArrayList<>();
             CourseSM selectedCourse = null;
@@ -155,47 +155,39 @@ public class StudentPage extends Page {
             System.out.println("selectedClasses Not Found");
         }
 
-
-
-
-            // System.out.println("Enter the course section ID: ");
-        //String Id = in.readLine();
-
-        //try {
-        // String filename = "user.txt";
-        //FileWriter fw = new FileWriter(filename, true);
-        //fw.write(("Enter the course section ID"));
-        //fw.close();
-        //} catch (IOException e) {
-        //  System.err.println("Selected Coures:" + e.getMessage());
-        //}
     }
 
     private void dropCourse() {
-        CourseService service = new CourseService();
-        ArrayList<CourseSM> unregisteredCourses = service.getRegisteredCourses(this.user);
-        Scanner scanner = new Scanner(System.in);
 
-        printCourseList(unregisteredCourses);
-        System.out.println("Drop registeredCourse: YES(1)/NO(0)");
-        //if
+        //printCourseList(registeredCourses);
+        System.out.println("Enter the drop course code: ");
+        //if(){
 
-        //CourseService service = new CourseService();
-        //ArrayList<CourseSM> courses = service.getRegisteredCourses(this.user);
-        //if (courses != null) {
-            // IDAO dao = new ClassDAO();
-            //dao.delete();
-
-        }
-
-        //try {
-        // String filename = "user.txt";
-        //FileWriter fw = new FileWriter(filename, true);
-        //fw.write(("Enter the course section ID"));
-        //fw.close();
-        //} catch (IOException e) {
-        //  System.err.println("Selected Coures:" + e.getMessage());
+        }//else{
+            //System.out.println("selectedClasses Not Found");
         //}
+        //String courseCode = scanner.next();
+        //for (CourseSM course : registeredCourses) {
+          //  if (courseCode == course.courseCode) {
+                
+                // selectedClasses = course.classes;
+            //}
+
+
+
+
+        //System.out.println("Drop registeredCourse: YES(1)/NO(0)");
+        //if(index == course.courseCode)
+
+
+
+
+
+
+
+
+
+
 
 
 
