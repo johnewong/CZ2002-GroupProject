@@ -14,16 +14,15 @@ import java.util.Scanner;
 public class LoginPage extends Page {
     @Override
     public void showPage() {
-        // user input username password
-        System.out.println("Username: ");
+
         Scanner scanner = new Scanner(System.in);
+        System.out.println("Username: ");
         String userName = scanner.next();
         System.out.println("Password: ");
         String password = scanner.next();
 
         //Date now = new Date();
         //System.out.println(now);
-
 
         ArrayList<User> users = new UserDAO().getAllValid();
         String encryptedPassword= DataUtil.encryptPassword(password);
@@ -40,13 +39,12 @@ public class LoginPage extends Page {
                     Date now = new Date();
 
                     //verify the access period
-                    if((now.compareTo(user.periodStartTime)==1 && now.compareTo(user.periodEndTime)== -1)
-                    || (now.compareTo(user.periodStartTime)==1 && now.compareTo(user.periodEndTime)== 1)){
+                    if(now.compareTo(user.periodStartTime)==1 && now.compareTo(user.periodEndTime) == -1){
                         new StudentPage(user).showPage();
                     }
 
                     else{
-                        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
                         String strPeriod = dateFormat.format(user.periodStartTime);
                         String endPeriod = dateFormat.format(user.periodEndTime);
                         System.out.println("You have no access to the page now");
@@ -54,15 +52,20 @@ public class LoginPage extends Page {
                     }
 
 
+
                 }
 
                 else
                     new AdminPage(user).showPage();
             }
-//            else
-//                System.out.println("User Name or Password Wrong");
 
         }
+
+//            if(count >0){
+//                count+=1;
+//                System.out.println("Invalid Username or Password. Please Enter Again");
+//            }
+
 
     }
 
