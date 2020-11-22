@@ -99,8 +99,8 @@ public class StudentPage extends Page {
 
         }
         if (selectedClasses.size() > 0) {
-            printClassList(selectedClasses, null);
-            System.out.println("Typy in index number");
+            printClassList(selectedClasses);
+            System.out.println("Type in index number");
             String index = scanner.next();
             CourseSM selectedCourse = null;
             for (CourseSM course : unregisteredCourses) {
@@ -125,7 +125,7 @@ public class StudentPage extends Page {
             printClassList(selectedClasses, null);
 
             //1 let user input class index number
-            System.out.println("Typy in index number");
+            System.out.println("Type in index number");
             String index = scanner.next();
             //ArrayList<ClassSM> indexNumber = new ArrayList<>();
             CourseSM selectedCourse = null;
@@ -154,17 +154,58 @@ public class StudentPage extends Page {
             System.out.println("selectedClasses Not Found");
         }
 
+
+        // System.out.println("Enter the course section ID: ");
+        //String Id = in.readLine();
+
+        //try {
+        // String filename = "user.txt";
+        //FileWriter fw = new FileWriter(filename, true);
+        //fw.write(("Enter the course section ID"));
+        //fw.close();
+        //} catch (IOException e) {
+        //  System.err.println("Selected Coures:" + e.getMessage());
+        //}
     }
 
     private void dropCourse() {
-        CourseService service = new CourseService();
-        ArrayList<CourseSM> unregisteredCourses = service.getRegisteredCourses(this.user);
-        Scanner scanner = new Scanner(System.in);
 
-        printCourseList(unregisteredCourses);
-        System.out.println("Drop registeredCourse: YES(1)/NO(0)");
+
+        CourseService service = new CourseService();
+        ArrayList<CourseSM> registeredCourses = service.getRegisteredCourses(this.user);
+
+
+        printCourseList(registeredCourses);
+
+        System.out.println("Enter the drop course code: ");
+        String code = scanner.next();
+        for(CourseSM course : registeredCourses){
+            if(code.equals(course.courseCode) ){
+                System.out.println("Drop Selected Course: YES(1)/NO(0) ");
+                int drop = scanner.nextInt();
+                if(drop == 1 ) {
+                    Class vancancyTanken = new Class();
+
+                    ClassDAO classDAO = new ClassDAO();
+                    vancancyTanken.vacancyTaken--;
+                    classDAO.update(vancancyTanken);
+                    System.out.println(("Course Drop and return page"));
+                }else{
+                    System.out.println("return student Page ");
+
+
+                }
+
+            }else{
+                System.out.println("Course not found");
+
+            }
+        }
+
 
     }
+
+
 
     private void changeCourseIndex() {
         CourseService service = new CourseService();
