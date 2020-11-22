@@ -43,7 +43,7 @@ public class StudentPage extends Page {
             System.out.println("2. Drop Course ");
             System.out.println("3. Check/Print Courses Registered");
             System.out.println("4. Check Vacancies Available ");
-            System.out.println("5. Change Index Number of Course");
+            System.out.println("5. Change Index Number of Registered Courses");
             System.out.println("6. Swap Index Number with Another Student");
             System.out.println("7. Exit");
             System.out.println("Please choose an option:  ");
@@ -99,7 +99,7 @@ public class StudentPage extends Page {
 
         }
         if (selectedClasses.size() > 0) {
-            printClassList(selectedClasses);
+            printClassList(selectedClasses, null);
             System.out.println("Typy in index number");
             String index = scanner.next();
             CourseSM selectedCourse = null;
@@ -122,7 +122,7 @@ public class StudentPage extends Page {
         }
 
         if (selectedClasses.size() == 0) {
-            printClassList(selectedClasses);
+            printClassList(selectedClasses, null);
 
             //1 let user input class index number
             System.out.println("Typy in index number");
@@ -154,18 +154,6 @@ public class StudentPage extends Page {
             System.out.println("selectedClasses Not Found");
         }
 
-
-        // System.out.println("Enter the course section ID: ");
-        //String Id = in.readLine();
-
-        //try {
-        // String filename = "user.txt";
-        //FileWriter fw = new FileWriter(filename, true);
-        //fw.write(("Enter the course section ID"));
-        //fw.close();
-        //} catch (IOException e) {
-        //  System.err.println("Selected Coures:" + e.getMessage());
-        //}
     }
 
     private void dropCourse() {
@@ -175,53 +163,78 @@ public class StudentPage extends Page {
 
         printCourseList(unregisteredCourses);
         System.out.println("Drop registeredCourse: YES(1)/NO(0)");
-        //if
 
-        //CourseService service = new CourseService();
-        //ArrayList<CourseSM> courses = service.getRegisteredCourses(this.user);
-        //if (courses != null) {
-            // IDAO dao = new ClassDAO();
-            //dao.delete();
-
-        }
-
-        //try {
-        // String filename = "user.txt";
-        //FileWriter fw = new FileWriter(filename, true);
-        //fw.write(("Enter the course section ID"));
-        //fw.close();
-        //} catch (IOException e) {
-        //  System.err.println("Selected Coures:" + e.getMessage());
-        //}
-
-
+    }
 
     private void changeCourseIndex() {
         CourseService service = new CourseService();
         ArrayList<CourseSM> courses = service.getRegisteredCourses(this.user);
+        System.out.println("Registered Courses: ");
         printCourseList(courses);
 
-        System.out.println("Please key in the course code");
-        String inputCourseCode =  scanner.next();
+        CourseSM selectedCourse = null;
+        while (selectedCourse == null) {
+            System.out.println("Please key in the course code");
+            String inputCourseCode = scanner.next();
 
+            for (CourseSM course : courses) {
+                if (course.courseCode.equals(inputCourseCode)) {
+                    selectedCourse = course;
+                }
+            }
+            if (selectedCourse != null)
+                break;
 
+            System.out.println("Course not found. Please key in again");
+        }
+
+        printClassList(selectedCourse.classes, selectedCourse.registeredClass);
+
+        ClassSM selectedClass = null;
+        while (selectedClass == null) {
+            System.out.println("Please key in the index number");
+            String inputIndex = scanner.next();
+            if(inputIndex.equals(selectedCourse.registeredClass.indexNumber)){
+                System.out.println("You cannot register an already registered class");
+                continue;
+            }
+
+            for (ClassSM classSM : selectedCourse.classes) {
+
+                if (classSM.indexNumber.equals(inputIndex)) {
+                    if (classSM.totalVacancy == classSM.vacancyTaken) {
+                        System.out.println("This class is full");
+                        break;
+                    }
+                    selectedClass = classSM;
+                }
+            }
+        }
+
+        ClassSM returnClass = new ClassService().changeClass(user, selectedCourse.registeredClass, selectedClass);
+        System.out.println(String.format("You have successfully change a class %s",returnClass.indexNumber));
     }
 
     private void printCourseList(ArrayList<CourseSM> courses) {
         //print course list
-        System.out.println("Course list: ");
         for (CourseSM course : courses) {
-            System.out.println(String.format("Name: %s Code: %s", course.courseName, course.courseCode));
+            System.out.println(String.format("Code: %s  Name: %s  AU: %d  Type: %s", course.courseCode, course.courseName, course.au, CourseType.getValue(course.courseType)));
         }
     }
 
-    private void printClassList(ArrayList<ClassSM> classes) {
-        //print class list
-        System.out.println("Class list: ");
+    private void printClassList(ArrayList<ClassSM> classes, ClassSM registeredClass) {
         for (ClassSM classSM : classes) {
+            String output = "Index Number:%s  Available Vacancy:%d";
+            if (classSM.totalVacancy == classSM.vacancyTaken) {
+                output += " [FULL]";
+            }
 
-            System.out.println(String.format("Name: %d Code: {1} Index:{2} Vacancy:{3} TotalVacancy{4} WaitList{5}"
-                    , classSM.classId, classSM.courseId, classSM.indexNumber, classSM.vacancyTaken, classSM.totalVacancy, classSM.numberInWaitlist));
+            if (registeredClass.classId == classSM.classId) {
+                output += " [REGISTERED]";
+            }
+
+            System.out.println(String.format(output
+                    , classSM.indexNumber, classSM.totalVacancy - classSM.vacancyTaken));
         }
     }
 

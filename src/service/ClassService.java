@@ -6,6 +6,7 @@ import dao.ClassUserDAO;
 import dao.SessionDAO;
 import model.Class;
 import model.ClassUser;
+import model.User;
 import utility.StatusEnum;
 
 import java.util.ArrayList;
@@ -52,7 +53,7 @@ public class ClassService {
         return classSMs;
     }
 
-    public ArrayList<ClassSM> getWaitlistClasses(int userId){
+    public ArrayList<ClassSM> getWaitlistClasses(int userId) {
         ClassUserDAO classUserDAO = new ClassUserDAO();
         ClassDAO classDAO = new ClassDAO();
         SessionDAO sessionDAO = new SessionDAO();
@@ -64,18 +65,54 @@ public class ClassService {
         ArrayList<Integer> waitlistClassIds = new ArrayList<>();
 
 
-        for(ClassUser classUser : classUsers){
-            if(classUser.userId == userId && classUser.status == StatusEnum.INWAITLIST.toInt())
+        for (ClassUser classUser : classUsers) {
+            if (classUser.userId == userId && classUser.status == StatusEnum.INWAITLIST.toInt())
                 waitlistClassIds.add(classUser.classId);
         }
-        for(Class cls : classes){
-            if(waitlistClassIds.contains(cls.classId)){
+        for (Class cls : classes) {
+            if (waitlistClassIds.contains(cls.classId)) {
                 ClassSM classSM = new ClassSM(cls, userService.getClassMatesById(cls.classId), sessionDAO.getByClassId(cls.classId));
                 waitlistClassSMs.add(classSM);
             }
 
         }
         return waitlistClassSMs;
+    }
 
+    public ClassSM changeClass(User user, ClassSM registeredClass, ClassSM selectedClass) {
+        if (selectedClass.vacancyTaken >= selectedClass.totalVacancy) {
+            return null;
+        }
+
+        ClassUserDAO classUserDAO = new ClassUserDAO();
+        ClassDAO classDAO = new ClassDAO();
+
+        ClassUser newClassUser = new ClassUser(user.userId, selectedClass.classId, StatusEnum.REGISTERED.toInt());
+        ClassUser deleteClassUser = classUserDAO.get(user.userId, registeredClass.classId);
+
+        registeredClass.vacancyTaken--;
+        selectedClass.vacancyTaken++;
+
+        classDAO.update(registeredClass);
+        classDAO.update(selectedClass);
+        classUserDAO.add(newClassUser);
+        classUserDAO.delete(deleteClassUser.classUserId);
+
+        return selectedClass;
+    }
+
+    public void registerClass(User user, ClassSM selectedClass) {
+        if (selectedClass.vacancyTaken >= selectedClass.totalVacancy) {
+            return;
+        }
+
+        ClassUserDAO classUserDAO = new ClassUserDAO();
+        ClassDAO classDAO = new ClassDAO();
+
+        ClassUser classUser = new ClassUser(user.userId, selectedClass.classId, StatusEnum.REGISTERED.toInt());
+        selectedClass.vacancyTaken++;
+
+        classDAO.update(selectedClass);
+        classUserDAO.add(classUser);
     }
 }

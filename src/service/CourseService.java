@@ -34,6 +34,7 @@ public class CourseService {
         for (ClassSM cls : registeredClassSMs) {
             Course course = courseDAO.get(cls.courseId);
             CourseSM courseSM = new CourseSM(course, classService.getCourseClasses(cls.courseId));
+            courseSM.registeredClass = cls;
             registeredCourseSMs.add(courseSM);
         }
 
