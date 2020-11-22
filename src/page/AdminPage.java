@@ -45,15 +45,15 @@ public class AdminPage extends Page {
     public void showPage() {
         int sel = 0;
         do {
-            System.out.println(String.format("\n ============ Hi %s Welcome to Admin Page! 		=========", user.displayName));
-            System.out.println("||===========1. Edit Student Access Period 		=========||");
-            System.out.println("||===========2. Add Student Information 			=========||");
-            System.out.println("||===========3. Add Courses 			  		    =========||");
-            System.out.println("||===========4. Update Courses 		  			    =========||");
-            System.out.println("||===========5. Check Course Availability Slots    =========||");
-            System.out.println("||===========6. Print Student List By Index Number =========||");
-            System.out.println("||===========7. Print Student List By Course	    =========||");
-            System.out.println("||===========8. Exit 							    =========||");
+            System.out.println(String.format("\n ============   Hi %s Welcome to Admin Page!             =========", user.displayName));
+            System.out.println("||===========   1. Edit Student Access Period           =========||");
+            System.out.println("||===========   2. Add Student Information              =========||");
+            System.out.println("||===========   3. Add Courses                          =========||");
+            System.out.println("||===========   4. Update Courses                       =========||");
+            System.out.println("||===========   5. Check Course Availability Slots      =========||");
+            System.out.println("||===========   6. Print Student List By Index Number   =========||");
+            System.out.println("||===========   7. Print Student List By Course         =========||");
+            System.out.println("||===========   8. Exit                                 =========||");
             System.out.println("Please choose an option:  ");
 
             try {
@@ -151,7 +151,7 @@ public class AdminPage extends Page {
         ArrayList<User> students = userDAO.getAllValidStudents();
 
         for (User student : students) {
-            System.out.println(String.format("Username: %s DisplayName: %s MatricNumber: %s PeriodStartTime: %s PeriodStartTime: %s "
+            System.out.println(String.format("Username: %s      DisplayName: %s       Matric Number: %s      Period Start Time: %s       Period Start Time: %s "
                     , student.userName, student.displayName, student.matricNumber, DATE_FORMATTER.format(student.periodStartTime), DATE_FORMATTER.format(student.periodEndTime)));
         }
         // let admin choose student to edit
@@ -276,46 +276,7 @@ public class AdminPage extends Page {
         System.out.println("Courses updated successfully !!!!!");
     }
 
-    // access period
-    public void courseAddedTime() throws Exception {
-        User user = new User();
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
-        LocalDateTime now = LocalDateTime.now();
-        PrintWriter pw = new PrintWriter("dataFiles/accessPeriod.txt");
-        pw.write("Last Added Time" + " " + dtf.format(now));
-        pw.close();
-    }
 
-    public void courseUpdateTime() throws Exception {
-        User user = new User();
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
-        LocalDateTime now = LocalDateTime.now();
-        PrintWriter pw = new PrintWriter("dataFiles/accessPeriod.txt");
-        pw.write("Last Updated Time " + " " + dtf.format(now));
-        pw.close();
-    }
-
-    // Get Time for access period
-    public void getDateAndTime() throws Exception {
-        FileReader reader = new FileReader("dataFiles/accessPeriod.txt");
-        BufferedReader br = new BufferedReader(reader);
-        List list = new ArrayList();
-        String line = br.readLine();
-        while (line != null) {
-            list.add(line);
-            line = br.readLine();
-
-        }
-        if (list.size() == 0) {
-            System.out.println("No course is added recently");
-        } else {
-
-            System.out.println(list.get(0));
-//			System.out.println("Last course updated " + list.get(1));
-        }
-
-
-    }
 
     public void printStudentListByIndex() throws Exception {
 
