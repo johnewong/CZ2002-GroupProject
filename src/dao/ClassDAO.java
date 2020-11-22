@@ -95,7 +95,7 @@ public class ClassDAO implements IDAO<Class> {
             existedClass.group = cls.group;
             existedClass.numberInWaitlist = cls.numberInWaitlist;
             existedClass.remark = cls.remark;
-            DataUtil.writeFile(this.allClasses, "dataFiles/classUser.txt");
+            DataUtil.writeFile(this.allClasses, "dataFiles/class.txt");
         }
         else {
             System.out.println("Class user not found");

@@ -54,7 +54,7 @@ public class StudentPage extends Page {
                     addCourse();
                     break;
                 case 2:
-                    //Todo
+                    dropCourse();
                     break;
                 case 3:
                     printCoursesRegistered();
@@ -62,7 +62,6 @@ public class StudentPage extends Page {
                 case 4:
                     checkVancancy();
                     break;
-                //Change Index Number of Course
                 case 5:
                     changeCourseIndex();
                     break;
@@ -84,135 +83,76 @@ public class StudentPage extends Page {
 
     private void addCourse() {
         CourseService service = new CourseService();
-        ArrayList<CourseSM> unregisteredCourses = service.getRegisteredCourses(this.user);
-        //BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+        ArrayList<CourseSM> unregisteredCourses = service.getUnregisteredCourses(this.user);
+        System.out.println("Unregistered Courses: ");
 
         printCourseList(unregisteredCourses);
-        System.out.println("Enter the course code: ");
+        CourseSM selectedCourse = selectCourse(unregisteredCourses);
 
-        String courseCode = scanner.next();
-        ArrayList<ClassSM> selectedClasses = new ArrayList<>();
-        for (CourseSM course : unregisteredCourses) {
-            if (courseCode == course.courseCode) {
-                selectedClasses = course.classes;
-            }
-
-        }
-        if (selectedClasses.size() > 0) {
-            printClassList(selectedClasses);
-            System.out.println("Type in index number");
-            String index = scanner.next();
-            CourseSM selectedCourse = null;
-            for (CourseSM course : unregisteredCourses) {
-                if (index == course.courseCode) {
-                    selectedCourse = course;
-                    selectedClasses = course.classes;
-                }
-
-            }
-            Class vancancyTanken = new Class();
-
-            ClassDAO classDAO = new ClassDAO();
-            vancancyTanken.vacancyTaken++;
-            classDAO.update(vancancyTanken);
-            ClassUser classUser = new ClassUser(this.user.userId, vancancyTanken.classId, StatusEnum.REGISTERED.toInt());
-            ClassUserDAO classUserDAO = new ClassUserDAO();
-            classUserDAO.add(classUser);
-
-        }
-
-        if (selectedClasses.size() == 0) {
-            printClassList(selectedClasses, null);
-
-            //1 let user input class index number
-            System.out.println("Type in index number");
-            String index = scanner.next();
-            //ArrayList<ClassSM> indexNumber = new ArrayList<>();
-            CourseSM selectedCourse = null;
-            for (CourseSM course : unregisteredCourses) {
-                if (index == course.courseCode) {
-                    selectedCourse = course;
-                    selectedClasses = course.classes;
-                }
-
-            }
-            System.out.println("Add to WaitList ");
-            Class selectedClass = new Class();
-
-            // +1 in class.numberInWaitlist
-            ClassDAO classDAO = new ClassDAO();
-            selectedClass.numberInWaitlist++;
-            classDAO.update(selectedClass);
-
-            // add classUser status -> inWaitlist
-            ClassUser classUser = new ClassUser(this.user.userId, selectedClass.classId, StatusEnum.INWAITLIST.toInt());
-            ClassUserDAO classUserDAO = new ClassUserDAO();
-            classUserDAO.add(classUser);
+        printClassList(selectedCourse.classes, selectedCourse.registeredClass);
+        ClassSM selectedClass = selectClass(selectedCourse, true, false);
 
 
-        } else {
-            System.out.println("selectedClasses Not Found");
-        }
-
-
-        // System.out.println("Enter the course section ID: ");
-        //String Id = in.readLine();
-
-        //try {
-        // String filename = "user.txt";
-        //FileWriter fw = new FileWriter(filename, true);
-        //fw.write(("Enter the course section ID"));
-        //fw.close();
-        //} catch (IOException e) {
-        //  System.err.println("Selected Coures:" + e.getMessage());
-        //}
+        ClassSM returnClass = new ClassService().registerClass(user, selectedClass);
+        System.out.println(String.format("You have successfully change a class %s", returnClass.indexNumber));
     }
 
     private void dropCourse() {
-
-
         CourseService service = new CourseService();
-        ArrayList<CourseSM> registeredCourses = service.getRegisteredCourses(this.user);
+        ArrayList<CourseSM> courses = service.getRegisteredCourses(this.user);
+        System.out.println("Registered Courses: ");
 
+        printCourseList(courses);
+        CourseSM selectedCourse = selectCourse(courses);
 
-        printCourseList(registeredCourses);
+        printClassList(selectedCourse.classes, selectedCourse.registeredClass);
+        ClassSM selectedClass = selectClass(selectedCourse, false, true);
 
-        System.out.println("Enter the drop course code: ");
-        String code = scanner.next();
-        for(CourseSM course : registeredCourses){
-            if(code.equals(course.courseCode) ){
-                System.out.println("Drop Selected Course: YES(1)/NO(0) ");
-                int drop = scanner.nextInt();
-                if(drop == 1 ) {
-                    Class vancancyTanken = new Class();
-
-                    ClassDAO classDAO = new ClassDAO();
-                    vancancyTanken.vacancyTaken--;
-                    classDAO.update(vancancyTanken);
-                    System.out.println(("Course Drop and return page"));
-                }else{
-                    System.out.println("return student Page ");
-
-
-                }
-
-            }else{
-                System.out.println("Course not found");
-
-            }
-        }
-
-
+        ClassSM returnClass = new ClassService().dropClass(user, selectedClass);
+        System.out.println(String.format("You have successfully dropped to class %s", returnClass.indexNumber));
     }
-
 
 
     private void changeCourseIndex() {
         CourseService service = new CourseService();
         ArrayList<CourseSM> courses = service.getRegisteredCourses(this.user);
         System.out.println("Registered Courses: ");
-        printCourseList(courses);
 
+        printCourseList(courses);
+        CourseSM selectedCourse = selectCourse(courses);
+
+        printClassList(selectedCourse.classes, selectedCourse.registeredClass);
+        ClassSM selectedClass = selectClass(selectedCourse, false, false);
+
+        ClassSM returnClass = new ClassService().changeClass(user, selectedCourse.registeredClass, selectedClass);
+        System.out.println(String.format("You have successfully changed to class %s", returnClass.indexNumber));
+    }
+
+    private ClassSM selectClass(CourseSM selectedCourse, boolean isWaitlistAllow, boolean isDelete) {
+        ClassSM selectedClass = null;
+        while (selectedClass == null) {
+            System.out.println("Please key in the index number");
+            String inputIndex = scanner.next();
+            if (!isDelete && selectedCourse.registeredClass != null && inputIndex.equals(selectedCourse.registeredClass.indexNumber)) {
+                System.out.println("You cannot register an already registered class");
+                continue;
+            }
+
+            for (ClassSM classSM : selectedCourse.classes) {
+                if (classSM.indexNumber.equals(inputIndex)) {
+                    if (classSM.totalVacancy == classSM.vacancyTaken && !isWaitlistAllow) {
+                        System.out.println("This class is full");
+                        break;
+                    }
+                    selectedClass = classSM;
+                }
+            }
+        }
+
+        return selectedClass;
+    }
+
+    private CourseSM selectCourse(ArrayList<CourseSM> courses) {
         CourseSM selectedCourse = null;
         while (selectedCourse == null) {
             System.out.println("Please key in the course code");
@@ -229,31 +169,7 @@ public class StudentPage extends Page {
             System.out.println("Course not found. Please key in again");
         }
 
-        printClassList(selectedCourse.classes, selectedCourse.registeredClass);
-
-        ClassSM selectedClass = null;
-        while (selectedClass == null) {
-            System.out.println("Please key in the index number");
-            String inputIndex = scanner.next();
-            if(inputIndex.equals(selectedCourse.registeredClass.indexNumber)){
-                System.out.println("You cannot register an already registered class");
-                continue;
-            }
-
-            for (ClassSM classSM : selectedCourse.classes) {
-
-                if (classSM.indexNumber.equals(inputIndex)) {
-                    if (classSM.totalVacancy == classSM.vacancyTaken) {
-                        System.out.println("This class is full");
-                        break;
-                    }
-                    selectedClass = classSM;
-                }
-            }
-        }
-
-        ClassSM returnClass = new ClassService().changeClass(user, selectedCourse.registeredClass, selectedClass);
-        System.out.println(String.format("You have successfully change a class %s",returnClass.indexNumber));
+        return selectedCourse;
     }
 
     private void printCourseList(ArrayList<CourseSM> courses) {
@@ -270,7 +186,7 @@ public class StudentPage extends Page {
                 output += " [FULL]";
             }
 
-            if (registeredClass.classId == classSM.classId) {
+            if (registeredClass != null && registeredClass.classId == classSM.classId) {
                 output += " [REGISTERED]";
             }
 

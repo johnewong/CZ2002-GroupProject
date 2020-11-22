@@ -22,6 +22,35 @@ public class CourseService {
         return new CourseSM(course, classSMS);
     }
 
+    public ArrayList<CourseSM> getUnregisteredCourses(User user) {
+        CourseDAO courseDAO = new CourseDAO();
+        ClassService classService = new ClassService();
+
+        // to get all registered classes
+        ArrayList<CourseSM> unregisteredCourseSMs = new ArrayList<>();
+        ArrayList<ClassSM> waitlistClassSMs = classService.getWaitlistClasses(user.userId);
+        ArrayList<ClassSM> registeredClassSMs = classService.getRegisteredClasses(user.userId);
+
+        ArrayList<Integer> unavailableCourseIds = new ArrayList<>();
+        for (ClassSM classSM : registeredClassSMs) {
+            unavailableCourseIds.add(classSM.courseId);
+        }
+
+        for (ClassSM classSM : waitlistClassSMs) {
+            unavailableCourseIds.add(classSM.courseId);
+        }
+
+        ArrayList<Course> allCourses = courseDAO.getAllValid();
+        for (Course course : allCourses) {
+            if (!unavailableCourseIds.contains(course.courseId)) {
+                CourseSM newCourseSM = new CourseSM(course, classService.getCourseClasses(course.courseId));
+                unregisteredCourseSMs.add(new CourseSM(course, classService.getCourseClasses(course.courseId)));
+            }
+        }
+
+        return unregisteredCourseSMs;
+    }
+
     public ArrayList<CourseSM> getRegisteredCourses(User user) {
         CourseDAO courseDAO = new CourseDAO();
         ClassService classService = new ClassService();
@@ -41,14 +70,14 @@ public class CourseService {
         return registeredCourseSMs;
     }
 
-    public ArrayList<CourseSM> getWaitlistCourses(User user){
+    public ArrayList<CourseSM> getWaitlistCourses(User user) {
         CourseDAO courseDAO = new CourseDAO();
         ClassService classService = new ClassService();
 
         ArrayList<ClassSM> waitlistClassSMs = classService.getWaitlistClasses(user.userId);
 
         ArrayList<CourseSM> waitlistCourseSMs = new ArrayList<>();
-        for(ClassSM waitlistClass : waitlistClassSMs){
+        for (ClassSM waitlistClass : waitlistClassSMs) {
             Course course = courseDAO.get(waitlistClass.courseId);
             CourseSM courseSM = new CourseSM(course, classService.getCourseClasses(waitlistClass.courseId));
             waitlistCourseSMs.add(courseSM);
@@ -56,7 +85,6 @@ public class CourseService {
 
         return waitlistCourseSMs;
     }
-
 
 
 }

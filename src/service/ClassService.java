@@ -79,6 +79,19 @@ public class ClassService {
         return waitlistClassSMs;
     }
 
+    public ClassSM dropClass(User user, ClassSM selectedClass){
+        ClassUserDAO classUserDAO = new ClassUserDAO();
+        ClassDAO classDAO = new ClassDAO();
+
+        ClassUser deleteClassUser = classUserDAO.get(user.userId, selectedClass.classId);
+        selectedClass.vacancyTaken--;
+
+        classDAO.update(selectedClass);
+        classUserDAO.delete(deleteClassUser.classUserId);
+
+        return selectedClass;
+    }
+
     public ClassSM changeClass(User user, ClassSM registeredClass, ClassSM selectedClass) {
         if (selectedClass.vacancyTaken >= selectedClass.totalVacancy) {
             return null;
@@ -101,18 +114,22 @@ public class ClassService {
         return selectedClass;
     }
 
-    public void registerClass(User user, ClassSM selectedClass) {
-        if (selectedClass.vacancyTaken >= selectedClass.totalVacancy) {
-            return;
-        }
-
+    public ClassSM registerClass(User user, ClassSM selectedClass) {
         ClassUserDAO classUserDAO = new ClassUserDAO();
         ClassDAO classDAO = new ClassDAO();
+        ClassUser classUser = null;
 
-        ClassUser classUser = new ClassUser(user.userId, selectedClass.classId, StatusEnum.REGISTERED.toInt());
-        selectedClass.vacancyTaken++;
+        if (selectedClass.vacancyTaken >= selectedClass.totalVacancy) {
+            classUser = new ClassUser(user.userId, selectedClass.classId, StatusEnum.INWAITLIST.toInt());
+            selectedClass.numberInWaitlist++;
 
+        } else {
+            classUser = new ClassUser(user.userId, selectedClass.classId, StatusEnum.REGISTERED.toInt());
+            selectedClass.vacancyTaken++;
+        }
         classDAO.update(selectedClass);
         classUserDAO.add(classUser);
+
+        return selectedClass;
     }
 }
