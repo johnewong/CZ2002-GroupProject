@@ -79,7 +79,7 @@ public class ClassService {
         return waitlistClassSMs;
     }
 
-    public ClassSM dropClass(User user, ClassSM selectedClass){
+    public ClassSM dropClass(User user, ClassSM selectedClass) {
         ClassUserDAO classUserDAO = new ClassUserDAO();
         ClassDAO classDAO = new ClassDAO();
 
@@ -92,8 +92,8 @@ public class ClassService {
         return selectedClass;
     }
 
-    public ClassSM changeClass(User user, ClassSM registeredClass, ClassSM selectedClass) {
-        if (selectedClass.vacancyTaken >= selectedClass.totalVacancy) {
+    public ClassSM changeClass(User user, ClassSM registeredClass, ClassSM selectedClass, boolean isSwap) {
+        if (!isSwap && selectedClass.vacancyTaken >= selectedClass.totalVacancy) {
             return null;
         }
 

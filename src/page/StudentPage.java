@@ -9,6 +9,7 @@ import model.ClassUser;
 import model.Course;
 import model.User;
 import service.*;
+import utility.DataUtil;
 import utility.StatusEnum;
 import utility.CourseType;
 import utility.StatusEnum;
@@ -66,7 +67,7 @@ public class StudentPage extends Page {
                     changeCourseIndex();
                     break;
                 case 6:
-                    //Todo
+                    swapIndex();
                     break;
                 case 7:
                     System.out.println("Program end....");
@@ -113,6 +114,34 @@ public class StudentPage extends Page {
     }
 
 
+    private void printCoursesRegistered() {
+        CourseService service = new CourseService();
+        ArrayList<CourseSM> registCourses = service.getRegisteredCourses(this.user);
+        ArrayList<CourseSM> waitCourses = service.getWaitlistCourses(this.user);
+        printCoursesInfo(registCourses, true);
+        printCoursesInfo(waitCourses, false);
+    }
+
+    private void checkVancancy() {
+        // get data
+        ClassDAO classDAO = new ClassDAO();
+        ArrayList<Class> classes = classDAO.getAllValid();
+
+        // display and user input
+        System.out.println("Please enter index number: ");
+        String indexNumber = scanner.next();
+
+        for (Class cls : classes) {
+            if (cls.indexNumber.equals(indexNumber)) {
+                // print class info
+                System.out.println(String.format("Current available vacancy: %d", cls.totalVacancy - cls.vacancyTaken));
+                return;
+            }
+        }
+
+        System.out.println("Index number not found");
+    }
+
     private void changeCourseIndex() {
         CourseService service = new CourseService();
         ArrayList<CourseSM> courses = service.getRegisteredCourses(this.user);
@@ -124,16 +153,64 @@ public class StudentPage extends Page {
         printClassList(selectedCourse.classes, selectedCourse.registeredClass);
         ClassSM selectedClass = selectClass(selectedCourse, false, false);
 
-        ClassSM returnClass = new ClassService().changeClass(user, selectedCourse.registeredClass, selectedClass);
+        ClassSM returnClass = new ClassService().changeClass(user, selectedCourse.registeredClass, selectedClass, false);
         System.out.println(String.format("You have successfully changed to class %s", returnClass.indexNumber));
     }
 
-    private ClassSM selectClass(CourseSM selectedCourse, boolean isWaitlistAllow, boolean isDelete) {
+    private void swapIndex() {
+        CourseService service = new CourseService();
+        ArrayList<CourseSM> courses = service.getRegisteredCourses(this.user);
+        System.out.println("Registered Courses: ");
+
+        printCourseList(courses);
+        CourseSM selectedCourse = selectCourse(courses);
+
+        System.out.println("Classes: ");
+        printClassList(selectedCourse.classes, selectedCourse.registeredClass);
+        System.out.println("Please select the class you want to swap to");
+        ClassSM selectedClass = selectClass(selectedCourse, true, false);
+
+        System.out.println("Students in this class: ");
+        printClassStudents(selectedClass);
+        System.out.println("Please key in the student MatricNumber you want to swap with");
+        String matricNumber = scanner.next();
+
+        User selectedStudent = null;
+        while (selectedStudent == null) {
+            for (User student : selectedClass.users) {
+                if (student.matricNumber.equals(matricNumber)) {
+                    selectedStudent = student;
+                    break;
+                }
+            }
+            if(selectedStudent != null)
+                break;
+            System.out.println("Student not found. Please key in again");
+        }
+
+        System.out.println("Please key in the password");
+        int count = 0;
+        while (count < 3) {
+            String password = scanner.next();
+            if (DataUtil.encryptPassword(password).equals(selectedStudent.password)) {
+                ClassService classService = new ClassService();
+                ClassSM newClass = classService.changeClass(this.user, selectedCourse.registeredClass, selectedClass, true);
+                ClassSM oldClass = classService.changeClass(selectedStudent, selectedClass, selectedCourse.registeredClass, true);
+                System.out.println(String.format("You have successfully swap from class %s to class %s", oldClass.indexNumber, newClass.indexNumber));
+                break;
+            }
+
+            count++;
+            System.out.println(String.format("Invalid password. Please try again. (%d/3)", count));
+        }
+    }
+
+    private ClassSM selectClass(CourseSM selectedCourse, boolean isWaitlistAllow, boolean isDrop) {
         ClassSM selectedClass = null;
         while (selectedClass == null) {
             System.out.println("Please key in the index number");
             String inputIndex = scanner.next();
-            if (!isDelete && selectedCourse.registeredClass != null && inputIndex.equals(selectedCourse.registeredClass.indexNumber)) {
+            if (!isDrop && selectedCourse.registeredClass != null && inputIndex.equals(selectedCourse.registeredClass.indexNumber)) {
                 System.out.println("You cannot register an already registered class");
                 continue;
             }
@@ -172,6 +249,12 @@ public class StudentPage extends Page {
         return selectedCourse;
     }
 
+    private void printClassStudents(ClassSM classSM) {
+        for (User user : classSM.users) {
+            System.out.println(String.format("Name: %s  Matric Number: %s", user.displayName, user.matricNumber));
+        }
+    }
+
     private void printCourseList(ArrayList<CourseSM> courses) {
         //print course list
         for (CourseSM course : courses) {
@@ -193,34 +276,6 @@ public class StudentPage extends Page {
             System.out.println(String.format(output
                     , classSM.indexNumber, classSM.totalVacancy - classSM.vacancyTaken));
         }
-    }
-
-    private void checkVancancy() {
-        // get data
-        ClassDAO classDAO = new ClassDAO();
-        ArrayList<Class> classes = classDAO.getAllValid();
-
-        // display and user input
-        System.out.println("Please enter index number: ");
-        String indexNumber = scanner.next();
-
-        for (Class cls : classes) {
-            if (cls.indexNumber.equals(indexNumber)) {
-                // print class info
-                System.out.println(String.format("Current available vacancy: %d", cls.totalVacancy - cls.vacancyTaken));
-                return;
-            }
-        }
-
-        System.out.println("Index number not found");
-    }
-
-    private void printCoursesRegistered() {
-        CourseService service = new CourseService();
-        ArrayList<CourseSM> registCourses = service.getRegisteredCourses(this.user);
-        ArrayList<CourseSM> waitCourses = service.getWaitlistCourses(this.user);
-        printCoursesInfo(registCourses, true);
-        printCoursesInfo(waitCourses, false);
     }
 
     private void printCoursesInfo(ArrayList<CourseSM> courses, boolean isRegistered) {
