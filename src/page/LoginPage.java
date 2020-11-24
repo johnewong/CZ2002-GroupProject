@@ -15,6 +15,12 @@ public class LoginPage extends Page {
     @Override
     public void showPage() {
 
+        System.out.println("-------------------------------------------");
+        System.out.println("|                                          |");
+        System.out.println("|           Welcome To MySTARS             |");
+        System.out.println("|                                          |");
+        System.out.println("-------------------------------------------");
+
         Scanner scanner = new Scanner(System.in);
         System.out.println("Username: ");
         String userName = scanner.next();

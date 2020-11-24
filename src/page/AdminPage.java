@@ -1,10 +1,24 @@
 package page;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import java.util.Locale;
 import java.util.Scanner;
 
 import dao.ClassDAO;
+import dao.CourseDAO;
+import dao.IDAO;
 import dao.UserDAO;
 import model.Class;
 import model.Course;
@@ -33,15 +47,23 @@ public class AdminPage extends Page {
     public void showPage() {
         int sel = 0;
         do {
-            System.out.println(String.format("\nHi %s Welcome to Admin Page!", user.displayName));
-            System.out.println("1. Edit Student Access Period");
-            System.out.println("2. Add Student Information");
-            System.out.println("3. Add Courses");
-            System.out.println("4. Update Courses");
-            System.out.println("5. Check Course Availability Slots");
-            System.out.println("6. Print Student List By Index Number");
-            System.out.println("7. Print Student List By Course");
-            System.out.println("8. Exit");
+            System.out.println(String.format("\nHi %s", user.displayName));
+            System.out.println("-------------------------------------------");
+            System.out.println("|                                          |");
+            System.out.println("|           Welcome To Admin Page          |");
+            System.out.println("|                                          |");
+            System.out.println("-------------------------------------------");
+            System.out.println("                    Menu          ");
+            System.out.println(" -------------------------------------------");
+            System.out.println("| 1. Edit Student Access Period             |");
+            System.out.println("| 2. Add Student Information                |");
+            System.out.println("| 3. Add Courses                            |");
+            System.out.println("| 4. Update Courses                         |");
+            System.out.println("| 5. Check Course Availability Slots        |");
+            System.out.println("| 6. Print Student List By Index Number     |");
+            System.out.println("| 7. Print Student List By Course           |");
+            System.out.println("| 8. Exit                                   |");
+            System.out.println(" -------------------------------------------");
             System.out.println("Please choose an option:  ");
 
             sel = scanner.nextInt();
@@ -83,18 +105,22 @@ public class AdminPage extends Page {
         UserDAO userDAO = new UserDAO();
         ArrayList<User> students = userDAO.getAllValidStudents();
 
-        System.out.print("Matric Number" + "    " + "Username" + "    " + "DisplayName" + "      " + "Period Start Time" + "      " + "Period End Time");
-        System.out.print('\n');
+        System.out.println("-------------------------------------------------------------------------------------------------------------------");
+        System.out.printf("%s %20s %27s %27s %27s %n","User Name","Student Name","Matric Number", "Start Period", "End Period");
+        System.out.println("-------------------------------------------------------------------------------------------------------------------");
 
         for (User student : students) {
-            System.out.println(student.matricNumber + "        " + student.userName + "        " + student.displayName + "          " + DATE_FORMATTER.format(student.periodStartTime) + "          " + DATE_FORMATTER.format(student.periodEndTime));
+            System.out.printf("%-17s %-20s %15s %30s %28s %n",student.userName, student.displayName, student.matricNumber,
+                    DATE_FORMATTER.format(student.periodStartTime), DATE_FORMATTER.format(student.periodEndTime));
+            System.out.print('\n');
+
 
         }
         // let admin choose student to edit
         User selectedUser = null;
 
         while (selectedUser == null) {
-            System.out.println("Please input student name   (-1 to exit)");
+            System.out.println("Please input student User Name   (-1 to exit)");
             String username = scanner.next();
             for (User student : students) {
                 if (student.userName.equals(username)) {
@@ -392,17 +418,14 @@ public class AdminPage extends Page {
             return;
         }
 
-        System.out.print("Matric Number" + "    " + "Name");
-        System.out.print('\n');
-        System.out.print("-----------------------");
-        System.out.print('\n');
+        System.out.println("-----------------------------------");
+        System.out.printf("%s %29s %n","Name", "Matric Number");
+        System.out.println("-----------------------------------");
         UserService userService = new UserService();
         ArrayList<User> students = userService.getClassMatesById(classId);
 
         for (User student : students) {
-            //System.out.println(String.format("Name: %s Matric Number: %s", student.userName, student.matricNumber));
-            System.out.print(student.matricNumber + "        " + student.displayName);
-            System.out.print('\n');
+            System.out.printf("%-20s %s %n",student.displayName, student.matricNumber);
         }
     }
 
@@ -423,20 +446,18 @@ public class AdminPage extends Page {
 
         for (ClassSM cls : course.classes) {
 
-            System.out.print("-------------------");
             System.out.print('\n');
             System.out.println(String.format("Index number: %s", cls.indexNumber));
-            System.out.print("--------------------------------");
-            System.out.print('\n');
-            System.out.print("Matric Number" + "      " + "Name");
-            System.out.print('\n');
-            System.out.print("--------------------------------");
-            System.out.print('\n');
+            System.out.println("-----------------------------------");
+            System.out.printf("%s %29s %n","Name", "Matric Number");
+            System.out.println("-----------------------------------");
+
             ArrayList<User> students = userService.getClassMatesById(cls.classId);
             for (User student : students) {
                 //System.out.println(String.format("Name: %s Matric Number: %s", student.userName, student.matricNumber));
-                System.out.print(student.matricNumber + "          " + student.displayName);
-                System.out.print('\n');
+//                System.out.print(student.matricNumber + "          "+student.displayName);
+//                System.out.print('\n');
+                System.out.printf("%-20s %s %n",student.displayName, student.matricNumber);
 
             }
 
