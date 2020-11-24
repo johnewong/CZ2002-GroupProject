@@ -15,4 +15,4 @@ userId,userName,displayName,password,matricNumber,nationality,school,gender,role
 14,Dylan,Dylan Ng,8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92,U1939678F,Singapore,1,0,0,2020-11-01,2020-12-01,false,false;
 15,Danny,Danny Chan,8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92,U1904898F,Singapore,2,0,0,2020-12-01,2020-12-02,false,false;
 16,Nana,Nana Ng,8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92,U1953078F,Singapore,3,1,0,2020-11-01,2020-12-01,false,false;
-
+17,Jc,JingChi Wong,8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92,U19220098R,Singapore,0,0,0,2020-11-11,2020-12-12,false,false;

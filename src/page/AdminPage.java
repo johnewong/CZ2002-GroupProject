@@ -253,9 +253,9 @@ public class AdminPage extends Page {
         ArrayList<User> students = userDAO.getAllValidStudents();
 
         //Display all student List
-        System.out.println("----------------------------------------------------------------------------------------------------------------------");
+        System.out.println("---------------------------------------------------------------------------------------------------");
         System.out.printf("%s %20s %20s %20s %20s %n","Matric Number","Student Name","Gender", "Nationality", "School");
-        System.out.println("----------------------------------------------------------------------------------------------------------------------");
+        System.out.println("---------------------------------------------------------------------------------------------------");
 
         for (User student : students) {
             System.out.printf("%-22s %-17s %14s %18s %21s %n",student.matricNumber, student.displayName,
