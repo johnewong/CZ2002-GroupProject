@@ -13,6 +13,27 @@ import java.util.ArrayList;
 
 public class ClassService {
 
+    public boolean validateIndexNumber(String indexNumber){
+        ClassDAO classDAO = new ClassDAO();
+        ArrayList<Class> allClasses = classDAO.getAllValid();
+
+        for (Class cls : allClasses) {
+            if (cls.indexNumber.equals(indexNumber)) {
+                System.out.println("Index number is already existed ");
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    public Class saveClass(Class newClass){
+        ClassDAO classDAO = new ClassDAO();
+        classDAO.add(newClass);
+
+        return newClass;
+    }
+
     public ArrayList<ClassSM> getRegisteredClasses(int userId) {
         ClassUserDAO classUserDAO = new ClassUserDAO();
         ClassDAO classDAO = new ClassDAO();
