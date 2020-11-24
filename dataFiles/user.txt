@@ -1,6 +1,6 @@
 userId,userName,displayName,password,matricNumber,nationality,school,gender,role,periodStartTime,periodEndTime,hasFirstLogin,isDeleted;
 1,Lee,Benjamin Lee,91b4d142823f7d20c5f08df69122de43f35f057a988d9619f6d3138485c9a203,U1900000F,Singapore,2,0,1,2020-11-01,2020-12-31,false,false;
-2,Alex,Alex Wang,8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92,U1900001F,Singapore,2,0,0,2020-11-01,2020-12-01,false,false;
+2,Alex,Alex Wang,8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92,U1900001F,Singapore,2,0,0,2020-12-01,2020-12-02,false,false;
 3,Jess,Jessical Lim,8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92,U1900011F,Singapore,2,1,0,2020-11-01,2020-12-01,false,false;
 4,Peter,Peter Lim,8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92,U1900021F,Singapore,2,0,0,2020-11-01,2020-12-01,false,false;
 5,Ming,Wang XinMing,8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92,U1900032F,China,2,0,0,2020-11-01,2020-12-01,false,false;
@@ -15,3 +15,4 @@ userId,userName,displayName,password,matricNumber,nationality,school,gender,role
 14,Dylan,Dylan Ng,8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92,U1939678F,Singapore,1,0,0,2020-11-01,2020-12-01,false,false;
 15,Danny,Danny Chan,8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92,U1904898F,Singapore,2,0,0,2020-12-01,2020-12-02,false,false;
 16,Nana,Nana Ng,8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92,U1953078F,Singapore,3,1,0,2020-11-01,2020-12-01,false,false;
+

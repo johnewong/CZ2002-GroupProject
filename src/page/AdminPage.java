@@ -11,10 +11,7 @@ import service.ClassSM;
 import service.CourseSM;
 import service.CourseService;
 import service.UserService;
-import utility.CourseType;
-import utility.DataUtil;
-import utility.RoleType;
-import utility.SchoolName;
+import utility.*;
 
 public class AdminPage extends Page {
     private User user;
@@ -251,6 +248,23 @@ public class AdminPage extends Page {
 
         userService.saveUser(newUser);
         System.out.println(String.format("You have successfully save a new student %s", newUser.userName));
+
+        UserDAO userDAO = new UserDAO();
+        ArrayList<User> students = userDAO.getAllValidStudents();
+
+        //Display all student List
+        System.out.println("----------------------------------------------------------------------------------------------------------------------");
+        System.out.printf("%s %20s %20s %20s %20s %n","Matric Number","Student Name","Gender", "Nationality", "School");
+        System.out.println("----------------------------------------------------------------------------------------------------------------------");
+
+        for (User student : students) {
+            System.out.printf("%-22s %-17s %14s %18s %21s %n",student.matricNumber, student.displayName,
+                    GenderType.getValue(student.gender),student.nationality, SchoolName.getValue(student.school));
+            System.out.print('\n');
+
+
+        }
+
     }
 
     private void addCourse() {
