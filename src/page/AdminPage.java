@@ -2,7 +2,7 @@ package page;
 
 import java.util.ArrayList;
 import java.util.Date;
-
+import dao.CourseDAO;
 import dao.ClassDAO;
 import dao.SessionDAO;
 import dao.UserDAO;
@@ -15,6 +15,7 @@ import utility.CourseType;
 import utility.DataUtil;
 import utility.RoleType;
 import utility.SchoolName;
+import utility.GenderType;
 
 public class AdminPage extends Page {
     private User user;
