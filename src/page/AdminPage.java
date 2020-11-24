@@ -3,6 +3,7 @@ package page;
 import java.util.ArrayList;
 import java.util.Date;
 import dao.ClassDAO;
+import dao.CourseDAO;
 import dao.UserDAO;
 import model.Class;
 import model.Course;
@@ -288,6 +289,23 @@ public class AdminPage extends Page {
 
         courseService.saveCourse(newCourse);
         System.out.println(String.format("You have successfully add a new course %s", newCourse.courseCode));
+
+        CourseDAO courseDAO = new CourseDAO();
+        ArrayList<Course> courses = courseDAO.getAllValid();
+
+        //Display all course List
+        System.out.println("---------------------------------------------------------------------------------");
+        System.out.printf("%s %20s %35s %10s %n","Course Code","Course Name","Course Type", "AU");
+        System.out.println("---------------------------------------------------------------------------------");
+
+        for (Course course : courses) {
+            System.out.printf("%-20s %-25s %20s %10s %n",course.courseCode,course.courseName,
+                    CourseType.getValue(course.courseType),course.au);
+            System.out.print('\n');
+
+
+        }
+
     }
 
     private void updateCourse() {
