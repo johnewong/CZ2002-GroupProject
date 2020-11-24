@@ -259,6 +259,23 @@ public class AdminPage extends Page {
 
         userService.saveUser(newUser);
         System.out.println(String.format("You have successfully save a new student %s", newUser.userName));
+
+        UserDAO userDAO = new UserDAO();
+        ArrayList<User> students = userDAO.getAllValidStudents();
+
+        //Display all student List
+        System.out.println("---------------------------------------------------------------------------------------------------");
+        System.out.printf("%s %20s %20s %20s %20s %n","Matric Number","Student Name","Gender", "Nationality", "School");
+        System.out.println("---------------------------------------------------------------------------------------------------");
+
+        for (User student : students) {
+            System.out.printf("%-22s %-17s %14s %18s %21s %n",student.matricNumber, student.displayName,
+                    GenderType.getValue(student.gender),student.nationality, SchoolName.getValue(student.school));
+            System.out.print('\n');
+
+
+        }
+
     }
 
     private void addCourse() {
@@ -279,6 +296,23 @@ public class AdminPage extends Page {
 
         courseService.saveCourse(newCourse);
         System.out.println(String.format("You have successfully add a new course %s", newCourse.courseCode));
+
+        CourseDAO courseDAO = new CourseDAO();
+        ArrayList<Course> courses = courseDAO.getAllValid();
+
+        //Display all course List
+        System.out.println("---------------------------------------------------------------------------------");
+        System.out.printf("%s %20s %35s %10s %n","Course Code","Course Name","Course Type", "AU");
+        System.out.println("---------------------------------------------------------------------------------");
+
+        for (Course course : courses) {
+            System.out.printf("%-20s %-25s %20s %10s %n",course.courseCode,course.courseName,
+                    CourseType.getValue(course.courseType),course.au);
+            System.out.print('\n');
+
+
+        }
+
     }
 
     private void updateCourse() {
