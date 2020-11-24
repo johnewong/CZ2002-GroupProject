@@ -42,12 +42,15 @@ public class LoginPage extends Page {
                         new StudentPage(user).showPage();
                     }
 
-                    else{
+                    else if (now.compareTo(user.periodStartTime)== -1 && now.compareTo(user.periodEndTime) == -1){
                         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
                         String strPeriod = dateFormat.format(user.periodStartTime);
                         String endPeriod = dateFormat.format(user.periodEndTime);
                         System.out.println("You have no access to the page now");
                         System.out.println("You may access the page from " +  strPeriod +  " " + "to " + endPeriod);
+                    }
+                    else {
+                        System.out.println("Your access period is end. pLease be on time next times");
                     }
                 }
 
