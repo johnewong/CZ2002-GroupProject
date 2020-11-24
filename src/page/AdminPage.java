@@ -43,7 +43,7 @@ public class AdminPage extends Page {
             System.out.println("| 2. Add Student Information                |");
             System.out.println("| 3. Add Courses                            |");
             System.out.println("| 4. Update Courses                         |");
-            System.out.println("| 5. Check Course Availability Slots        |");
+            System.out.println("| 5. Check available slot for an Index      |");
             System.out.println("| 6. Print Student List By Index Number     |");
             System.out.println("| 7. Print Student List By Course           |");
             System.out.println("| 8. Exit                                   |");
@@ -89,12 +89,12 @@ public class AdminPage extends Page {
         UserDAO userDAO = new UserDAO();
         ArrayList<User> students = userDAO.getAllValidStudents();
 
-        System.out.println("-------------------------------------------------------------------------------------------------------------------");
-        System.out.printf("%s %20s %27s %27s %27s %n","User Name","Student Name","Matric Number", "Start Period", "End Period");
-        System.out.println("-------------------------------------------------------------------------------------------------------------------");
+        System.out.println("--------------------------------------------------------------------------------------------------------------------------------------------------");
+        System.out.printf("%s %20s %27s %27s %26s %27s %n","Username","Student Name","Matric Number", "School","Start Period", "End Period");
+        System.out.println("--------------------------------------------------------------------------------------------------------------------------------------------------");
 
         for (User student : students) {
-            System.out.printf("%-17s %-20s %15s %30s %28s %n",student.userName, student.displayName, student.matricNumber,
+            System.out.printf("%-17s %-20s %15s %30s %26s %28s %n",student.userName, student.displayName, student.matricNumber, SchoolName.getValue(student.school),
                     DATE_FORMATTER.format(student.periodStartTime), DATE_FORMATTER.format(student.periodEndTime));
             System.out.print('\n');
 
@@ -104,7 +104,7 @@ public class AdminPage extends Page {
         User selectedUser = null;
 
         while (selectedUser == null) {
-            System.out.println("Please input student User Name   (-1 to exit)");
+            System.out.println("Please input student Username   (-1 to exit)");
             String username = scanner.next();
             for (User student : students) {
                 if (student.userName.equals(username)) {
