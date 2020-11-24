@@ -17,5 +17,5 @@ sessionId,classId,day,time,venue,classType,isDeleted;
 16,13,4,14:00,LT-5,1,false;
 17,13,4,15:00,RT-9,2,false;
 18,13,4,16:00,SoftwareLab-1,3,false;
-
-
+19,13,1,0930-1230,lt1,1,false;
+20,13,2,0930-1130,tut9,2,false;

@@ -2,17 +2,20 @@ package page;
 
 import java.util.ArrayList;
 import java.util.Date;
-import dao.ClassDAO;
 import dao.CourseDAO;
+import dao.ClassDAO;
+import dao.SessionDAO;
 import dao.UserDAO;
 import model.Class;
 import model.Course;
+import model.Session;
 import model.User;
-import service.ClassSM;
-import service.CourseSM;
-import service.CourseService;
-import service.UserService;
-import utility.*;
+import service.*;
+import utility.CourseType;
+import utility.DataUtil;
+import utility.RoleType;
+import utility.SchoolName;
+import utility.GenderType;
 
 public class AdminPage extends Page {
     private User user;
@@ -41,10 +44,12 @@ public class AdminPage extends Page {
             System.out.println("| 2. Add Student Information                |");
             System.out.println("| 3. Add Courses                            |");
             System.out.println("| 4. Update Courses                         |");
-            System.out.println("| 5. Check available slot for an Index      |");
-            System.out.println("| 6. Print Student List By Index Number     |");
-            System.out.println("| 7. Print Student List By Course           |");
-            System.out.println("| 8. Exit                                   |");
+            System.out.println("| 5. Add Class                              |");
+            System.out.println("| 6. Update Class                           |");
+            System.out.println("| 7. Check Course Availability Slots        |");
+            System.out.println("| 8. Print Student List By Index Number     |");
+            System.out.println("| 9. Print Student List By Course           |");
+            System.out.println("| 10. Exit                                  |");
             System.out.println(" -------------------------------------------");
             System.out.println("Please choose an option:  ");
 
@@ -63,22 +68,28 @@ public class AdminPage extends Page {
                     updateCourse();
                     break;
                 case 5:
-                    checkVancancy();
+                    addClass();
                     break;
                 case 6:
-                    printStudentListByIndex();
+                    updateClass();
                     break;
                 case 7:
-                    printStudentListByCourse();
+                    checkVancancy();
                     break;
                 case 8:
+                    printStudentListByIndex();
+                    break;
+                case 9:
+                    printStudentListByCourse();
+                    break;
+                case 10:
                     exitAdminPage();
                     break;
                 default:
                     System.out.println("Invalid input. Please try again!");
             }
 
-        } while (sel != 8);
+        } while (sel != 10);
     }
 
     private void changeAccessPeriod() {
@@ -87,12 +98,12 @@ public class AdminPage extends Page {
         UserDAO userDAO = new UserDAO();
         ArrayList<User> students = userDAO.getAllValidStudents();
 
-        System.out.println("--------------------------------------------------------------------------------------------------------------------------------------------------");
-        System.out.printf("%s %20s %27s %27s %26s %27s %n","Username","Student Name","Matric Number", "School","Start Period", "End Period");
-        System.out.println("--------------------------------------------------------------------------------------------------------------------------------------------------");
+        System.out.println("-------------------------------------------------------------------------------------------------------------------");
+        System.out.printf("%s %20s %27s %27s %27s %n", "User Name", "Student Name", "Matric Number", "Start Period", "End Period");
+        System.out.println("-------------------------------------------------------------------------------------------------------------------");
 
         for (User student : students) {
-            System.out.printf("%-17s %-20s %15s %30s %26s %28s %n",student.userName, student.displayName, student.matricNumber, SchoolName.getValue(student.school),
+            System.out.printf("%-17s %-20s %15s %30s %28s %n", student.userName, student.displayName, student.matricNumber,
                     DATE_FORMATTER.format(student.periodStartTime), DATE_FORMATTER.format(student.periodEndTime));
             System.out.print('\n');
 
@@ -102,7 +113,7 @@ public class AdminPage extends Page {
         User selectedUser = null;
 
         while (selectedUser == null) {
-            System.out.println("Please input student Username   (-1 to exit)");
+            System.out.println("Please input student User Name   (-1 to exit)");
             String username = scanner.next();
             for (User student : students) {
                 if (student.userName.equals(username)) {
@@ -273,12 +284,9 @@ public class AdminPage extends Page {
 
         String courseCode = enterCourseCode();
         String courseName = enterCourseName();
-
         int school = enterSchool();
         int courseType = enterCourseType();
-
-        System.out.println("Enter AU ");
-        int au = scanner.nextInt();
+        int au = enterAU();
 
         Course newCourse = new Course();
         newCourse.courseCode = courseCode;
@@ -355,6 +363,150 @@ public class AdminPage extends Page {
 
     }
 
+    private void addClass() {
+        CourseService courseService = new CourseService();
+        ClassService classService = new ClassService();
+        ArrayList<CourseSM> allCourses = courseService.getAllCourses();
+        printCourseList(allCourses);
+
+        System.out.println("Select the course to add a class");
+        CourseSM selectedCourse = selectCourse(allCourses);
+        String indexNumber = enterIndexNumber();
+
+        System.out.println("Enter total vacancy");
+        int totalVacancy = scanner.nextInt();
+
+        System.out.println("Enter group number");
+        int group = scanner.nextInt();
+
+        System.out.println("Enter the remark");
+        String remark = scanner.next();
+
+        Class newClass = new Class();
+        newClass.courseId = selectedCourse.courseId;
+        newClass.indexNumber = indexNumber;
+        newClass.vacancyTaken = 0;
+        newClass.totalVacancy = totalVacancy;
+        newClass.numberInWaitlist = 0;
+        newClass.group = group;
+        newClass.remark = remark;
+        classService.saveClass(newClass);
+        System.out.println(String.format("You have successfully add a class %s", selectedCourse.courseCode));
+
+
+        System.out.println("Add session in this class");
+        System.out.println("How many sessions of this class you want to add? (Skip this step:0)");
+        int sessionCount = scanner.nextInt();
+        if (sessionCount <= 0) {
+            return;
+        }
+
+        SessionDAO sessionDAO = new SessionDAO();
+        for (int i = 0; i < sessionCount; i++) {
+            Session newSession = new Session();
+            newSession.classId = newClass.classId;
+            newSession.day = enterDay();
+            newSession.time = enterTime();
+            newSession.venue = enterVenue();
+            newSession.classType = enterClassType();
+            sessionDAO.add(newSession);
+            System.out.println(String.format("You have successfully add a session in class %s", newClass.indexNumber));
+        }
+    }
+
+    private void updateClass() {
+        CourseService courseService = new CourseService();
+        ClassService classService = new ClassService();
+        ArrayList<CourseSM> allCourses = courseService.getAllCourses();
+        printCourseList(allCourses);
+
+        System.out.println("Select the course of the class");
+        CourseSM selectedCourse = selectCourse(allCourses);
+
+        printClassList(selectedCourse.classes, null);
+        ClassSM selectedClass = selectClass(selectedCourse);
+        printSessionList(selectedClass.sessions);
+
+        Session selectedSession = selectSession(selectedClass);
+        SessionDAO sessionDAO = new SessionDAO();
+        int sel = 0;
+        System.out.println("Select the field you want to update.");
+        System.out.println("1. day");
+        System.out.println("2. time");
+        System.out.println("3. venue");
+        System.out.println("4. classType");
+        System.out.println("5. Save update");
+
+        do {
+            System.out.println("Please select: ");
+            sel = scanner.nextInt();
+            switch (sel) {
+                case 1:
+                    selectedSession.day = enterDay();
+                    break;
+                case 2:
+                    selectedSession.time = enterTime();
+                    break;
+                case 3:
+                    selectedSession.venue = enterVenue();
+                    break;
+                case 4:
+                    selectedSession.classType = enterClassType();
+                    break;
+                case 5:
+                    sessionDAO.update(selectedSession);
+                    System.out.println(String.format("You have successfully update a session in class %s", selectedClass.indexNumber));
+                    break;
+                default:
+                    System.out.println("Invalid input. Please try again!");
+
+            }
+        } while (sel != 5);
+
+    }
+
+    private int enterClassType() {
+        int classType = 0;
+        while (classType < 1 || classType > 3) {
+            System.out.println("Enter type of class (Lecture:1 Tutorial:2 Lab:3)");
+            classType = scanner.nextInt();
+        }
+
+        return classType;
+    }
+
+    private String enterVenue() {
+        System.out.println("Enter vanue");
+        return scanner.next();
+    }
+
+    private String enterTime() {
+        System.out.println("Enter time (Format: 0930-1230)");
+        return scanner.next();
+    }
+
+    private int enterDay() {
+        int day = 0;
+        while (day < 1 || day > 5) {
+            System.out.println("Enter day of the session (mon:1 tue:2 wed:3 thur:4 fri:5)");
+            day = scanner.nextInt();
+        }
+
+        return day;
+    }
+
+    private String enterIndexNumber() {
+        Boolean isValid = false;
+        String indexNumber = null;
+        while (!isValid) {
+            System.out.println("Enter index number ");
+            indexNumber = scanner.next();
+            isValid = new ClassService().validateIndexNumber(indexNumber);
+        }
+
+        return indexNumber;
+    }
+
     private String enterCourseCode() {
         Boolean isValid = false;
         String courseCode = null;
@@ -417,6 +569,47 @@ public class AdminPage extends Page {
         return courseTypeCode;
     }
 
+    private ClassSM selectClass(CourseSM selectedCourse) {
+        ClassSM selectedClass = null;
+        while (selectedClass == null) {
+            System.out.println("Please key in the index number");
+            String inputIndex = scanner.next();
+
+            for (ClassSM classSM : selectedCourse.classes) {
+                if (classSM.indexNumber.equals(inputIndex)) {
+                    selectedClass = classSM;
+                }
+            }
+
+            if (selectedClass != null)
+                break;
+            System.out.println("Class not found. Please key in again");
+        }
+
+        return selectedClass;
+    }
+
+    private Session selectSession(ClassSM selectedClass) {
+        Session selectedSession = null;
+        while (selectedSession == null) {
+            System.out.println("Please key in the session id");
+            int sessionId = scanner.nextInt();
+
+            for (Session session : selectedClass.sessions) {
+                if (session.sessionId == sessionId) {
+                    selectedSession = session;
+                }
+            }
+
+            if (selectedClass != null)
+                break;
+            System.out.println("Session not found. Please key in again");
+        }
+
+        return selectedSession;
+    }
+
+
     public void printStudentListByIndex() {
 
         // user input index no.
@@ -437,13 +630,13 @@ public class AdminPage extends Page {
         }
 
         System.out.println("-----------------------------------");
-        System.out.printf("%s %29s %n","Name", "Matric Number");
+        System.out.printf("%s %29s %n", "Name", "Matric Number");
         System.out.println("-----------------------------------");
         UserService userService = new UserService();
         ArrayList<User> students = userService.getClassMatesById(classId);
 
         for (User student : students) {
-            System.out.printf("%-20s %s %n",student.displayName, student.matricNumber);
+            System.out.printf("%-20s %s %n", student.displayName, student.matricNumber);
         }
     }
 
@@ -467,7 +660,7 @@ public class AdminPage extends Page {
             System.out.print('\n');
             System.out.println(String.format("Index number: %s", cls.indexNumber));
             System.out.println("-----------------------------------");
-            System.out.printf("%s %29s %n","Name", "Matric Number");
+            System.out.printf("%s %29s %n", "Name", "Matric Number");
             System.out.println("-----------------------------------");
 
             ArrayList<User> students = userService.getClassMatesById(cls.classId);
@@ -475,7 +668,7 @@ public class AdminPage extends Page {
                 //System.out.println(String.format("Name: %s Matric Number: %s", student.userName, student.matricNumber));
 //                System.out.print(student.matricNumber + "          "+student.displayName);
 //                System.out.print('\n');
-                System.out.printf("%-20s %s %n",student.displayName, student.matricNumber);
+                System.out.printf("%-20s %s %n", student.displayName, student.matricNumber);
 
             }
 

@@ -26,7 +26,7 @@ public class SessionDAO implements IDAO<Session> {
         for (int i = 1; i < rows.length; i++) {
             Session s = new Session();
             DataUtil.setObject(s, rows[0], rows[i]);
-            Session.add(s);
+            sessions.add(s);
         }
 
         return sessions;
