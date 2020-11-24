@@ -290,17 +290,18 @@ public class AdminPage extends Page {
         courseService.saveCourse(newCourse);
         System.out.println(String.format("You have successfully add a new course %s", newCourse.courseCode));
 
+
         CourseDAO courseDAO = new CourseDAO();
         ArrayList<Course> courses = courseDAO.getAllValid();
 
         //Display all course List
         System.out.println("---------------------------------------------------------------------------------");
-        System.out.printf("%s %20s %35s %10s %n","Course Code","Course Name","Course Type", "AU");
+        System.out.printf("%s %15s %30s %15s %n","Course Code","Course Name", "AU", "Course Type");
         System.out.println("---------------------------------------------------------------------------------");
 
         for (Course course : courses) {
-            System.out.printf("%-20s %-25s %20s %10s %n",course.courseCode,course.courseName,
-                    CourseType.getValue(course.courseType),course.au);
+            System.out.printf("%-15s %-30s %10s %15s %n",course.courseCode,course.courseName,course.au,
+                    CourseType.getValue(course.courseType));
             System.out.print('\n');
 
 
@@ -344,6 +345,7 @@ public class AdminPage extends Page {
                 case 6:
                     courseService.saveCourse(selectedCourse);
                     System.out.println(String.format("You have successfully add the course %s", selectedCourse.courseCode));
+                    printCourseList(allCourses);
                     break;
                 default:
                     System.out.println("Invalid input. Please try again!");

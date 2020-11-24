@@ -6,6 +6,7 @@ import model.User;
 import service.ClassSM;
 import service.CourseSM;
 import utility.CourseType;
+import utility.SchoolName;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -43,10 +44,11 @@ public abstract class Page {
 
     protected void printCourseList(ArrayList<CourseSM> courses) {
         //print course list
-        System.out.printf("%s %15s %30s %15s %n","Course Code","Course Name", "AU", "Course Type");
-        System.out.println("----------------------------------------------------------------------------");
+        System.out.printf("%s %15s %30s %15s %15s %n","Course Code","Course Name", "AU", "Course Type", "School");
+        System.out.println("--------------------------------------------------------------------------------------------");
         for (CourseSM course : courses) {
-            System.out.printf("%-15s %-30s %10s %15s %n",course.courseCode, course.courseName, course.au, CourseType.getValue(course.courseType));
+            System.out.printf("%-15s %-30s %10s %15s %15s %n",course.courseCode, course.courseName, course.au,
+                    CourseType.getValue(course.courseType), SchoolName.getValue(course.school));
         }
         System.out.print('\n');
     }
