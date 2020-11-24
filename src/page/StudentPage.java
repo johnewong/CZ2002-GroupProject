@@ -23,9 +23,6 @@ import java.util.Scanner;
 
 public class StudentPage extends Page {
     private User user;
-    private Scanner scanner = new Scanner(System.in);
-
-
     public StudentPage() {
 
     }
@@ -121,26 +118,25 @@ public class StudentPage extends Page {
         printCoursesInfo(registCourses, true);
         printCoursesInfo(waitCourses, false);
     }
-
-    private void checkVancancy() {
-        // get data
-        ClassDAO classDAO = new ClassDAO();
-        ArrayList<Class> classes = classDAO.getAllValid();
-
-        // display and user input
-        System.out.println("Please enter index number: ");
-        String indexNumber = scanner.next();
-
-        for (Class cls : classes) {
-            if (cls.indexNumber.equals(indexNumber)) {
-                // print class info
-                System.out.println(String.format("Current available vacancy: %d", cls.totalVacancy - cls.vacancyTaken));
-                return;
-            }
-        }
-
-        System.out.println("Index number not found");
-    }
+//    private void checkVancancy() {
+//        // get data
+//        ClassDAO classDAO = new ClassDAO();
+//        ArrayList<Class> classes = classDAO.getAllValid();
+//
+//        // display and user input
+//        System.out.println("Please enter index number: ");
+//        String indexNumber = scanner.next();
+//
+//        for (Class cls : classes) {
+//            if (cls.indexNumber.equals(indexNumber)) {
+//                // print class info
+//                System.out.println(String.format("Current available vacancy: %d", cls.totalVacancy - cls.vacancyTaken));
+//                return;
+//            }
+//        }
+//
+//        System.out.println("Index number not found");
+//    }
 
     private void changeCourseIndex() {
         CourseService service = new CourseService();
@@ -229,25 +225,25 @@ public class StudentPage extends Page {
         return selectedClass;
     }
 
-    private CourseSM selectCourse(ArrayList<CourseSM> courses) {
-        CourseSM selectedCourse = null;
-        while (selectedCourse == null) {
-            System.out.println("Please key in the course code");
-            String inputCourseCode = scanner.next();
-
-            for (CourseSM course : courses) {
-                if (course.courseCode.equals(inputCourseCode)) {
-                    selectedCourse = course;
-                }
-            }
-            if (selectedCourse != null)
-                break;
-
-            System.out.println("Course not found. Please key in again");
-        }
-
-        return selectedCourse;
-    }
+//    private CourseSM selectCourse(ArrayList<CourseSM> courses) {
+//        CourseSM selectedCourse = null;
+//        while (selectedCourse == null) {
+//            System.out.println("Please key in the course code");
+//            String inputCourseCode = scanner.next();
+//
+//            for (CourseSM course : courses) {
+//                if (course.courseCode.equals(inputCourseCode)) {
+//                    selectedCourse = course;
+//                }
+//            }
+//            if (selectedCourse != null)
+//                break;
+//
+//            System.out.println("Course not found. Please key in again");
+//        }
+//
+//        return selectedCourse;
+//    }
 
     private void printClassStudents(ClassSM classSM) {
         for (User user : classSM.users) {
@@ -255,28 +251,28 @@ public class StudentPage extends Page {
         }
     }
 
-    private void printCourseList(ArrayList<CourseSM> courses) {
-        //print course list
-        for (CourseSM course : courses) {
-            System.out.println(String.format("Code: %s  Name: %s  AU: %d  Type: %s", course.courseCode, course.courseName, course.au, CourseType.getValue(course.courseType)));
-        }
-    }
-
-    private void printClassList(ArrayList<ClassSM> classes, ClassSM registeredClass) {
-        for (ClassSM classSM : classes) {
-            String output = "Index Number:%s  Available Vacancy:%d";
-            if (classSM.totalVacancy == classSM.vacancyTaken) {
-                output += " [FULL]";
-            }
-
-            if (registeredClass != null && registeredClass.classId == classSM.classId) {
-                output += " [REGISTERED]";
-            }
-
-            System.out.println(String.format(output
-                    , classSM.indexNumber, classSM.totalVacancy - classSM.vacancyTaken));
-        }
-    }
+//    private void printCourseList(ArrayList<CourseSM> courses) {
+//        //print course list
+//        for (CourseSM course : courses) {
+//            System.out.println(String.format("Code: %s  Name: %s  AU: %d  Type: %s", course.courseCode, course.courseName, course.au, CourseType.getValue(course.courseType)));
+//        }
+//    }
+//
+//    private void printClassList(ArrayList<ClassSM> classes, ClassSM registeredClass) {
+//        for (ClassSM classSM : classes) {
+//            String output = "Index Number:%s  Available Vacancy:%d";
+//            if (classSM.totalVacancy == classSM.vacancyTaken) {
+//                output += " [FULL]";
+//            }
+//
+//            if (registeredClass != null && registeredClass.classId == classSM.classId) {
+//                output += " [REGISTERED]";
+//            }
+//
+//            System.out.println(String.format(output
+//                    , classSM.indexNumber, classSM.totalVacancy - classSM.vacancyTaken));
+//        }
+//    }
 
     private void printCoursesInfo(ArrayList<CourseSM> courses, boolean isRegistered) {
         if (isRegistered) {

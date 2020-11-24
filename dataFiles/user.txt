@@ -16,3 +16,5 @@ userId,userName,displayName,password,matricNumber,nationality,school,gender,role
 15,Xian,ZhiXiang Wang,8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92,U1900095D,Singapore,2,0,0,2020-11-01,2020-12-31,false,false;
 16,Jia,Jia Ming Feng,8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92,U1900078D,Singapore,2,0,0,2020-11-01,2020-12-31,false,false;
 17,Fei,FeiXiang Fang,8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92,U1900085D,Singapore,2,0,0,2020-11-01,2020-12-31,false,false;
+18,Jimmy,JimmyChu,8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92,U1911000A,Singapore,2,0,0,2020-01-20,2020-12-20,false,false;
+19,Danny,Danny Chen,8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92,U1911000N,Singapore,2,0,0,2020-01-01,2021-02-02,false,false;

@@ -1,24 +1,10 @@
 package page;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
-import java.util.Locale;
 import java.util.Scanner;
 
 import dao.ClassDAO;
-import dao.CourseDAO;
-import dao.IDAO;
 import dao.UserDAO;
 import model.Class;
 import model.Course;
@@ -27,15 +13,17 @@ import service.ClassSM;
 import service.CourseSM;
 import service.CourseService;
 import service.UserService;
+import utility.CourseType;
 import utility.DataUtil;
+import utility.RoleType;
+import utility.SchoolName;
 
 public class AdminPage extends Page {
     private User user;
-    private Scanner scanner = new Scanner(System.in);
-    BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
     public AdminPage(User user) {
         this.user = user;
+
     }
 
     public AdminPage() {
@@ -56,86 +44,31 @@ public class AdminPage extends Page {
             System.out.println("8. Exit");
             System.out.println("Please choose an option:  ");
 
-            try {
-                sel = Integer.parseInt(reader.readLine());
-            } catch (NumberFormatException e1) {
-                // TODO Auto-generated catch block
-                e1.printStackTrace();
-            } catch (IOException e1) {
-                // TODO Auto-generated catch block
-                e1.printStackTrace();
-            }
+            sel = scanner.nextInt();
             switch (sel) {
                 case 1:
-                    try {
-                        changeAccessPeriod();
-                    } catch (Exception e2) {
-                        // TODO Auto-generated catch block
-                        e2.printStackTrace();
-                    }
+                    changeAccessPeriod();
                     break;
                 case 2:
-                    try {
-                        addStudent();
-                    } catch (Exception e) {
-                        // TODO Auto-generated catch block
-                        e.printStackTrace();
-                    }
+                    addStudent();
                     break;
                 case 3:
-                    try {
-                        addCourses();
-                        //courseAddedTime();
-                    } catch (IOException e) {
-                        // TODO Auto-generated catch block
-                        e.printStackTrace();
-                    } catch (Exception e) {
-                        // TODO Auto-generated catch block
-                        e.printStackTrace();
-                    }
+                    addCourse();
                     break;
                 case 4:
-                    try {
-                        updateCourses();
-                        //courseUpdateTime();
-                    } catch (IOException e1) {
-                        // TODO Auto-generated catch block
-                        e1.printStackTrace();
-                    } catch (Exception e1) {
-                        // TODO Auto-generated catch block
-                        e1.printStackTrace();
-                    }
+                    updateCourse();
                     break;
                 case 5:
-                    // todo
-				try {
-					checkVancancy();
-				} catch (Exception e) {
-						// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+                    checkVancancy();
                     break;
-
                 case 6:
-                    // todo
-                    try {
-                        printStudentListByIndex();
-                    } catch (Exception e) {
-                        // TODO Auto-generated catch block
-                        e.printStackTrace();
-                    }
+                    printStudentListByIndex();
                     break;
                 case 7:
-                    // todo
                     printStudentListByCourse();
                     break;
                 case 8:
-                    try {
-                        exitAdminPage();
-                    } catch (Exception e) {
-                        // TODO Auto-generated catch block
-                        e.printStackTrace();
-                    }
+                    exitAdminPage();
                     break;
                 default:
                     System.out.println("Invalid input. Please try again!");
@@ -150,14 +83,11 @@ public class AdminPage extends Page {
         UserDAO userDAO = new UserDAO();
         ArrayList<User> students = userDAO.getAllValidStudents();
 
-        System.out.print("Matric Number" + "    "+ "Username" + "    " + "DisplayName" + "      " + "Period Start Time" + "      " + "Period End Time");
+        System.out.print("Matric Number" + "    " + "Username" + "    " + "DisplayName" + "      " + "Period Start Time" + "      " + "Period End Time");
         System.out.print('\n');
 
         for (User student : students) {
-            System.out.println(student.matricNumber + "        " + student.userName + "        " + student.displayName + "          "  + DATE_FORMATTER.format(student.periodStartTime)+ "          " + DATE_FORMATTER.format(student.periodEndTime));
-
-            //System.out.println(String.format("Username: %s      DisplayName: %s       Matric Number: %s      Period Start Time: %s       Period Start Time: %s "
-            //        , student.userName, student.displayName, student.matricNumber, DATE_FORMATTER.format(student.periodStartTime), DATE_FORMATTER.format(student.periodEndTime)));
+            System.out.println(student.matricNumber + "        " + student.userName + "        " + student.displayName + "          " + DATE_FORMATTER.format(student.periodStartTime) + "          " + DATE_FORMATTER.format(student.periodEndTime));
 
         }
         // let admin choose student to edit
@@ -176,8 +106,8 @@ public class AdminPage extends Page {
                 new AdminPage(this.user).showPage();
         }
 
-        Date startDate = null;
-        Date endDate = null;
+        Date startDate = new Date();
+        Date endDate = new Date();
         Boolean isValid = false;
         while (!isValid) {
             System.out.println(String.format("Current user start period: %s.  Please input start period (format: yyyy-MM-dd)"
@@ -188,11 +118,10 @@ public class AdminPage extends Page {
                     , DATE_FORMATTER.format(selectedUser.periodEndTime)));
             String inputEndPeriod = scanner.next();
 
-
             try {
                 startDate = DATE_FORMATTER.parse(inputStartPeriod);
                 endDate = DATE_FORMATTER.parse(inputEndPeriod);
-                if(startDate.compareTo(endDate)>0){
+                if (startDate.compareTo(endDate) > 0) {
                     throw new Exception("Error: Start date cannot be later than end date");
                 }
                 isValid = true;
@@ -200,7 +129,6 @@ public class AdminPage extends Page {
                 System.out.println(e.getMessage());
                 System.out.println("Error: Invalid date input. Please input again!");
                 isValid = false;
-                //e.printStackTrace();
             }
         }
 
@@ -211,88 +139,245 @@ public class AdminPage extends Page {
         userDAO.update(selectedUser);
     }
 
-    // Add student
-    public void addStudent() throws Exception {
-        User user = new User();
-        System.out.println("Enter user id  ");
-        user.userId = Integer.parseInt(reader.readLine());
-        System.out.println("Enter user name ");
-        user.userName = reader.readLine();
-        System.out.println("Enter display name ");
-        user.displayName = reader.readLine();
-        System.out.println("Enter password ");
-        user.password = DataUtil.encryptPassword(reader.readLine());
-        System.out.println("Enter matric number ");
-        user.matricNumber = reader.readLine();
-        System.out.println("Enter nationality ");
-        user.nationality = reader.readLine();
-        System.out.println("Enter school e.g 1.EEE  2.SCSE  3.CEE ");
-        user.school = reader.readLine();
-        System.out.println("Enter gender e.g 0:Male 1:Female 2:Other");
-        user.gender = Integer.parseInt(reader.readLine());
-        System.out.println("Enter role e.g  0: student 1:admin");
-        user.role = Integer.parseInt(reader.readLine());
-        System.out.println("Enter start Period e.g format 2020-10-01");
-        user.periodStartTime = DATE_FORMATTER.parse(reader.readLine());
-
-        System.out.println("Enter End Period e.g format 2020-10-01");
-        user.periodEndTime = DATE_FORMATTER.parse(reader.readLine());
-
-        try {
-//            user.periodStartTime = str;
-//            user.periodEndTime = end;
-        } catch (Exception e) {
-            System.out.println("Parse Exception");
-
+    private void addStudent() {
+        UserService userService = new UserService();
+        String userName = null;
+        Boolean isValid = false;
+        while (!isValid) {
+            System.out.println("Enter user name ");
+            userName = scanner.next();
+            isValid = userService.validateUserName(userName);
         }
-        IDAO dao = new UserDAO();
-        dao.add(user);
-        System.out.println("Student data is added successfully!!!!!");
+
+        System.out.println("Enter display name ");
+        String displayName = scanner.next();
+
+        String password = null;
+        String confirmPassword = null;
+        isValid = false;
+        while ((password == null || confirmPassword == null) || !isValid) {
+            System.out.println("Enter password ");
+            password = scanner.next();
+
+            System.out.println("Confirm your password ");
+            confirmPassword = scanner.next();
+
+            if (!password.equals(confirmPassword)) {
+                System.out.println("Your confirm password is wrong. Please key in again");
+            } else
+                isValid = true;
+        }
+        String encrptedPassword = DataUtil.encryptPassword(password);
+
+        String matricNumber = null;
+        isValid = false;
+        while (!isValid) {
+            System.out.println("Enter matric number ");
+            matricNumber = scanner.next();
+            isValid = userService.validateMatricNumber(matricNumber);
+        }
+
+        System.out.println("Enter nationality ");
+        String nationality = scanner.next();
+
+        int school = enterSchool();
+
+        int gender = 0;
+        isValid = false;
+        while (!isValid) {
+            System.out.println("Enter gender (Male:0 Female:1)");
+            gender = scanner.nextInt();
+            if (gender == 0 || gender == 1)
+                isValid = true;
+            else
+                System.out.println("Invalid input");
+        }
+
+//        int role = 0;
+//        isValid = false;
+//        while (!isValid) {
+//            System.out.println("Enter role (Student:0 Admin:1)");
+//            role = scanner.nextInt();
+//            if (role == 0 || role == 1)
+//                isValid = true;
+//            else
+//                System.out.println("Invalid input");
+//        }
+
+        Date startDate = new Date();
+        Date endDate = new Date();
+        isValid = false;
+        while (!isValid) {
+            System.out.println("Enter start Period (format: yyyy-MM-dd)");
+            String inputStartPeriod = scanner.next();
+            System.out.println("Enter end Period (format: yyyy-MM-dd)");
+            String inputEndPeriod = scanner.next();
+
+            try {
+                startDate = DATE_FORMATTER.parse(inputStartPeriod);
+                endDate = DATE_FORMATTER.parse(inputEndPeriod);
+                if (startDate.compareTo(endDate) > 0) {
+                    throw new Exception("Error: Start date cannot be later than end date");
+                }
+                isValid = true;
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+                System.out.println("Error: Invalid date input. Please input again!");
+                isValid = false;
+            }
+        }
+
+        User newUser = new User();
+        newUser.userName = userName;
+        newUser.displayName = displayName;
+        newUser.password = encrptedPassword;
+        newUser.matricNumber = matricNumber;
+        newUser.role = RoleType.Student.toInt();
+        newUser.nationality = nationality;
+        newUser.gender = gender;
+        newUser.school = school;
+        newUser.periodStartTime = startDate;
+        newUser.periodEndTime = endDate;
+
+        userService.saveUser(newUser);
+        System.out.println(String.format("You have successfully save a new student %s", newUser.userName));
     }
 
-    // Add Courses
-    public void addCourses() throws Exception, IOException {
-        Course course = new Course();
-        System.out.println("Enter course id  ");
-        course.courseId = Integer.parseInt(reader.readLine());
-        System.out.println("Enter course code ");
-        course.courseCode = reader.readLine();
+    private void addCourse() {
+        CourseService courseService = new CourseService();
+
+        String courseCode = enterCourseCode();
+        String courseName = enterCourseName();
+
+        int school = enterSchool();
+        int courseType = enterCourseType();
+
+        System.out.println("Enter AU ");
+        int au = scanner.nextInt();
+
+        Course newCourse = new Course();
+        newCourse.courseCode = courseCode;
+        newCourse.courseName = courseName;
+        newCourse.school = school;
+        newCourse.courseType = courseType;
+        newCourse.au = au;
+
+        courseService.saveCourse(newCourse);
+        System.out.println(String.format("You have successfully add a new course %s", newCourse.courseCode));
+    }
+
+    private void updateCourse() {
+        CourseService courseService = new CourseService();
+        ArrayList<CourseSM> allCourses = courseService.getAllCourses();
+        printCourseList(allCourses);
+        CourseSM selectedCourse = selectCourse(allCourses);
+
+        int sel = 0;
+        System.out.println("Select the field you want to update.");
+        System.out.println("1. CourseCode");
+        System.out.println("2. CourseName");
+        System.out.println("3. School");
+        System.out.println("4. CourseType");
+        System.out.println("5. AU");
+        System.out.println("6. Save update");
+        do {
+            System.out.println("Please select: ");
+            sel = scanner.nextInt();
+            switch (sel) {
+                case 1:
+                    selectedCourse.courseCode = enterCourseCode();
+                    break;
+                case 2:
+                    selectedCourse.courseName = enterCourseName();
+                    break;
+                case 3:
+                    selectedCourse.school = enterSchool();
+                    break;
+                case 4:
+                    selectedCourse.courseType = enterCourseType();
+                    break;
+                case 5:
+                    selectedCourse.au = enterAU();
+                    break;
+                case 6:
+                    courseService.saveCourse(selectedCourse);
+                    System.out.println(String.format("You have successfully add the course %s", selectedCourse.courseCode));
+                    break;
+                default:
+                    System.out.println("Invalid input. Please try again!");
+
+            }
+        } while (sel != 6);
+
+    }
+
+    private String enterCourseCode() {
+        Boolean isValid = false;
+        String courseCode = null;
+        while (!isValid) {
+            System.out.println("Enter course code ");
+            courseCode = scanner.next();
+            isValid = new CourseService().validateCourseCode(courseCode);
+        }
+
+        return courseCode;
+    }
+
+    private String enterCourseName() {
         System.out.println("Enter course name  ");
-        course.courseName = reader.readLine();
-        System.out.println("Enter school e.g 1.EEE   2.SCSSE    3.CEE  ");
-        course.school = Integer.parseInt(reader.readLine());
-        System.out.println("Enter course type e.g 0 Core 1 Elective  ");
-        course.courseType = Integer.parseInt(reader.readLine());
-        IDAO dao = new CourseDAO();
-        dao.add(course);
-        System.out.println("Courses added successfully !!!!!");
+        return scanner.next();
     }
 
-    // Update Courses
-    public void updateCourses() throws Exception, IOException {
-        Course course = new Course();
-        System.out.println("Enter course id  ");
-        course.courseId = Integer.parseInt(reader.readLine());
-        System.out.println("Enter course code ");
-        course.courseCode = reader.readLine();
-        System.out.println("Enter course name  ");
-        course.courseName = reader.readLine();
-        System.out.println("Enter school e.g 1 eee 2 scse 3 nbs  ");
-        course.school = Integer.parseInt(reader.readLine());
-        System.out.println("Enter course type e.g 0 Core 1 Elective  ");
-        course.courseType = Integer.parseInt(reader.readLine());
-        IDAO dao = new CourseDAO();
-        dao.update(course);
-        System.out.println("Courses updated successfully !!!!!");
+    private int enterAU() {
+        System.out.println("Enter AU ");
+        return scanner.nextInt();
     }
 
 
+    private int enterSchool() {
+        boolean isValid = false;
+        int school = 0;
+        while (!isValid) {
+            System.out.println("Enter school number (EEE:0  MAE:1  SCSE:2  MSE:3)");
+            school = scanner.nextInt();
+            for (SchoolName schoolName : SchoolName.values()) {
+                if (schoolName.toInt() == school) {
+                    isValid = true;
+                    break;
+                }
+            }
 
-    public void printStudentListByIndex() throws Exception {
+            if (!isValid)
+                System.out.println("Invalid school number");
+        }
+        return school;
+    }
+
+    private int enterCourseType() {
+        boolean isValid = false;
+        int courseTypeCode = 0;
+        while (!isValid) {
+            //Core(0, "Core"), GERCore(1, "GERCore"), CoreElective(2, "CoreElective"), UE(3, "UE");
+            System.out.println("Enter course type (Core:0  GERCore:1  CoreElective:2  UE:3)");
+            courseTypeCode = scanner.nextInt();
+            for (CourseType courseType : CourseType.values()) {
+                if (courseType.toInt() == courseTypeCode) {
+                    isValid = true;
+                    break;
+                }
+            }
+
+            if (!isValid)
+                System.out.println("Invalid school number");
+        }
+        return courseTypeCode;
+    }
+
+    public void printStudentListByIndex() {
 
         // user input index no.
         System.out.println("Please input an index number:  ");
-        String indexNumber = reader.readLine();
+        String indexNumber = scanner.next();
 
         Integer classId = null;
         ArrayList<Class> classes = new ClassDAO().getAllValid();
@@ -350,7 +435,7 @@ public class AdminPage extends Page {
             ArrayList<User> students = userService.getClassMatesById(cls.classId);
             for (User student : students) {
                 //System.out.println(String.format("Name: %s Matric Number: %s", student.userName, student.matricNumber));
-                System.out.print(student.matricNumber + "          "+student.displayName);
+                System.out.print(student.matricNumber + "          " + student.displayName);
                 System.out.print('\n');
 
             }
@@ -359,30 +444,30 @@ public class AdminPage extends Page {
 
     }
 
-    public void exitAdminPage() throws Exception {
+    public void exitAdminPage() {
 
         System.out.println("Thank you for using MYSTARTS Planner. System is closed!!!!");
         System.exit(0);
     }
-
-    private void checkVancancy() {
-        // get data
-        ClassDAO classDAO = new ClassDAO();
-        ArrayList<Class> classes = classDAO.getAllValid();
-
-        // display and user input
-        System.out.println("Please enter index number: ");
-        String indexNumber = scanner.next();
-
-        for (Class cls : classes) {
-            if (cls.indexNumber.equals(indexNumber)) {
-                // print class info
-                System.out.println(String.format("Current available vacancy: %d", cls.totalVacancy - cls.vacancyTaken));
-                return;
-            }
-        }
-
-        System.out.println("Index number not found");
-    }
+//
+//    private void checkVancancy() {
+//        // get data
+//        ClassDAO classDAO = new ClassDAO();
+//        ArrayList<Class> classes = classDAO.getAllValid();
+//
+//        // display and user input
+//        System.out.println("Please enter index number: ");
+//        String indexNumber = scanner.next();
+//
+//        for (Class cls : classes) {
+//            if (cls.indexNumber.equals(indexNumber)) {
+//                // print class info
+//                System.out.println(String.format("Current available vacancy: %d", cls.totalVacancy - cls.vacancyTaken));
+//                return;
+//            }
+//        }
+//
+//        System.out.println("Index number not found");
+//    }
 
 }

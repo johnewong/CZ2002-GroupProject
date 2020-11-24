@@ -8,6 +8,49 @@ import java.util.ArrayList;
 
 public class CourseService {
 
+    public Course saveCourse(Course newCourse) {
+        CourseDAO courseDAO = new CourseDAO();
+        ArrayList<Course> allCourses = courseDAO.getAllValid();
+
+        for (Course course : allCourses) {
+            if (course.courseCode.equals(newCourse.courseCode)) {
+                courseDAO.update(newCourse);
+                return newCourse;
+            }
+        }
+
+        courseDAO.add(newCourse);
+        return newCourse;
+    }
+
+    public boolean validateCourseCode(String courseCode) {
+        CourseDAO courseDAO = new CourseDAO();
+        ArrayList<Course> allCourses = courseDAO.getAllValid();
+
+        for (Course course : allCourses) {
+            if (course.courseCode.equals(courseCode)) {
+                System.out.println("CourseCode is already existed ");
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    public ArrayList<CourseSM> getAllCourses() {
+        CourseDAO courseDAO = new CourseDAO();
+        ClassService classService = new ClassService();
+
+        ArrayList<Course> allCourses = courseDAO.getAllValid();
+        ArrayList<CourseSM> allCourseSMs = new ArrayList<>();
+        for (Course course : allCourses) {
+            CourseSM courseSM = new CourseSM(course, classService.getCourseClasses(course.courseId));
+            allCourseSMs.add(courseSM);
+        }
+
+        return allCourseSMs;
+    }
+
     public CourseSM getCourseByCourseCode(String courseCode) {
         // to get all registered classes
 

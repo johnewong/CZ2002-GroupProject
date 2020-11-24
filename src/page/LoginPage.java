@@ -21,18 +21,11 @@ public class LoginPage extends Page {
         System.out.println("Password: ");
         String password = scanner.next();
 
-        //Date now = new Date();
-        //System.out.println(now);
-
         ArrayList<User> users = new UserDAO().getAllValid();
         String encryptedPassword= DataUtil.encryptPassword(password);
 
         for (User user : users){
-            //user.password.equals(encryptedPassword)
-
             if(user.userName.equals(userName) && user.password.equals(encryptedPassword)){
-
-
                 if(user.role == RoleType.Student.toInt()){
 
                     //get Current Date
@@ -50,9 +43,6 @@ public class LoginPage extends Page {
                         System.out.println("You have no access to the page now");
                         System.out.println("You may access the page from " +  strPeriod +  " " + "to " + endPeriod);
                     }
-
-
-
                 }
 
                 else
@@ -60,14 +50,5 @@ public class LoginPage extends Page {
             }
 
         }
-
-//            if(count >0){
-//                count+=1;
-//                System.out.println("Invalid Username or Password. Please Enter Again");
-//            }
-
-
     }
-
-
 }
