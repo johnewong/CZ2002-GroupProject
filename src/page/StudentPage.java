@@ -120,7 +120,6 @@ public class StudentPage extends Page {
         System.out.println(String.format("You have successfully dropped to class %s", returnClass.indexNumber));
     }
 
-
     private void printCoursesRegistered() {
         CourseService service = new CourseService();
         ArrayList<CourseSM> registCourses = service.getRegisteredCourses(this.user);
@@ -128,25 +127,6 @@ public class StudentPage extends Page {
         printCoursesInfo(registCourses, true);
         printCoursesInfo(waitCourses, false);
     }
-//    private void checkVancancy() {
-//        // get data
-//        ClassDAO classDAO = new ClassDAO();
-//        ArrayList<Class> classes = classDAO.getAllValid();
-//
-//        // display and user input
-//        System.out.println("Please enter index number: ");
-//        String indexNumber = scanner.next();
-//
-//        for (Class cls : classes) {
-//            if (cls.indexNumber.equals(indexNumber)) {
-//                // print class info
-//                System.out.println(String.format("Current available vacancy: %d", cls.totalVacancy - cls.vacancyTaken));
-//                return;
-//            }
-//        }
-//
-//        System.out.println("Index number not found");
-//    }
 
     private void changeCourseIndex() {
         CourseService service = new CourseService();
@@ -235,26 +215,6 @@ public class StudentPage extends Page {
         return selectedClass;
     }
 
-//    private CourseSM selectCourse(ArrayList<CourseSM> courses) {
-//        CourseSM selectedCourse = null;
-//        while (selectedCourse == null) {
-//            System.out.println("Please key in the course code");
-//            String inputCourseCode = scanner.next();
-//
-//            for (CourseSM course : courses) {
-//                if (course.courseCode.equals(inputCourseCode)) {
-//                    selectedCourse = course;
-//                }
-//            }
-//            if (selectedCourse != null)
-//                break;
-//
-//            System.out.println("Course not found. Please key in again");
-//        }
-//
-//        return selectedCourse;
-//    }
-
     private void printClassStudents(ClassSM classSM) {
         System.out.println("-----------------------------------");
         System.out.printf("%s %29s %n","Name", "Matric Number");
@@ -262,32 +222,6 @@ public class StudentPage extends Page {
         for (User user : classSM.users) {
             //System.out.println(String.format("Name: %s  Matric Number: %s", user.displayName, user.matricNumber));
             System.out.printf("%-20s %s %n",user.displayName, user.matricNumber);
-        }
-    }
-
-    private void printCourseList(ArrayList<CourseSM> courses) {
-        //print course list
-        System.out.printf("%s %15s %30s %15s %n","Course Code","Course Name", "AU", "Course Type");
-        System.out.println("----------------------------------------------------------------------------");
-        for (CourseSM course : courses) {
-            System.out.printf("%-15s %-30s %10s %15s %n",course.courseCode, course.courseName, course.au, CourseType.getValue(course.courseType));
-        }
-        System.out.print('\n');
-    }
-
-    private void printClassList(ArrayList<ClassSM> classes, ClassSM registeredClass) {
-        for (ClassSM classSM : classes) {
-            String output = "Index Number:%s  Available Vacancy:%d";
-            if (classSM.totalVacancy == classSM.vacancyTaken) {
-                output += " [FULL]";
-            }
-
-            if (registeredClass != null && registeredClass.classId == classSM.classId) {
-                output += " [REGISTERED]";
-            }
-
-            System.out.println(String.format(output
-                    , classSM.indexNumber, classSM.totalVacancy - classSM.vacancyTaken));
         }
     }
 

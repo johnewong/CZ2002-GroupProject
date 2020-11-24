@@ -18,11 +18,37 @@ public abstract class Page {
 
     protected abstract void showPage();
 
+//    protected void printCourseList(ArrayList<CourseSM> courses) {
+//        //print course list
+//        for (CourseSM course : courses) {
+//            System.out.println(String.format("Code: %s  Name: %s  AU: %d  Type: %s", course.courseCode, course.courseName, course.au, CourseType.getValue(course.courseType)));
+//        }
+//    }
+//
+//    protected void printClassList(ArrayList<ClassSM> classes, ClassSM registeredClass) {
+//        for (ClassSM classSM : classes) {
+//            String output = "Index Number:%s  Available Vacancy:%d";
+//            if (classSM.totalVacancy == classSM.vacancyTaken) {
+//                output += " [FULL]";
+//            }
+//
+//            if (registeredClass != null && registeredClass.classId == classSM.classId) {
+//                output += " [REGISTERED]";
+//            }
+//
+//            System.out.println(String.format(output
+//                    , classSM.indexNumber, classSM.totalVacancy - classSM.vacancyTaken));
+//        }
+//    }
+
     protected void printCourseList(ArrayList<CourseSM> courses) {
         //print course list
+        System.out.printf("%s %15s %30s %15s %n","Course Code","Course Name", "AU", "Course Type");
+        System.out.println("----------------------------------------------------------------------------");
         for (CourseSM course : courses) {
-            System.out.println(String.format("Code: %s  Name: %s  AU: %d  Type: %s", course.courseCode, course.courseName, course.au, CourseType.getValue(course.courseType)));
+            System.out.printf("%-15s %-30s %10s %15s %n",course.courseCode, course.courseName, course.au, CourseType.getValue(course.courseType));
         }
+        System.out.print('\n');
     }
 
     protected void printClassList(ArrayList<ClassSM> classes, ClassSM registeredClass) {
@@ -40,7 +66,6 @@ public abstract class Page {
                     , classSM.indexNumber, classSM.totalVacancy - classSM.vacancyTaken));
         }
     }
-
     public CourseSM selectCourse(ArrayList<CourseSM> courses) {
         CourseSM selectedCourse = null;
 

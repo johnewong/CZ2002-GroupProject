@@ -1,24 +1,8 @@
 package page;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
-import java.util.Locale;
-import java.util.Scanner;
-
 import dao.ClassDAO;
-import dao.CourseDAO;
-import dao.IDAO;
 import dao.UserDAO;
 import model.Class;
 import model.Course;
@@ -470,25 +454,5 @@ public class AdminPage extends Page {
         System.out.println("Thank you for using MYSTARTS Planner. System is closed!!!!");
         System.exit(0);
     }
-//
-//    private void checkVancancy() {
-//        // get data
-//        ClassDAO classDAO = new ClassDAO();
-//        ArrayList<Class> classes = classDAO.getAllValid();
-//
-//        // display and user input
-//        System.out.println("Please enter index number: ");
-//        String indexNumber = scanner.next();
-//
-//        for (Class cls : classes) {
-//            if (cls.indexNumber.equals(indexNumber)) {
-//                // print class info
-//                System.out.println(String.format("Current available vacancy: %d", cls.totalVacancy - cls.vacancyTaken));
-//                return;
-//            }
-//        }
-//
-//        System.out.println("Index number not found");
-//    }
 
 }
