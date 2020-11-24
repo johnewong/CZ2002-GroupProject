@@ -46,7 +46,7 @@ public class AdminPage extends Page {
             System.out.println("| 4. Update Courses                         |");
             System.out.println("| 5. Add Class                              |");
             System.out.println("| 6. Update Class                           |");
-            System.out.println("| 7. Check Course Availability Slots        |");
+            System.out.println("| 7. Check available slot for an index      |");
             System.out.println("| 8. Print Student List By Index Number     |");
             System.out.println("| 9. Print Student List By Course           |");
             System.out.println("| 10. Exit                                  |");
