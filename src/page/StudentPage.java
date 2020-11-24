@@ -38,15 +38,22 @@ public class StudentPage extends Page {
         int sel = 0;
 
         do {
-            System.out.println(String.format("\nHi %s Welcome to Student Page!", user.displayName));
-
-            System.out.println("1. Add Course");
-            System.out.println("2. Drop Course ");
-            System.out.println("3. Check/Print Courses Registered");
-            System.out.println("4. Check Vacancies Available ");
-            System.out.println("5. Change Index Number of Registered Courses");
-            System.out.println("6. Swap Index Number with Another Student");
-            System.out.println("7. Exit");
+            System.out.println(String.format("\nHi %s Welcome to MySTARS", user.displayName));
+            System.out.println("---------------------------------------------------");
+            System.out.println("|                                                 |");
+            System.out.println("|              Course Registration                |");
+            System.out.println("|                                                 |");
+            System.out.println("---------------------------------------------------");
+            System.out.println("                      Menu          ");
+            System.out.println("---------------------------------------------------");
+            System.out.println("| 1. Add Course                                   |");
+            System.out.println("| 2. Drop Course                                  |");
+            System.out.println("| 3. Check/Print Courses Registered               |");
+            System.out.println("| 4. Check Vacancies Available                    |");
+            System.out.println("| 5. Change Index Number of Registered Courses    |");
+            System.out.println("| 6. Swap Index Number with Another Student       |");
+            System.out.println("| 7. Exit                                         |");
+            System.out.println("---------------------------------------------------");
             System.out.println("Please choose an option:  ");
 
             sel = scanner.nextInt();
@@ -250,16 +257,23 @@ public class StudentPage extends Page {
     }
 
     private void printClassStudents(ClassSM classSM) {
+        System.out.println("-----------------------------------");
+        System.out.printf("%s %29s %n","Name", "Matric Number");
+        System.out.println("-----------------------------------");
         for (User user : classSM.users) {
-            System.out.println(String.format("Name: %s  Matric Number: %s", user.displayName, user.matricNumber));
+            //System.out.println(String.format("Name: %s  Matric Number: %s", user.displayName, user.matricNumber));
+            System.out.printf("%-20s %s %n",user.displayName, user.matricNumber);
         }
     }
 
     private void printCourseList(ArrayList<CourseSM> courses) {
         //print course list
+        System.out.printf("%s %15s %30s %15s %n","Course Code","Course Name", "AU", "Course Type");
+        System.out.println("----------------------------------------------------------------------------");
         for (CourseSM course : courses) {
-            System.out.println(String.format("Code: %s  Name: %s  AU: %d  Type: %s", course.courseCode, course.courseName, course.au, CourseType.getValue(course.courseType)));
+            System.out.printf("%-15s %-30s %10s %15s %n",course.courseCode, course.courseName, course.au, CourseType.getValue(course.courseType));
         }
+        System.out.print('\n');
     }
 
     private void printClassList(ArrayList<ClassSM> classes, ClassSM registeredClass) {
@@ -280,23 +294,20 @@ public class StudentPage extends Page {
 
     private void printCoursesInfo(ArrayList<CourseSM> courses, boolean isRegistered) {
         if (isRegistered) {
-            System.out.println("-----------------");
             System.out.println("Registered Course:");
-            System.out.println("-----------------");
+            System.out.println("---------------------------------------------------------------------------------------------");
         } else {
-            System.out.println("--------------------");
             System.out.println("In Waitlist Course:");
-            System.out.println("--------------------");
+            System.out.println("---------------------------------------------------------------------------------------------");
         }
-        System.out.println("Course Code" + "  " + "AU" + "  " + "Index Number" + "  " + "Course Type");
-        System.out.println("-------------------------------------------");
+        System.out.printf("%s %15s %35s %10s %15s %n","Course Code","Course Name","Index Number", "AU", "Course Type");
+        //System.out.println("Course Code" + "  " + "AU" + "  " + "Index Number" + "  " + "Course Type");
+        System.out.println("---------------------------------------------------------------------------------------------");
         for (CourseSM course : courses) {
-
-            System.out.println(course.courseCode + "       " + course.au + "      " + course.classes.get(0).indexNumber + "        " + CourseType.getValue(course.courseType));
-            System.out.println("-------------------------------------------");
-
-
+            System.out.printf("%-15s %-35s %-10s %10s %15s %n",course.courseCode, course.courseName,
+                    course.classes.get(0).indexNumber,course.au, CourseType.getValue(course.courseType));
         }
+        System.out.println("---------------------------------------------------------------------------------------------");
     }
 
 }
