@@ -13,7 +13,7 @@ sessionId,classId,day,time,venue,classType,isDeleted;
 12,5,3,10:30-11:30,LT-7,2,false;
 13,6,1,13:00-14:00,LT-6,1,false;
 14,6,1,14:00-15:00,LT-6,2,false;
-15,7,2,09:30-10:30,LT-4,1,false;
+15,7,2,09:30-10:30,LT-5,1,false;
 16,7,3,12:00-13:00,TR4,2,false;
 17,8,1,09:00-10:00,LT-5,1,false;
 18,8,3,13:00-14:00,TR8,2,false;

@@ -412,6 +412,7 @@ public class AdminPage extends Page {
             sessionDAO.add(newSession);
             System.out.println(String.format("You have successfully add a session in class %s", newClass.indexNumber));
         }
+
     }
 
     private void updateClass() {
