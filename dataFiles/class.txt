@@ -1,7 +1,7 @@
 classId,courseId,indexNumber,vacancyTaken,totalVacancy,numberInWaitlist,group,remark,isDeleted;
 1,1,00011,10,10,1,1,CZ2001 Gourp 1,false;
 2,1,00012,4,10,0,2,CZ2001 Gourp 2,false;
-3,2,00021,8,10,0,1,CZ2002 Group 1,false;
+3,2,00021,9,10,0,1,CZ2002 Group 1,false;
 4,2,00022,7,10,0,2,CZ2002 Group 2,false;
 5,3,00031,10,10,1,1,CZ2003 Group 1,false;
 6,3,00032,4,10,0,2,CZ2003 Group 2,false;
