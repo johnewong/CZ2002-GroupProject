@@ -6,3 +6,4 @@ courseId,courseCode,courseName,school,courseType,au,isDeleted;
 5,CZ2005,Operation System,2,0,3,false;
 6,HW0188,Engineering Comm I,2,1,2,false;
 7,CZ2006,Software Engineering,2,0,3,false;
+8,CZ1007,Data Stuctures,2,0,3,false;
