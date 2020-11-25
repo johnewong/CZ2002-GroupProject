@@ -1,3 +1,12 @@
+/**
+ Course. A data model class to contains course info
+ Same as the data file
+
+ @author Weng Yifei
+ @version 1.0
+ @since Nov-2020
+ */
+
 package model;
 
 public class Course {

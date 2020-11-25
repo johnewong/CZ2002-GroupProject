@@ -1,3 +1,13 @@
+/**
+Login page for user login
+Contains 1. start/end period comparison  2.username, password verification  3. determine the login user to access which page by his role type
+
+ @author Huang XiaoYan
+ @version 1.0
+ @since Nov-2020
+ */
+
+
 package page;
 
 import dao.UserDAO;

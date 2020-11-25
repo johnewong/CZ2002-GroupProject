@@ -1,3 +1,11 @@
+/**
+ Class service provide complex data manipulation methods.
+
+ @author Weng Yifei
+ @version 1.0
+ @since Nov-2020
+ */
+
 package service;
 
 
@@ -13,6 +21,12 @@ import java.util.ArrayList;
 
 public class ClassService {
 
+    /**
+     * Method to validate index number duplcation
+     *
+     * @param indexNumber
+     * @return isValid
+     */
     public boolean validateIndexNumber(String indexNumber){
         ClassDAO classDAO = new ClassDAO();
         ArrayList<Class> allClasses = classDAO.getAllValid();
@@ -27,13 +41,32 @@ public class ClassService {
         return true;
     }
 
+    /**
+     * Method to add or update a class
+     *
+     * @param newClass
+     * @return return class
+     */
     public Class saveClass(Class newClass){
         ClassDAO classDAO = new ClassDAO();
+        ArrayList<Class> allClasses = classDAO.getAllValid();
+        for (Class cls : allClasses) {
+            if (cls.indexNumber.equals(newClass.indexNumber)) {
+                classDAO.update(newClass);
+                return newClass;
+            }
+        }
         classDAO.add(newClass);
 
         return newClass;
     }
 
+    /**
+     * Method to get registered classes by userId
+     *
+     * @param userId
+     * @return return list of classes
+     */
     public ArrayList<ClassSM> getRegisteredClasses(int userId) {
         ClassUserDAO classUserDAO = new ClassUserDAO();
         ClassDAO classDAO = new ClassDAO();
@@ -59,6 +92,12 @@ public class ClassService {
         return registeredClassSMs;
     }
 
+    /**
+     * Method to get all classes in the course
+     *
+     * @param courseId
+     * @return return list of classes
+     */
     public ArrayList<ClassSM> getCourseClasses(int courseId) {
         ClassDAO classDAO = new ClassDAO();
         SessionDAO sessionDAO = new SessionDAO();
@@ -74,6 +113,12 @@ public class ClassService {
         return classSMs;
     }
 
+    /**
+     * Method to get all classes in wait list by userId
+     *
+     * @param userId
+     * @return return list of classes
+     */
     public ArrayList<ClassSM> getWaitlistClasses(int userId) {
         ClassUserDAO classUserDAO = new ClassUserDAO();
         ClassDAO classDAO = new ClassDAO();
@@ -100,6 +145,13 @@ public class ClassService {
         return waitlistClassSMs;
     }
 
+    /**
+     * Method to drop a class
+     *
+     * @param user  student who drops the class
+     * @param selectedClass  class to be dropped
+     * @return dropped class
+     */
     public ClassSM dropClass(User user, ClassSM selectedClass) {
         ClassUserDAO classUserDAO = new ClassUserDAO();
         ClassDAO classDAO = new ClassDAO();
@@ -113,6 +165,15 @@ public class ClassService {
         return selectedClass;
     }
 
+    /**
+     * Method to change a class
+     *
+     * @param user  student who change the class
+     * @param registeredClass
+     * @param selectedClass  new class
+     * @param isSwap  flag to indicate whether it is a swap
+     * @return new class
+     */
     public ClassSM changeClass(User user, ClassSM registeredClass, ClassSM selectedClass, boolean isSwap) {
         if (!isSwap && selectedClass.vacancyTaken >= selectedClass.totalVacancy) {
             return null;
@@ -135,6 +196,13 @@ public class ClassService {
         return selectedClass;
     }
 
+    /**
+     * Method to register a class
+     *
+     * @param user  student who register the class
+     * @param selectedClass  class to be registered
+     * @return registered class
+     */
     public ClassSM registerClass(User user, ClassSM selectedClass) {
         ClassUserDAO classUserDAO = new ClassUserDAO();
         ClassDAO classDAO = new ClassDAO();

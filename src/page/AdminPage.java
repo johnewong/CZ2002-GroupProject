@@ -1,7 +1,16 @@
+/**
+ * AdminPage for admin to add students, add/update courses and classes
+ *
+ * @author Weng Yifei, Xu ZhiYong, Cai Yu
+ * @version 1.0
+ * @since Nov-2020
+ */
+
 package page;
 
 import java.util.ArrayList;
 import java.util.Date;
+
 import dao.CourseDAO;
 import dao.ClassDAO;
 import dao.SessionDAO;
@@ -16,6 +25,11 @@ import utility.*;
 public class AdminPage extends Page {
     private User user;
 
+    /**
+     * Constructor to initialize the login user from login page
+     *
+     * @param user The user object from login page
+     */
     public AdminPage(User user) {
         this.user = user;
 
@@ -70,7 +84,7 @@ public class AdminPage extends Page {
                     updateClass();
                     break;
                 case 7:
-                    checkVancancy();
+                    checkVacancy();
                     break;
                 case 8:
                     printStudentListByIndex();
@@ -88,6 +102,10 @@ public class AdminPage extends Page {
         } while (sel != 10);
     }
 
+    /**
+     * Method to change student access period
+     * Contains 1. display all students  2. select students  3. start/end period validation
+     */
     private void changeAccessPeriod() {
 
         // get all student info
@@ -154,6 +172,10 @@ public class AdminPage extends Page {
         userDAO.update(selectedUser);
     }
 
+    /**
+     * Method to add a student
+     * Contains  1. user information input  2. user name duplication validation  3. password and confirm password validation   4. start/end period validation
+     */
     private void addStudent() {
         UserService userService = new UserService();
         String userName = null;
@@ -208,17 +230,6 @@ public class AdminPage extends Page {
                 System.out.println("Invalid input");
         }
 
-//        int role = 0;
-//        isValid = false;
-//        while (!isValid) {
-//            System.out.println("Enter role (Student:0 Admin:1)");
-//            role = scanner.nextInt();
-//            if (role == 0 || role == 1)
-//                isValid = true;
-//            else
-//                System.out.println("Invalid input");
-//        }
-
         Date startDate = new Date();
         Date endDate = new Date();
         isValid = false;
@@ -262,12 +273,12 @@ public class AdminPage extends Page {
 
         //Display all student List
         System.out.println("---------------------------------------------------------------------------------------------------");
-        System.out.printf("%s %20s %20s %20s %20s %n","Matric Number","Student Name","Gender", "Nationality", "School");
+        System.out.printf("%s %20s %20s %20s %20s %n", "Matric Number", "Student Name", "Gender", "Nationality", "School");
         System.out.println("---------------------------------------------------------------------------------------------------");
 
         for (User student : students) {
-            System.out.printf("%-22s %-17s %14s %18s %21s %n",student.matricNumber, student.displayName,
-                    GenderType.getValue(student.gender),student.nationality, SchoolName.getValue(student.school));
+            System.out.printf("%-22s %-17s %14s %18s %21s %n", student.matricNumber, student.displayName,
+                    GenderType.getValue(student.gender), student.nationality, SchoolName.getValue(student.school));
             System.out.print('\n');
 
 
@@ -275,6 +286,10 @@ public class AdminPage extends Page {
 
     }
 
+    /**
+     * Method to add a course
+     * Contains  1. course information input  2. course code duplication validation  3. all courses display
+     */
     private void addCourse() {
         CourseService courseService = new CourseService();
 
@@ -300,11 +315,11 @@ public class AdminPage extends Page {
 
         //Display all course List
         System.out.println("---------------------------------------------------------------------------------");
-        System.out.printf("%s %15s %30s %15s %n","Course Code","Course Name", "AU", "Course Type");
+        System.out.printf("%s %15s %30s %15s %n", "Course Code", "Course Name", "AU", "Course Type");
         System.out.println("---------------------------------------------------------------------------------");
 
         for (Course course : courses) {
-            System.out.printf("%-15s %-30s %10s %15s %n",course.courseCode,course.courseName,course.au,
+            System.out.printf("%-15s %-30s %10s %15s %n", course.courseCode, course.courseName, course.au,
                     CourseType.getValue(course.courseType));
             System.out.print('\n');
 
@@ -313,6 +328,10 @@ public class AdminPage extends Page {
 
     }
 
+    /**
+     * Method to edit a course
+     * Contains  1. existed courses display  2. select course  3. selected course information update
+     */
     private void updateCourse() {
         CourseService courseService = new CourseService();
         ArrayList<CourseSM> allCourses = courseService.getAllCourses();
@@ -359,6 +378,11 @@ public class AdminPage extends Page {
 
     }
 
+    /**
+     * Method to add a class
+     * Contains  1. existed courses display  2. select course  3. classes in the selected course display  4. select class  5. add class information
+     * 6. add session
+     */
     private void addClass() {
         CourseService courseService = new CourseService();
         ClassService classService = new ClassService();
@@ -407,12 +431,17 @@ public class AdminPage extends Page {
             newSession.classType = enterClassType();
             sessionDAO.add(newSession);
             System.out.println(String.format("Session: day:%d  time:%s  venue:%s  classType:%s"
-                    , newSession.day,newSession.time,newSession.venue, ClassType.getValue(newSession.classType)));
+                    , newSession.day, newSession.time, newSession.venue, ClassType.getValue(newSession.classType)));
             System.out.println(String.format("You have successfully add a session in class %s", newClass.indexNumber));
         }
 
     }
 
+    /**
+     * Method to add a class
+     * Contains  1. existed courses display  2. select course  3. classes in the selected course display  4. select class  5. update class information
+     * 6. update session
+     */
     private void updateClass() {
         CourseService courseService = new CourseService();
         ClassService classService = new ClassService();
@@ -424,8 +453,20 @@ public class AdminPage extends Page {
 
         printClassList(selectedCourse.classes, null);
         ClassSM selectedClass = selectClass(selectedCourse);
-        printSessionList(selectedClass.sessions);
 
+        System.out.println(String.format("Selected class: Index number: %s  Total vacancy: %d  Group number: %d  Remarks: %s"
+                , selectedClass.indexNumber, selectedClass.totalVacancy, selectedClass.group, selectedClass.remark));
+        System.out.println("Enter total vacancy");
+        selectedClass.totalVacancy = scanner.nextInt();
+
+        System.out.println("Enter group number");
+        selectedClass.group = scanner.nextInt();
+
+        System.out.println("Enter the remark");
+        selectedClass.remark = scanner.next();
+        classService.saveClass(selectedClass);
+
+        printSessionList(selectedClass.sessions);
         Session selectedSession = selectSession(selectedClass);
         SessionDAO sessionDAO = new SessionDAO();
         int sel = 0;
@@ -454,7 +495,7 @@ public class AdminPage extends Page {
                     break;
                 case 5:
                     System.out.println(String.format("Session: day:%d  time:%s  venue:%s  classType:%s"
-                            , selectedSession.day,selectedSession.time,selectedSession.venue, ClassType.getValue(selectedSession.classType)));
+                            , selectedSession.day, selectedSession.time, selectedSession.venue, ClassType.getValue(selectedSession.classType)));
                     sessionDAO.update(selectedSession);
                     System.out.println(String.format("You have successfully update a session in class %s", selectedClass.indexNumber));
                     break;
@@ -666,9 +707,6 @@ public class AdminPage extends Page {
 
             ArrayList<User> students = userService.getClassMatesById(cls.classId);
             for (User student : students) {
-                //System.out.println(String.format("Name: %s Matric Number: %s", student.userName, student.matricNumber));
-//                System.out.print(student.matricNumber + "          "+student.displayName);
-//                System.out.print('\n');
                 System.out.printf("%-20s %s %n", student.displayName, student.matricNumber);
 
             }

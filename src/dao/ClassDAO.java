@@ -1,3 +1,12 @@
+/**
+ ClassDAO. Provide all the CRUD functions of model.Class
+ Implements IDAO
+
+ @author Weng Yifei
+ @version 1.0
+ @since Nov-2020
+ */
+
 package dao;
 
 import java.util.ArrayList;

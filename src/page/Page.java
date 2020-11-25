@@ -1,15 +1,22 @@
+/**
+ A parent class of AdminPage, LoginPage, StudentPage
+ Contains all the shared methods and properties of those pages
+
+ @author Weng Yifei
+ @version 1.0
+ @since Nov-2020
+ */
+
 package page;
 
 import dao.ClassDAO;
 import model.Class;
 import model.Session;
-import model.User;
 import service.ClassSM;
 import service.CourseSM;
 import utility.ClassType;
 import utility.CourseType;
 import utility.SchoolName;
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -17,34 +24,15 @@ import java.util.Scanner;
 public abstract class Page {
     protected static SimpleDateFormat DATE_FORMATTER = new SimpleDateFormat("yyyy-MM-dd");
     protected Scanner scanner = new Scanner(System.in).useDelimiter("\n");
-    //this.scanner.useDelimiter("\n");
 
     protected abstract void showPage();
 
-//    protected void printCourseList(ArrayList<CourseSM> courses) {
-//        //print course list
-//        for (CourseSM course : courses) {
-//            System.out.println(String.format("Code: %s  Name: %s  AU: %d  Type: %s", course.courseCode, course.courseName, course.au, CourseType.getValue(course.courseType)));
-//        }
-//    }
-//
-//    protected void printClassList(ArrayList<ClassSM> classes, ClassSM registeredClass) {
-//        for (ClassSM classSM : classes) {
-//            String output = "Index Number:%s  Available Vacancy:%d";
-//            if (classSM.totalVacancy == classSM.vacancyTaken) {
-//                output += " [FULL]";
-//            }
-//
-//            if (registeredClass != null && registeredClass.classId == classSM.classId) {
-//                output += " [REGISTERED]";
-//            }
-//
-//            System.out.println(String.format(output
-//                    , classSM.indexNumber, classSM.totalVacancy - classSM.vacancyTaken));
-//        }
-//    }
 
-
+    /**
+     * Shared method to print the course information of a course list
+     *
+     * @param courses
+     */
     protected void printCourseList(ArrayList<CourseSM> courses) {
         //print course list
         System.out.printf("%s %15s %30s %15s %15s %n","Course Code","Course Name", "AU", "Course Type", "School");
@@ -56,6 +44,11 @@ public abstract class Page {
         System.out.print('\n');
     }
 
+    /**
+     * Shared method to print the session information of a session list
+     *
+     * @param sessions
+     */
     protected void printSessionList(ArrayList<Session> sessions) {
         for (Session session : sessions) {
             System.out.println(String.format("sessionId:%d  day:%d  time:%s  venue:%s  classType:%s"
@@ -64,6 +57,12 @@ public abstract class Page {
 
     }
 
+    /**
+     * Shared method to print the class information of a class list
+     *
+     * @param classes The class list want to display
+     * @param registeredClass The registered class
+     */
     protected void printClassList(ArrayList<ClassSM> classes, ClassSM registeredClass) {
         for (ClassSM classSM : classes) {
             String output = "Index Number:%s  Available Vacancy:%d";
@@ -80,6 +79,11 @@ public abstract class Page {
         }
     }
 
+    /**
+     * Shared method to let user select a course from a course list
+     *
+     * @param courses
+     */
     public CourseSM selectCourse(ArrayList<CourseSM> courses) {
         CourseSM selectedCourse = null;
 
@@ -101,7 +105,11 @@ public abstract class Page {
         return selectedCourse;
     }
 
-    protected void checkVancancy() {
+    /**
+     * Shared method to let user check the vacancy of a class
+     *
+     */
+    protected void checkVacancy() {
         // get data
         ClassDAO classDAO = new ClassDAO();
         ArrayList<Class> classes = classDAO.getAllValid();

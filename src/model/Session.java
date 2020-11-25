@@ -1,3 +1,11 @@
+/**
+ Class. A data model class to contains session info
+ Same as the data file
+
+ @author Weng Yifei
+ @version 1.0
+ @since Nov-2020
+ */
 package model;
 
 public class Session {
@@ -21,50 +29,4 @@ public class Session {
         this.venue = venue;
         this.classType = classType;
     }
-
-    public static void add(Session session) {
-    }
-
-    // setter method
-    public void setSessionId(int sessionId) {
-        this.sessionId = sessionId;
-    }
-
-    public void setClassId(int classId) {
-        this.classId = classId;
-    }
-
-    public void setDay(int day) {
-        this.day = day;
-    }
-
-    public void setTime(String time) {
-        this.time = time;
-    }
-
-    public void setVenue(String venue) {
-        this.venue = venue;
-    }
-
-    //getter method 
-    public int getSessionId() {
-        return sessionId;
-    }
-
-    public int getClassId() {
-        return classId;
-    }
-
-    public int getDay() {
-        return day;
-    }
-
-    public String getTime() {
-        return time;
-    }
-
-    public String getVenue() {
-        return venue;
-    }
-
 }

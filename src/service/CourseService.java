@@ -1,3 +1,12 @@
+/**
+ Course service provide complex data manipulation methods.
+
+ @author Weng Yifei
+ @version 1.0
+ @since Nov-2020
+ */
+
+
 package service;
 
 import dao.*;
@@ -8,6 +17,12 @@ import java.util.ArrayList;
 
 public class CourseService {
 
+    /**
+     * Method to add or update a course
+     *
+     * @param newCourse
+     * @return return course
+     */
     public Course saveCourse(Course newCourse) {
         CourseDAO courseDAO = new CourseDAO();
         ArrayList<Course> allCourses = courseDAO.getAllValid();
@@ -23,6 +38,12 @@ public class CourseService {
         return newCourse;
     }
 
+    /**
+     * Method to validate course code duplcation
+     *
+     * @param courseCode
+     * @return isValid
+     */
     public boolean validateCourseCode(String courseCode) {
         CourseDAO courseDAO = new CourseDAO();
         ArrayList<Course> allCourses = courseDAO.getAllValid();
@@ -37,6 +58,11 @@ public class CourseService {
         return true;
     }
 
+    /**
+     * Method to get all courses
+     *
+     * @return return list of classes
+     */
     public ArrayList<CourseSM> getAllCourses() {
         CourseDAO courseDAO = new CourseDAO();
         ClassService classService = new ClassService();
@@ -51,6 +77,12 @@ public class CourseService {
         return allCourseSMs;
     }
 
+    /**
+     * Method to get course by course code
+     *
+     * @param courseCode
+     * @return return course
+     */
     public CourseSM getCourseByCourseCode(String courseCode) {
         // to get all registered classes
 
@@ -65,6 +97,12 @@ public class CourseService {
         return new CourseSM(course, classSMS);
     }
 
+    /**
+     * Method to get unregistered courses by user
+     *
+     * @param user
+     * @return return list of courses
+     */
     public ArrayList<CourseSM> getUnregisteredCourses(User user) {
         CourseDAO courseDAO = new CourseDAO();
         ClassService classService = new ClassService();
@@ -94,6 +132,12 @@ public class CourseService {
         return unregisteredCourseSMs;
     }
 
+    /**
+     * Method to get registered courses by user
+     *
+     * @param user
+     * @return return list of courses
+     */
     public ArrayList<CourseSM> getRegisteredCourses(User user) {
         CourseDAO courseDAO = new CourseDAO();
         ClassService classService = new ClassService();
@@ -113,6 +157,12 @@ public class CourseService {
         return registeredCourseSMs;
     }
 
+    /**
+     * Method to get courses in waitlist by user
+     *
+     * @param user
+     * @return return list of courses
+     */
     public ArrayList<CourseSM> getWaitlistCourses(User user) {
         CourseDAO courseDAO = new CourseDAO();
         ClassService classService = new ClassService();

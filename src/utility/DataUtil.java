@@ -1,3 +1,13 @@
+/**
+ Utility class to provide utility method for data manipulation
+ Contains read file, write file, encrpty password
+
+ @author Weng Yifei, Huang Xiao Yan
+ @version 1.0
+ @since Nov-2020
+ */
+
+
 package utility;
 
 import java.io.File;
@@ -12,10 +22,16 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 
-// provide static utility methods for all classes
+
 public class DataUtil {
     private static SimpleDateFormat DATE_FORMATTER = new SimpleDateFormat("yyyy-MM-dd");
 
+    /**
+     * Method to load a file
+     *
+     * @param filePath
+     * @return file content in string
+     */
     public static String loadFile(String filePath) {
         StringBuilder sb = null;
         RandomAccessFile rFile = null;
@@ -39,6 +55,13 @@ public class DataUtil {
         return sb.toString();
     }
 
+    /**
+     * Method to wirte a file. Convert object list to string
+     * Using reflection
+     *
+     * @param path
+     * @param list data in list
+     */
     public static void writeFile(ArrayList<?> list, String path) {
         StringBuilder sb = new StringBuilder();
         String header = "";
@@ -85,6 +108,14 @@ public class DataUtil {
         }
     }
 
+    /**
+     * Method to set the value of a object
+     * Using reflection
+     *
+     * @param obj  object to be assigned values
+     * @param header data header
+     * @param row  data
+     */
     public static void setObject(Object obj, String header, String row) {
 
         String[] columnNames = header.split(",");
@@ -113,6 +144,13 @@ public class DataUtil {
         }
     }
 
+    /**
+     * Method to encrypt password
+     * Using SHA-256 algorithm to encrypt
+     *
+     * @param password  raw password
+     * @return encrypted password
+     */
     public static String encryptPassword(String password) {
         try {
             // Create MessageDigest instance for Sha-256

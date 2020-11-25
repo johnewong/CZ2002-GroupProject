@@ -1,3 +1,12 @@
+/**
+ Class. A data model class to contains user info
+ Same as the data file
+
+ @author Weng Yifei
+ @version 1.0
+ @since Nov-2020
+ */
+
 package model;
 
 import java.util.Date;
@@ -26,10 +35,6 @@ public class User {
     public boolean hasFirstLogin;
     public boolean isDeleted; // not null
 
-    public String getUserName() {
-
-        return this.userName;
-    }
 }
 
 

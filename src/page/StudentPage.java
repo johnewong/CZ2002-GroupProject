@@ -1,23 +1,18 @@
+/**
+ StudentPage for student to add/drop course and check/change their registered classes
+
+ @author Weng Yifei, Zhan Yijia, Huang Xiao Yan
+ @version 1.0
+ @since Nov-2020
+ */
+
 package page;
 
-import dao.ClassDAO;
-import dao.ClassUserDAO;
-import dao.CourseDAO;
-import dao.IDAO;
-import model.Class;
-import model.ClassUser;
-import model.Course;
 import model.User;
 import service.*;
 import utility.DataUtil;
-import utility.StatusEnum;
 import utility.CourseType;
-import utility.StatusEnum;
 
-import java.io.BufferedReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -30,6 +25,11 @@ public class StudentPage extends Page {
 
     }
 
+    /**
+     * Constructor to initialize the login user from login page
+     *
+     * @param user The user object from login page
+     */
     public StudentPage(User user) {
         this.user = user;
     }
@@ -68,7 +68,7 @@ public class StudentPage extends Page {
                     printCoursesRegistered();
                     break;
                 case 4:
-                    checkVancancy();
+                    checkVacancy();
                     break;
                 case 5:
                     changeCourseIndex();
@@ -89,6 +89,10 @@ public class StudentPage extends Page {
         } while (sel != 7);
     }
 
+    /**
+     * Method to register a course
+     * Contains  1. Unregistered courses display  2. Select course  3. Register course
+     */
     private void addCourse() {
         CourseService service = new CourseService();
         ArrayList<CourseSM> unregisteredCourses = service.getUnregisteredCourses(this.user);
@@ -105,6 +109,10 @@ public class StudentPage extends Page {
         System.out.println(String.format("You have successfully change a class %s", returnClass.indexNumber));
     }
 
+    /**
+     * Method to drop a course
+     * Contains  1. Registered courses display  2. Select course  3. drop course
+     */
     private void dropCourse() {
         CourseService service = new CourseService();
         ArrayList<CourseSM> courses = service.getRegisteredCourses(this.user);
@@ -120,6 +128,10 @@ public class StudentPage extends Page {
         System.out.println(String.format("You have successfully dropped to class %s", returnClass.indexNumber));
     }
 
+    /**
+     * Method to print all registered courses
+     * Contains  1. Registered courses display  2. In wailtlist courses display
+     */
     private void printCoursesRegistered() {
         CourseService service = new CourseService();
         ArrayList<CourseSM> registCourses = service.getRegisteredCourses(this.user);
@@ -128,6 +140,10 @@ public class StudentPage extends Page {
         printCoursesInfo(waitCourses, false);
     }
 
+    /**
+     * Method to let student change the class index of his registered courses
+     * Contains  1. Registered courses display  2. Select course  3. Classes of selected course display  4. Change class
+     */
     private void changeCourseIndex() {
         CourseService service = new CourseService();
         ArrayList<CourseSM> courses = service.getRegisteredCourses(this.user);
@@ -143,6 +159,11 @@ public class StudentPage extends Page {
         System.out.println(String.format("You have successfully changed to class %s", returnClass.indexNumber));
     }
 
+    /**
+     * Method to let student swap the class with another student
+     * Contains  1. Registered courses display  2. Select course  3. Classes of selected course display  4. Select class
+     * 5. Students in the class display  6. Key in student martic number  7. Key in password  8. Swap
+     */
     private void swapIndex() {
         CourseService service = new CourseService();
         ArrayList<CourseSM> courses = service.getRegisteredCourses(this.user);

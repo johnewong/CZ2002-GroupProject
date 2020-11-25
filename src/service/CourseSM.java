@@ -1,8 +1,15 @@
+/**
+ Course. To contains all information relevant to the course
+ Inherit model.Course
+ Contains course info, all classes in the course
+
+ @author Weng Yifei
+ @version 1.0
+ @since Nov-2020
+ */
 package service;
 
-import model.Class;
 import model.Course;
-
 import java.util.ArrayList;
 
 public class CourseSM extends Course {
