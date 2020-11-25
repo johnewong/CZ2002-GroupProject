@@ -241,7 +241,7 @@ public class StudentPage extends Page {
         System.out.printf("%s %29s %n","Name", "Matric Number");
         System.out.println("-----------------------------------");
         for (User user : classSM.users) {
-            //System.out.println(String.format("Name: %s  Matric Number: %s", user.displayName, user.matricNumber));
+
             System.out.printf("%-20s %s %n",user.displayName, user.matricNumber);
         }
     }
@@ -255,7 +255,7 @@ public class StudentPage extends Page {
             System.out.println("---------------------------------------------------------------------------------------------");
         }
         System.out.printf("%s %15s %35s %10s %15s %n","Course Code","Course Name","Index Number", "AU", "Course Type");
-        //System.out.println("Course Code" + "  " + "AU" + "  " + "Index Number" + "  " + "Course Type");
+
         System.out.println("---------------------------------------------------------------------------------------------");
         for (CourseSM course : courses) {
             if(isRegistered)
@@ -263,7 +263,7 @@ public class StudentPage extends Page {
                     course.registeredClass.indexNumber,course.au, CourseType.getValue(course.courseType));
             else
                 System.out.printf("%-15s %-35s %-10s %10s %15s %n",course.courseCode, course.courseName,
-                        "null",course.au, CourseType.getValue(course.courseType));
+                        course.classes.get(0).indexNumber,course.au, CourseType.getValue(course.courseType));
         }
         System.out.println("---------------------------------------------------------------------------------------------");
     }
