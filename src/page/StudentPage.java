@@ -259,7 +259,7 @@ public class StudentPage extends Page {
         System.out.println("---------------------------------------------------------------------------------------------");
         for (CourseSM course : courses) {
             System.out.printf("%-15s %-35s %-10s %10s %15s %n",course.courseCode, course.courseName,
-                    course.classes.get(0).indexNumber,course.au, CourseType.getValue(course.courseType));
+                    course.registeredClass.indexNumber,course.au, CourseType.getValue(course.courseType));
         }
         System.out.println("---------------------------------------------------------------------------------------------");
     }
