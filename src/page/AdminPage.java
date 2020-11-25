@@ -11,11 +11,7 @@ import model.Course;
 import model.Session;
 import model.User;
 import service.*;
-import utility.CourseType;
-import utility.DataUtil;
-import utility.RoleType;
-import utility.SchoolName;
-import utility.GenderType;
+import utility.*;
 
 public class AdminPage extends Page {
     private User user;
@@ -410,6 +406,8 @@ public class AdminPage extends Page {
             newSession.venue = enterVenue();
             newSession.classType = enterClassType();
             sessionDAO.add(newSession);
+            System.out.println(String.format("Session: day:%d  time:%s  venue:%s  classType:%s"
+                    , newSession.day,newSession.time,newSession.venue, ClassType.getValue(newSession.classType)));
             System.out.println(String.format("You have successfully add a session in class %s", newClass.indexNumber));
         }
 
@@ -455,6 +453,8 @@ public class AdminPage extends Page {
                     selectedSession.classType = enterClassType();
                     break;
                 case 5:
+                    System.out.println(String.format("Session: day:%d  time:%s  venue:%s  classType:%s"
+                            , selectedSession.day,selectedSession.time,selectedSession.venue, ClassType.getValue(selectedSession.classType)));
                     sessionDAO.update(selectedSession);
                     System.out.println(String.format("You have successfully update a session in class %s", selectedClass.indexNumber));
                     break;

@@ -1,6 +1,6 @@
 sessionId,classId,day,time,venue,classType,isDeleted;
 1,1,1,9:00-10:00,LT-4,1,false;
-2,1,1,10:00-11:00,LT-4,2,false;
+2,1,2,10:00-11:00,LT-4,2,false;
 3,2,2,11:00-12:00,LT-5,1,false;
 4,2,2,12:00-13:00,LT-5,2,false;
 5,3,1,09:30-10:30,LT-4,1,false;
