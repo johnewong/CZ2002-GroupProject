@@ -1,6 +1,6 @@
 package dao;
 
-import entity.Course;
+import model.Course;
 import utility.DataUtil;
 
 import java.util.ArrayList;

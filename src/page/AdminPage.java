@@ -6,10 +6,10 @@ import dao.CourseDAO;
 import dao.ClassDAO;
 import dao.SessionDAO;
 import dao.UserDAO;
-import entity.Class;
-import entity.Course;
-import entity.Session;
-import entity.User;
+import model.Class;
+import model.Course;
+import model.Session;
+import model.User;
 import service.*;
 import utility.*;
 

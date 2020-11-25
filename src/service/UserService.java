@@ -2,8 +2,8 @@ package service;
 
 import dao.ClassUserDAO;
 import dao.UserDAO;
-import entity.ClassUser;
-import entity.User;
+import model.ClassUser;
+import model.User;
 
 import java.util.ArrayList;
 

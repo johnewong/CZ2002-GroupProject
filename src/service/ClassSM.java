@@ -1,8 +1,8 @@
 package service;
 
-import entity.Session;
-import entity.User;
-import entity.Class;
+import model.Session;
+import model.User;
+import model.Class;
 
 import java.util.ArrayList;
 

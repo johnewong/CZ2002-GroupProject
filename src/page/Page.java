@@ -1,8 +1,9 @@
 package page;
 
 import dao.ClassDAO;
-import entity.Class;
-import entity.Session;
+import model.Class;
+import model.Session;
+import model.User;
 import service.ClassSM;
 import service.CourseSM;
 import utility.ClassType;

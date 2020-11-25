@@ -1,6 +1,7 @@
 package service;
 
-import entity.Course;
+import model.Class;
+import model.Course;
 
 import java.util.ArrayList;
 
