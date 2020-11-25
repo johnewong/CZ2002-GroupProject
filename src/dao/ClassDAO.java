@@ -2,9 +2,8 @@ package dao;
 
 import java.util.ArrayList;
 
-import model.Class;
+import entity.Class;
 
-import model.ClassUser;
 import utility.DataUtil;
 
 public class ClassDAO implements IDAO<Class> {

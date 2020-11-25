@@ -1,6 +1,6 @@
 package dao;
 
-import model.ClassUser;
+import entity.ClassUser;
 import utility.DataUtil;
 import utility.StatusEnum;
 

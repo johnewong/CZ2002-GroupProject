@@ -1,6 +1,6 @@
 package dao;
 
-import model.User;
+import entity.User;
 import utility.DataUtil;
 import utility.RoleType;
 

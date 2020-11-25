@@ -1,7 +1,6 @@
 package dao;
 
-import model.Class;
-import model.Session;
+import entity.Session;
 import utility.DataUtil;
 import java.util.ArrayList;
 

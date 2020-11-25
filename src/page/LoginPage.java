@@ -1,7 +1,7 @@
 package page;
 
 import dao.UserDAO;
-import model.User;
+import entity.User;
 import utility.DataUtil;
 import utility.RoleType;
 

@@ -4,9 +4,9 @@ package service;
 import dao.ClassDAO;
 import dao.ClassUserDAO;
 import dao.SessionDAO;
-import model.Class;
-import model.ClassUser;
-import model.User;
+import entity.Class;
+import entity.ClassUser;
+import entity.User;
 import utility.StatusEnum;
 
 import java.util.ArrayList;

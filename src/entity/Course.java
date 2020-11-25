@@ -1,4 +1,4 @@
-package model;
+package entity;
 
 public class Course {
     public int courseId;

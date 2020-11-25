@@ -1,7 +1,7 @@
 package service;
 
 import dao.*;
-import model.*;
+import entity.*;
 
 
 import java.util.ArrayList;
