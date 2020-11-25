@@ -13,3 +13,4 @@ classId,courseId,indexNumber,vacancyTaken,totalVacancy,numberInWaitlist,group,re
 12,6,00062,0,10,0,2,HW0188 Group 2,false;
 13,7,00071,10,10,3,1,CZ2006 Group 1,false;
 14,7,00072,1,10,0,2,CZ2006 Group 2,false;
+15,7,00073,0,10,0,3,CZ2006 Group 3,false;
