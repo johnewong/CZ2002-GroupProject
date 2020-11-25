@@ -406,9 +406,19 @@ public class AdminPage extends Page {
             newSession.venue = enterVenue();
             newSession.classType = enterClassType();
             sessionDAO.add(newSession);
-            System.out.println(String.format("Session: day:%d  time:%s  venue:%s  classType:%s"
-                    , newSession.day,newSession.time,newSession.venue, ClassType.getValue(newSession.classType)));
+
+            System.out.println("Session");
+            System.out.println("---------");
+            System.out.println(String.format("day: %d", newSession.day));
+            System.out.println(String.format("time: %s", newSession.time));
+            System.out.println(String.format("venue: %s", newSession.venue));
+            System.out.println(String.format("classType: %s", ClassType.getValue(newSession.classType)));
             System.out.println(String.format("You have successfully add a session in class %s", newClass.indexNumber));
+            System.out.print('\n');
+
+//            System.out.println(String.format("Session: day:%d  time:%s  venue:%s  classType:%s"
+//                    , newSession.day,newSession.time,newSession.venue, ClassType.getValue(newSession.classType)));
+
         }
 
     }
@@ -453,9 +463,13 @@ public class AdminPage extends Page {
                     selectedSession.classType = enterClassType();
                     break;
                 case 5:
-                    System.out.println(String.format("Session: day:%d  time:%s  venue:%s  classType:%s"
-                            , selectedSession.day,selectedSession.time,selectedSession.venue, ClassType.getValue(selectedSession.classType)));
+                    System.out.println("Session");
+                    System.out.println(String.format("day: %d", selectedSession.day));
+                    System.out.println(String.format("time: %s", selectedSession.time));
+                    System.out.println(String.format("venue: %s", selectedSession.venue));
+                    System.out.println(String.format("classType: %s", ClassType.getValue(selectedSession.classType)));
                     sessionDAO.update(selectedSession);
+
                     System.out.println(String.format("You have successfully update a session in class %s", selectedClass.indexNumber));
                     break;
                 default:
